@@ -7,7 +7,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ImagesListViewController: UIViewController {
+    
+    @IBOutlet private var imagesTable: UITableView!
     
     override func viewDidLoad() {
         sleep(4)
