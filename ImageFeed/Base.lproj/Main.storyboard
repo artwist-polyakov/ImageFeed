@@ -30,7 +30,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="223"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="bwy-jg-BEd">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="bwy-jg-BEd" userLabel="Cell Image">
                                                     <rect key="frame" x="16" y="4" width="382" height="215"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="bwy-jg-BEd" secondAttribute="height" multiplier="16:9" id="SU8-mg-qtq"/>
@@ -67,6 +67,11 @@
                                                 <constraint firstItem="bwy-jg-BEd" firstAttribute="trailing" secondItem="5ce-a7-Gs0" secondAttribute="trailing" id="lVB-cR-Xkd"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cellDateLabel" destination="Cfd-l2-GqN" id="MOk-wp-cxj"/>
+                                            <outlet property="cellImage" destination="bwy-jg-BEd" id="eDT-kF-XQk"/>
+                                            <outlet property="cellLikeButton" destination="5ce-a7-Gs0" id="fe1-Ac-5Pj"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
