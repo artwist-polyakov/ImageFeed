@@ -24,23 +24,20 @@ class ImagesListViewController: UIViewController {
         // Do any additional setup after loading the view.
         imagesTable.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
     }
-
+    
 }
 
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return photosName.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
-
         guard let imageListCell = cell as? ImagesListCell else {
             return UITableViewCell()
         }
-
         configCell(for: imageListCell, with: indexPath)
-
         return imageListCell
     }
 }
@@ -54,10 +51,7 @@ extension ImagesListViewController {
         cell.picture.image = image
         cell.dateLabel.text = dateFormatter.string(from: Date())
         cell.likeButton.setImage(isEvenIndex ? UIImage(named: "LikeButtonOn") : UIImage(named: "LikeButtonOff"), for: .normal )
-        
     }
-    
-    
 }
 
 extension ImagesListViewController: UITableViewDelegate {
