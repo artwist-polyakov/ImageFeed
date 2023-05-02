@@ -43,6 +43,11 @@ extension ImagesListViewController: UITableViewDataSource {
 }
 
 extension ImagesListViewController {
+    private func setLiked(to likeButton: UIButton, state: Bool) {
+        let pic = state ? UIImage(named: "LikeButtonOn") : UIImage(named: "LikeButtonOff")
+        likeButton.setImage(pic, for: .normal)
+    }
+    
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         guard let image  = UIImage(named: photosName[indexPath.row]) else {
             return
@@ -50,7 +55,8 @@ extension ImagesListViewController {
         let isEvenIndex = indexPath.row%2 == 0
         cell.picture.image = image
         cell.dateLabel.text = dateFormatter.string(from: Date())
-        cell.likeButton.setImage(isEvenIndex ? UIImage(named: "LikeButtonOn") : UIImage(named: "LikeButtonOff"), for: .normal )
+        setLiked(to: cell.likeButton, state: isEvenIndex)
+//        cell.likeButton.setImage(isEvenIndex ? UIImage(named: "LikeButtonOn") : UIImage(named: "LikeButtonOff"), for: .normal )
     }
 }
 
