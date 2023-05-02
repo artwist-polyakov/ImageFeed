@@ -50,9 +50,10 @@ extension ImagesListViewController {
         guard let image  = UIImage(named: photosName[indexPath.row]) else {
             return
         }
+        let isEvenIndex = indexPath.row%2 == 0
         cell.cellImage.image = image
         cell.cellDateLabel.text = dateFormatter.string(from: Date())
-        cell.cellLikeButton.setImage(Bool(truncating: (1+indexPath.row)%2 as NSNumber) ? UIImage(named: "LikeButtonOn") : UIImage(named: "LikeButtonOff"), for: .normal )
+        cell.cellLikeButton.setImage(isEvenIndex ? UIImage(named: "LikeButtonOn") : UIImage(named: "LikeButtonOff"), for: .normal )
         
     }
     

@@ -48,7 +48,7 @@
                                                     <state key="normal" image="LikeButtonOn"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27 августа 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cfd-l2-GqN" userLabel="Date Label">
-                                                    <rect key="frame" x="32" y="195" width="101.5" height="16"/>
+                                                    <rect key="frame" x="24" y="195" width="101.5" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -59,7 +59,7 @@
                                                 <constraint firstItem="5ce-a7-Gs0" firstAttribute="top" secondItem="bwy-jg-BEd" secondAttribute="top" id="FIV-zE-5te"/>
                                                 <constraint firstAttribute="bottom" secondItem="bwy-jg-BEd" secondAttribute="bottom" constant="4" id="Gpx-k8-HvL"/>
                                                 <constraint firstItem="bwy-jg-BEd" firstAttribute="leading" secondItem="odM-18-oUf" secondAttribute="leading" constant="16" id="I2t-op-YUX"/>
-                                                <constraint firstItem="Cfd-l2-GqN" firstAttribute="leading" secondItem="bwy-jg-BEd" secondAttribute="leading" constant="16" id="PIh-7I-Ey0"/>
+                                                <constraint firstItem="Cfd-l2-GqN" firstAttribute="leading" secondItem="bwy-jg-BEd" secondAttribute="leading" constant="8" id="PIh-7I-Ey0"/>
                                                 <constraint firstItem="bwy-jg-BEd" firstAttribute="top" secondItem="odM-18-oUf" secondAttribute="top" constant="4" id="Ybc-DJ-uMT"/>
                                                 <constraint firstItem="bwy-jg-BEd" firstAttribute="bottom" secondItem="Cfd-l2-GqN" secondAttribute="bottom" constant="8" id="c2k-Pa-s3m"/>
                                                 <constraint firstItem="bwy-jg-BEd" firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Cfd-l2-GqN" secondAttribute="trailing" constant="8" id="cx1-nb-Mps"/>
@@ -102,7 +102,7 @@
         <image name="0" width="200" height="132"/>
         <image name="LikeButtonOn" width="44" height="44"/>
         <namedColor name="YP Black">
-            <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
