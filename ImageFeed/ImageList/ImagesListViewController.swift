@@ -44,8 +44,8 @@ extension ImagesListViewController: UITableViewDataSource {
 
 extension ImagesListViewController {
     private func setLiked(to likeButton: UIButton, state: Bool) {
-        let pic = state ? UIImage(named: "LikeButtonOn") : UIImage(named: "LikeButtonOff")
-        likeButton.setImage(pic, for: .normal)
+        let picture = state ? UIImage(named: "LikeButtonOn") : UIImage(named: "LikeButtonOff")
+        likeButton.setImage(picture, for: .normal)
     }
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
