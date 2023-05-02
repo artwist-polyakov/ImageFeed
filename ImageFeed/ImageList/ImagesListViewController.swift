@@ -51,9 +51,9 @@ extension ImagesListViewController {
             return
         }
         let isEvenIndex = indexPath.row%2 == 0
-        cell.cellImage.image = image
-        cell.cellDateLabel.text = dateFormatter.string(from: Date())
-        cell.cellLikeButton.setImage(isEvenIndex ? UIImage(named: "LikeButtonOn") : UIImage(named: "LikeButtonOff"), for: .normal )
+        cell.picture.image = image
+        cell.dateLabel.text = dateFormatter.string(from: Date())
+        cell.likeButton.setImage(isEvenIndex ? UIImage(named: "LikeButtonOn") : UIImage(named: "LikeButtonOff"), for: .normal )
         
     }
     

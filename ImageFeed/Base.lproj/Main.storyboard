@@ -68,9 +68,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="cellDateLabel" destination="Cfd-l2-GqN" id="MOk-wp-cxj"/>
-                                            <outlet property="cellImage" destination="bwy-jg-BEd" id="eDT-kF-XQk"/>
-                                            <outlet property="cellLikeButton" destination="5ce-a7-Gs0" id="fe1-Ac-5Pj"/>
+                                            <outlet property="dateLabel" destination="Cfd-l2-GqN" id="rl9-hl-QDx"/>
+                                            <outlet property="likeButton" destination="5ce-a7-Gs0" id="M8p-KT-PPY"/>
+                                            <outlet property="picture" destination="bwy-jg-BEd" id="2cG-sD-nzr"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
