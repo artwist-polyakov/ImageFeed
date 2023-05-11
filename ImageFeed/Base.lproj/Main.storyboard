@@ -97,6 +97,21 @@
             </objects>
             <point key="canvasLocation" x="46.564885496183201" y="-2.1126760563380285"/>
         </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="Vn3-cr-fSf">
+            <objects>
+                <viewController id="aqS-1y-ua3" customClass="ProfileViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Mi7-UN-UpP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="2JC-2m-NyG"/>
+                        <color key="backgroundColor" name="YP Black"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ixU-6Q-Abl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="699" y="-3"/>
+        </scene>
     </scenes>
     <resources>
         <image name="0" width="200" height="132"/>
