@@ -10,6 +10,7 @@ import UIKit
 class ImagesListViewController: UIViewController {
     
     @IBOutlet private var imagesTable: UITableView!
+    private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
     private let photosName: [String] = Array(0..<20).map{ "\($0)" }
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -26,7 +27,7 @@ class ImagesListViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "ShowSingleImage" { // 1
+            if segue.identifier == ShowSingleImageSegueIdentifier { // 1
                 let viewController = segue.destination as! SingleImageViewController // 2
                 let indexPath = sender as! IndexPath // 3
                 let image = UIImage(named: photosName[indexPath.row]) // 4
@@ -73,7 +74,7 @@ extension ImagesListViewController {
 
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "ShowSingleImage", sender: indexPath)
+        performSegue(withIdentifier: ShowSingleImageSegueIdentifier, sender: indexPath)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
