@@ -71,6 +71,7 @@
                                             <outlet property="dateLabel" destination="Cfd-l2-GqN" id="rl9-hl-QDx"/>
                                             <outlet property="likeButton" destination="5ce-a7-Gs0" id="M8p-KT-PPY"/>
                                             <outlet property="picture" destination="bwy-jg-BEd" id="2cG-sD-nzr"/>
+                                            <segue destination="dod-PH-TnW" kind="show" id="Pgp-6y-EFT"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -107,7 +108,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="puv-I4-0aD" userLabel="SingleImageBig">
-                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="721"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="40Z-be-XR7"/>
@@ -119,6 +120,7 @@
                             <constraint firstItem="puv-I4-0aD" firstAttribute="leading" secondItem="40Z-be-XR7" secondAttribute="leading" id="oJc-zl-7QC"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="2tF-fC-u8Q"/>
                     <connections>
                         <outlet property="bigSinglePicture" destination="puv-I4-0aD" id="BuV-hr-Pjz"/>
                     </connections>
