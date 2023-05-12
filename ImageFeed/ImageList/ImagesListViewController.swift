@@ -27,7 +27,7 @@ class ImagesListViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             if segue.identifier == "ShowSingleImage" { // 1
-                let viewController = segue.destination as! SingleImageViewController // 2
+                let viewController = segue.destination as! SingleImageViewController // 2 
                 let indexPath = sender as! IndexPath // 3
                 let image = UIImage(named: photosName[indexPath.row]) // 4
                 viewController.image = image // 5
