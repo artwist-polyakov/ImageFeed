@@ -98,6 +98,35 @@
             </objects>
             <point key="canvasLocation" x="864" y="-3"/>
         </scene>
+        <!--Single Image View Controller-->
+        <scene sceneID="gws-oe-Wfc">
+            <objects>
+                <viewController id="dod-PH-TnW" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rem-4j-QFo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="puv-I4-0aD" userLabel="SingleImageBig">
+                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="40Z-be-XR7"/>
+                        <color key="backgroundColor" name="YP Black"/>
+                        <constraints>
+                            <constraint firstItem="40Z-be-XR7" firstAttribute="trailing" secondItem="puv-I4-0aD" secondAttribute="trailing" id="4Bd-Sx-fa9"/>
+                            <constraint firstItem="40Z-be-XR7" firstAttribute="top" secondItem="puv-I4-0aD" secondAttribute="top" id="YrJ-y6-ZCL"/>
+                            <constraint firstItem="puv-I4-0aD" firstAttribute="bottom" secondItem="40Z-be-XR7" secondAttribute="bottom" id="bmn-GB-aLs"/>
+                            <constraint firstItem="puv-I4-0aD" firstAttribute="leading" secondItem="40Z-be-XR7" secondAttribute="leading" id="oJc-zl-7QC"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bigSinglePicture" destination="puv-I4-0aD" id="BuV-hr-Pjz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kjM-cT-pdz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1684" y="-3"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="D1Q-MO-zQj">
             <objects>
@@ -224,6 +253,7 @@
     </scenes>
     <resources>
         <image name="0" width="200" height="132"/>
+        <image name="1" width="200" height="260"/>
         <image name="ExitIcon" width="20" height="22"/>
         <image name="LikeButtonOn" width="44" height="44"/>
         <image name="ProfilePhoto" width="70" height="70"/>

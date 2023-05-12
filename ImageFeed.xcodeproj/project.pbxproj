@@ -15,6 +15,7 @@
 		AF2694C129FC1BDC0023942A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF2694BF29FC1BDC0023942A /* LaunchScreen.storyboard */; };
 		AF2694E929FEEF8A0023942A /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2694E829FEEF8A0023942A /* ImagesListCell.swift */; };
 		AFF07B692A0D2D3900683324 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF07B682A0D2D3900683324 /* ProfileViewController.swift */; };
+		AFF07B6F2A0E9F9A00683324 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF07B6E2A0E9F9A00683324 /* SingleImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		AF2694C229FC1BDC0023942A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF2694E829FEEF8A0023942A /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		AFF07B682A0D2D3900683324 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		AFF07B6E2A0E9F9A00683324 /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 			children = (
 				AF2694E829FEEF8A0023942A /* ImagesListCell.swift */,
 				AF2694B829FC1BDB0023942A /* ImagesListViewController.swift */,
+				AFF07B6E2A0E9F9A00683324 /* SingleImageViewController.swift */,
 			);
 			path = ImageList;
 			sourceTree = "<group>";
@@ -164,6 +167,7 @@
 				AF2694E929FEEF8A0023942A /* ImagesListCell.swift in Sources */,
 				AFF07B692A0D2D3900683324 /* ProfileViewController.swift in Sources */,
 				AF2694B529FC1BDB0023942A /* AppDelegate.swift in Sources */,
+				AFF07B6F2A0E9F9A00683324 /* SingleImageViewController.swift in Sources */,
 				AF2694B729FC1BDB0023942A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
