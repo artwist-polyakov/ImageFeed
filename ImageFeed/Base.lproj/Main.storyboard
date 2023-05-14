@@ -107,9 +107,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="puv-I4-0aD" userLabel="SingleImageBig">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="BSn-72-rzZ">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            </imageView>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="puv-I4-0aD" userLabel="SingleImageBig">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="260"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="puv-I4-0aD" firstAttribute="leading" secondItem="BSn-72-rzZ" secondAttribute="leading" id="1dQ-Zy-olF"/>
+                                    <constraint firstAttribute="trailing" secondItem="puv-I4-0aD" secondAttribute="trailing" id="dvp-cm-ia4"/>
+                                    <constraint firstItem="puv-I4-0aD" firstAttribute="top" secondItem="BSn-72-rzZ" secondAttribute="top" id="si3-v9-Mnp"/>
+                                    <constraint firstAttribute="bottom" secondItem="puv-I4-0aD" secondAttribute="bottom" id="zwX-MD-Etb"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="nus-Ow-fJB"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="Lo6-FL-H9P"/>
+                                <connections>
+                                    <outlet property="delegate" destination="dod-PH-TnW" id="j1c-4I-Nap"/>
+                                </connections>
+                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBa-ge-baL" userLabel="BackButton">
                                 <rect key="frame" x="8" y="8" width="48" height="48"/>
                                 <constraints>
@@ -127,10 +143,10 @@
                         <viewLayoutGuide key="safeArea" id="40Z-be-XR7"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="puv-I4-0aD" secondAttribute="trailing" id="4Bd-Sx-fa9"/>
-                            <constraint firstAttribute="top" secondItem="puv-I4-0aD" secondAttribute="top" id="YrJ-y6-ZCL"/>
-                            <constraint firstItem="puv-I4-0aD" firstAttribute="bottom" secondItem="rem-4j-QFo" secondAttribute="bottom" id="bmn-GB-aLs"/>
-                            <constraint firstItem="puv-I4-0aD" firstAttribute="leading" secondItem="rem-4j-QFo" secondAttribute="leading" id="oJc-zl-7QC"/>
+                            <constraint firstItem="BSn-72-rzZ" firstAttribute="top" secondItem="rem-4j-QFo" secondAttribute="top" id="Eji-DI-dlx"/>
+                            <constraint firstItem="BSn-72-rzZ" firstAttribute="leading" secondItem="40Z-be-XR7" secondAttribute="leading" id="RPM-nS-Ghc"/>
+                            <constraint firstItem="BSn-72-rzZ" firstAttribute="bottom" secondItem="rem-4j-QFo" secondAttribute="bottom" id="Viq-8h-eHE"/>
+                            <constraint firstItem="40Z-be-XR7" firstAttribute="trailing" secondItem="BSn-72-rzZ" secondAttribute="trailing" id="mx2-2l-l4G"/>
                             <constraint firstItem="kBa-ge-baL" firstAttribute="top" secondItem="40Z-be-XR7" secondAttribute="top" constant="8" id="rI4-A8-Zw0"/>
                             <constraint firstItem="kBa-ge-baL" firstAttribute="leading" secondItem="40Z-be-XR7" secondAttribute="leading" constant="8" id="tfq-hu-3fw"/>
                         </constraints>
@@ -138,11 +154,12 @@
                     <navigationItem key="navigationItem" id="2tF-fC-u8Q"/>
                     <connections>
                         <outlet property="bigSinglePicture" destination="puv-I4-0aD" id="BuV-hr-Pjz"/>
+                        <outlet property="scrollView" destination="BSn-72-rzZ" id="RoF-gY-51J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kjM-cT-pdz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1684" y="-3"/>
+            <point key="canvasLocation" x="1682.608695652174" y="-3.3482142857142856"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="D1Q-MO-zQj">
