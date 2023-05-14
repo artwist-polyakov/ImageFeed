@@ -18,9 +18,10 @@ final class SingleImageViewController: UIViewController {
     @IBOutlet var scrollView: UIScrollView!
     let screenSize = UIScreen.main.bounds.size
     
-    @IBAction func didTapBackButton(_ sender: Any) {
+    @IBAction func didTapBackButton() {
         dismiss(animated: true, completion: nil)
     }
+    
     
     
     override func viewDidLoad() {
