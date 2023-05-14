@@ -136,7 +136,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="single_image_back_button"/>
                                 <connections>
-                                    <action selector="didTabBackButton:" destination="dod-PH-TnW" eventType="touchUpInside" id="WqX-Xi-TJK"/>
+                                    <action selector="didTapBackButton:" destination="dod-PH-TnW" eventType="touchUpInside" id="EHa-FK-2ZF"/>
                                 </connections>
                             </button>
                         </subviews>
