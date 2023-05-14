@@ -58,4 +58,11 @@ extension SingleImageViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         bigSinglePicture
     }
+    
+    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+        guard let image = bigSinglePicture.image
+        else {return}
+        do {self.rescaleAndCenterImageInScrollView(image:image)}
+        
+    }
 }

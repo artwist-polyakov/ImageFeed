@@ -107,6 +107,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sharing_button" translatesAutoresizingMaskIntoConstraints="NO" id="2cY-be-9YD">
+                                <rect key="frame" x="182" y="795" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="IEC-ig-jf6"/>
+                                    <constraint firstAttribute="width" constant="50" id="de3-ak-MDg"/>
+                                </constraints>
+                            </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="BSn-72-rzZ">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
@@ -143,10 +150,12 @@
                         <viewLayoutGuide key="safeArea" id="40Z-be-XR7"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="2cY-be-9YD" secondAttribute="bottom" constant="51" id="A4N-8I-wVC"/>
+                            <constraint firstItem="2cY-be-9YD" firstAttribute="centerX" secondItem="rem-4j-QFo" secondAttribute="centerX" id="B2A-6l-GFC"/>
                             <constraint firstItem="BSn-72-rzZ" firstAttribute="top" secondItem="rem-4j-QFo" secondAttribute="top" id="Eji-DI-dlx"/>
-                            <constraint firstItem="BSn-72-rzZ" firstAttribute="leading" secondItem="40Z-be-XR7" secondAttribute="leading" id="RPM-nS-Ghc"/>
+                            <constraint firstItem="BSn-72-rzZ" firstAttribute="leading" secondItem="rem-4j-QFo" secondAttribute="leading" id="RPM-nS-Ghc"/>
                             <constraint firstItem="BSn-72-rzZ" firstAttribute="bottom" secondItem="rem-4j-QFo" secondAttribute="bottom" id="Viq-8h-eHE"/>
-                            <constraint firstItem="40Z-be-XR7" firstAttribute="trailing" secondItem="BSn-72-rzZ" secondAttribute="trailing" id="mx2-2l-l4G"/>
+                            <constraint firstAttribute="trailing" secondItem="BSn-72-rzZ" secondAttribute="trailing" id="mx2-2l-l4G"/>
                             <constraint firstItem="kBa-ge-baL" firstAttribute="top" secondItem="40Z-be-XR7" secondAttribute="top" constant="8" id="rI4-A8-Zw0"/>
                             <constraint firstItem="kBa-ge-baL" firstAttribute="leading" secondItem="40Z-be-XR7" secondAttribute="leading" constant="8" id="tfq-hu-3fw"/>
                         </constraints>
@@ -263,7 +272,6 @@
         <!--Navigation Controller-->
         <scene sceneID="UWx-Oo-bA5">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4P3-xe-yuQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="lij-5o-nkO" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="tab_editorial_active" id="gdm-hu-AMM"/>
                     <toolbarItems/>
@@ -278,6 +286,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="bTF-GW-Q1S"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4P3-xe-yuQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="46.376811594202906" y="-2.6785714285714284"/>
         </scene>
@@ -288,6 +297,7 @@
         <image name="ExitIcon" width="20" height="22"/>
         <image name="LikeButtonOn" width="44" height="44"/>
         <image name="ProfilePhoto" width="70" height="70"/>
+        <image name="sharing_button" width="51" height="50"/>
         <image name="single_image_back_button" width="9" height="16"/>
         <image name="tab_editorial_active" width="30" height="30"/>
         <image name="tab_profile_active" width="30" height="30"/>
@@ -295,10 +305,10 @@
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="YP Gray">
-            <color red="0.68235294117647061" green="0.68627450980392157" blue="0.70588235294117641" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68199998140335083" green="0.68599998950958252" blue="0.70599997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="YP Red">
-            <color red="0.96078431372549022" green="0.41960784313725491" blue="0.42352941176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.96100002527236938" green="0.41999998688697815" blue="0.42399999499320984" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="YP White">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
