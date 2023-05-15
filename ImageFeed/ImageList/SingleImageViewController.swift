@@ -29,7 +29,7 @@ final class SingleImageViewController: UIViewController {
         
             super.viewDidLoad()
             scrollView.minimumZoomScale = 0.1
-            scrollView.maximumZoomScale = 1.25
+            scrollView.maximumZoomScale = 3
             bigSinglePicture.image = image
         rescaleAndCenterImageInScrollView(image: image)
         }
