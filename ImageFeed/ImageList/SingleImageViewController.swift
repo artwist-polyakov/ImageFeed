@@ -28,7 +28,7 @@ final class SingleImageViewController: UIViewController {
     override func viewDidLoad() {
         
             super.viewDidLoad()
-            scrollView.minimumZoomScale = 0.1
+            scrollView.minimumZoomScale = 1
             scrollView.maximumZoomScale = 3
             bigSinglePicture.image = image
         rescaleAndCenterImageInScrollView(image: image)
@@ -37,9 +37,13 @@ final class SingleImageViewController: UIViewController {
     private func rescaleAndCenterImageInScrollView(image: UIImage) {
         let minZoomScale = scrollView.minimumZoomScale
         let maxZoomScale = scrollView.maximumZoomScale
+        print("minZoomScale = \(minZoomScale)")
+        print("maxZoomScale = \(maxZoomScale)")
         view.layoutIfNeeded()
         let visibleRectSize = scrollView.bounds.size
+        print("visibleRectSize = \(visibleRectSize): \(visibleRectSize.width), \(visibleRectSize.height)")
         let imageSize = image.size
+        print("Размер картинки \(imageSize): \(imageSize.width), \(imageSize.height)")
         let hScale = visibleRectSize.width / imageSize.width
         let vScale = visibleRectSize.height / imageSize.height
         let scale = min(maxZoomScale, max(minZoomScale, max(hScale, vScale)))
@@ -60,9 +64,8 @@ extension SingleImageViewController: UIScrollViewDelegate {
     }
     
     func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-        guard let image = bigSinglePicture.image
-        else {return}
-        do {self.rescaleAndCenterImageInScrollView(image:image)}
+        bigSinglePicture.image = image
+        rescaleAndCenterImageInScrollView(image: image)
         
     }
 }
