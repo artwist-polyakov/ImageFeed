@@ -24,6 +24,15 @@ final class SingleImageViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+
+    @IBAction func didTapShareButton() {
+        guard let sharingImage = bigSinglePicture
+        else {return}
+        
+        let activityViewController = UIActivityViewController(activityItems: [sharingImage], applicationActivities: nil)
+        present(activityViewController, animated: true, completion: nil)
+
+    }
     
     
     override func viewDidLoad() {

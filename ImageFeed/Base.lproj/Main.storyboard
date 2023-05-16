@@ -156,6 +156,9 @@
                                     <constraint firstAttribute="height" constant="50" id="x68-sc-AhQ"/>
                                 </constraints>
                                 <buttonConfiguration key="configuration" style="plain" image="sharing_button"/>
+                                <connections>
+                                    <action selector="didTapShareButton" destination="dod-PH-TnW" eventType="touchUpInside" id="3Ci-YQ-n55"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="40Z-be-XR7"/>
