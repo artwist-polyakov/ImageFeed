@@ -50,6 +50,10 @@ final class SingleImageViewController: UIViewController {
         scrollView.layoutIfNeeded()
 
         scrollView.zoomScale = scale
+        
+        let verticalPadding = max(0, (scrollView.bounds.height - imageSize.height * scale) / 2)
+        let horizontalPadding = max(0, (scrollView.bounds.width - imageSize.width * scale) / 2)
+        scrollView.contentOffset = CGPoint(x: horizontalPadding, y: verticalPadding)
     }
 
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
