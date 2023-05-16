@@ -14,6 +14,7 @@ final class SingleImageViewController: UIViewController {
             rescaleAndCenterImageInScrollView(image: image)
         }
     }
+   
     @IBOutlet var bigSinglePicture: UIImageView!
     
     @IBOutlet var scrollView: UIScrollView!
@@ -74,6 +75,8 @@ extension SingleImageViewController: UIScrollViewDelegate {
         bigSinglePicture
         
     }
+    
+    
     
     
 }

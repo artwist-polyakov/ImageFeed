@@ -149,22 +149,23 @@
                                     <action selector="didTapBackButton" destination="dod-PH-TnW" eventType="touchUpInside" id="ZmQ-ri-7du"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sharing_button" translatesAutoresizingMaskIntoConstraints="NO" id="2cY-be-9YD">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZRg-df-B6h" userLabel="SharingButton">
                                 <rect key="frame" x="182" y="810" width="50" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="IEC-ig-jf6"/>
-                                    <constraint firstAttribute="width" constant="50" id="de3-ak-MDg"/>
+                                    <constraint firstAttribute="width" constant="50" id="nMi-KM-hnA"/>
+                                    <constraint firstAttribute="height" constant="50" id="x68-sc-AhQ"/>
                                 </constraints>
-                            </imageView>
+                                <buttonConfiguration key="configuration" style="plain" image="sharing_button"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="40Z-be-XR7"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
-                            <constraint firstItem="40Z-be-XR7" firstAttribute="bottom" secondItem="2cY-be-9YD" secondAttribute="bottom" constant="36" id="A4N-8I-wVC"/>
-                            <constraint firstItem="2cY-be-9YD" firstAttribute="centerX" secondItem="40Z-be-XR7" secondAttribute="centerX" id="B2A-6l-GFC"/>
+                            <constraint firstItem="40Z-be-XR7" firstAttribute="bottom" secondItem="ZRg-df-B6h" secondAttribute="bottom" constant="36" id="2hC-no-d2V"/>
                             <constraint firstItem="BSn-72-rzZ" firstAttribute="top" secondItem="rem-4j-QFo" secondAttribute="top" id="Eji-DI-dlx"/>
                             <constraint firstItem="BSn-72-rzZ" firstAttribute="leading" secondItem="40Z-be-XR7" secondAttribute="leading" id="RPM-nS-Ghc"/>
                             <constraint firstItem="BSn-72-rzZ" firstAttribute="bottom" secondItem="rem-4j-QFo" secondAttribute="bottom" id="Viq-8h-eHE"/>
+                            <constraint firstItem="ZRg-df-B6h" firstAttribute="centerX" secondItem="40Z-be-XR7" secondAttribute="centerX" id="WZ2-co-0ZC"/>
                             <constraint firstItem="40Z-be-XR7" firstAttribute="trailing" secondItem="BSn-72-rzZ" secondAttribute="trailing" id="mx2-2l-l4G"/>
                             <constraint firstItem="kBa-ge-baL" firstAttribute="top" secondItem="40Z-be-XR7" secondAttribute="top" constant="8" id="rI4-A8-Zw0"/>
                             <constraint firstItem="kBa-ge-baL" firstAttribute="leading" secondItem="40Z-be-XR7" secondAttribute="leading" constant="8" id="tfq-hu-3fw"/>
