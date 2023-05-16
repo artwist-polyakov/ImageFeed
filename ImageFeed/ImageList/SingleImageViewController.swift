@@ -35,25 +35,31 @@ final class SingleImageViewController: UIViewController {
         }
     
     private func rescaleAndCenterImageInScrollView(image: UIImage) {
-        let minZoomScale = scrollView.minimumZoomScale
-        let maxZoomScale = scrollView.maximumZoomScale
-        print("minZoomScale = \(minZoomScale)")
-        print("maxZoomScale = \(maxZoomScale)")
-        view.layoutIfNeeded()
         let visibleRectSize = scrollView.bounds.size
-        print("visibleRectSize = \(visibleRectSize)")
         let imageSize = image.size
-        print("Размер картинки \(imageSize)")
         let hScale = visibleRectSize.width / imageSize.width
         let vScale = visibleRectSize.height / imageSize.height
-        print("hScale = \(hScale), vScale = \(vScale)")
-        let scale = min(maxZoomScale, max(minZoomScale, min(hScale, vScale)))
-        scrollView.setZoomScale(scale, animated: false)
+        let scale = min(scrollView.maximumZoomScale, max(scrollView.minimumZoomScale, min(hScale, vScale)))
+
+        let targetWidth = imageSize.width * scale
+        let targetHeight = imageSize.height * scale
+        bigSinglePicture.frame = CGRect(x: 0, y: 0, width: targetWidth, height: targetHeight)
+        scrollView.contentSize = bigSinglePicture.frame.size
+
+        view.layoutIfNeeded()
         scrollView.layoutIfNeeded()
-        let newContentSize = scrollView.contentSize
-        let x = (newContentSize.width - visibleRectSize.width) / 2
-        let y = (newContentSize.height - visibleRectSize.height) / 2
-        scrollView.setContentOffset(CGPoint(x: x, y: y), animated: false)
+
+        scrollView.zoomScale = scale
+    }
+
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        let imageViewSize = bigSinglePicture.frame.size
+        let scrollViewSize = scrollView.bounds.size
+
+        let verticalPadding = imageViewSize.height < scrollViewSize.height ? (scrollViewSize.height - imageViewSize.height) / 2 : 0
+        let horizontalPadding = imageViewSize.width < scrollViewSize.width ? (scrollViewSize.width - imageViewSize.width) / 2 : 0
+
+        scrollView.contentInset = UIEdgeInsets(top: verticalPadding, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
     }
 
     
@@ -65,9 +71,5 @@ extension SingleImageViewController: UIScrollViewDelegate {
         
     }
     
-    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-        bigSinglePicture.image = image
-        rescaleAndCenterImageInScrollView(image: image)
-        
-    }
+    
 }
