@@ -26,17 +26,15 @@ final class SingleImageViewController: UIViewController {
     
 
     @IBAction func didTapShareButton() {
+        
         guard let sharingImage = bigSinglePicture
         else {return}
         
         let activityViewController = UIActivityViewController(activityItems: [sharingImage], applicationActivities: nil)
         present(activityViewController, animated: true, completion: nil)
-
     }
     
-    
     override func viewDidLoad() {
-        
             super.viewDidLoad()
         scrollView.minimumZoomScale = 0.1
         scrollView.maximumZoomScale = 8
