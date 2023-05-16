@@ -47,6 +47,13 @@
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="LikeButtonOn"/>
                                                 </button>
+                                                <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KsD-JL-DEb" customClass="GradientUnderDate" customModule="ImageFeed" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="189" width="382" height="30"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="y6j-Li-zoe"/>
+                                                    </constraints>
+                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27 августа 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cfd-l2-GqN" userLabel="Date Label">
                                                     <rect key="frame" x="24" y="195" width="101.5" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -56,15 +63,18 @@
                                             </subviews>
                                             <color key="backgroundColor" name="YP Black"/>
                                             <constraints>
+                                                <constraint firstItem="bwy-jg-BEd" firstAttribute="bottom" secondItem="KsD-JL-DEb" secondAttribute="bottom" id="1uB-BY-RCX"/>
                                                 <constraint firstItem="5ce-a7-Gs0" firstAttribute="top" secondItem="bwy-jg-BEd" secondAttribute="top" id="FIV-zE-5te"/>
                                                 <constraint firstAttribute="bottom" secondItem="bwy-jg-BEd" secondAttribute="bottom" constant="4" id="Gpx-k8-HvL"/>
                                                 <constraint firstItem="bwy-jg-BEd" firstAttribute="leading" secondItem="odM-18-oUf" secondAttribute="leading" constant="16" id="I2t-op-YUX"/>
                                                 <constraint firstItem="Cfd-l2-GqN" firstAttribute="leading" secondItem="bwy-jg-BEd" secondAttribute="leading" constant="8" id="PIh-7I-Ey0"/>
                                                 <constraint firstItem="bwy-jg-BEd" firstAttribute="top" secondItem="odM-18-oUf" secondAttribute="top" constant="4" id="Ybc-DJ-uMT"/>
+                                                <constraint firstItem="bwy-jg-BEd" firstAttribute="trailing" secondItem="KsD-JL-DEb" secondAttribute="trailing" id="blo-Ek-BS5"/>
                                                 <constraint firstItem="bwy-jg-BEd" firstAttribute="bottom" secondItem="Cfd-l2-GqN" secondAttribute="bottom" constant="8" id="c2k-Pa-s3m"/>
                                                 <constraint firstItem="bwy-jg-BEd" firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Cfd-l2-GqN" secondAttribute="trailing" constant="8" id="cx1-nb-Mps"/>
                                                 <constraint firstAttribute="trailing" secondItem="bwy-jg-BEd" secondAttribute="trailing" constant="16" id="dn9-G6-mF8"/>
                                                 <constraint firstItem="bwy-jg-BEd" firstAttribute="trailing" secondItem="5ce-a7-Gs0" secondAttribute="trailing" id="lVB-cR-Xkd"/>
+                                                <constraint firstItem="KsD-JL-DEb" firstAttribute="leading" secondItem="bwy-jg-BEd" secondAttribute="leading" id="rRt-sE-qJ3"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
