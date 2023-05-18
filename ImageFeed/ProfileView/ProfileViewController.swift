@@ -4,11 +4,8 @@
 //
 //  Created by Александр Поляков on 11.05.2023.
 //
-
-
 import UIKit
 class ProfileViewController: UIViewController {
-    
     private func initProfileImage (view: UIView) {
         view.backgroundColor = UIColor(named: "YP Black")
         let profileImage = UIImage(named: "ProfilePhoto") ?? UIImage(named: "ProfilePhotoPlaceholder")
@@ -40,7 +37,6 @@ class ProfileViewController: UIViewController {
         logOutButton.centerYAnchor.constraint(equalTo: view.viewWithTag(1)!
             .centerYAnchor).isActive = true
         logOutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24).isActive = true
-        
     }
     
     private func initLabels(view: UIView) {
@@ -75,8 +71,6 @@ class ProfileViewController: UIViewController {
         userDescription.translatesAutoresizingMaskIntoConstraints = false
         userDescription.topAnchor.constraint(equalTo: userNickName.bottomAnchor, constant: 8).isActive = true
         userDescription.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
-        
-        
     }
     
     override func viewDidLoad() {
@@ -84,7 +78,6 @@ class ProfileViewController: UIViewController {
         initProfileImage (view: view)
         initLogoutButton(view: view)
         initLabels(view: view)
-        
     }
     
     @objc
@@ -98,8 +91,6 @@ class ProfileViewController: UIViewController {
                     imageView.tintColor = UIColor(named: "YP Gray")
                 }
             }
-            
-            
         }
     }
 }

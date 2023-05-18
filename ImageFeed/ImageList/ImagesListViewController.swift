@@ -6,9 +6,7 @@
 //
 
 import UIKit
-
 class ImagesListViewController: UIViewController {
-    
     @IBOutlet private var imagesTable: UITableView!
     private let photosName: [String] = Array(0..<20).map{ "\($0)" }
     private lazy var dateFormatter: DateFormatter = {
@@ -26,16 +24,17 @@ class ImagesListViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "ShowSingleImage" { // 1
-                let viewController = segue.destination as! SingleImageViewController // 2
-                let indexPath = sender as! IndexPath // 3
-                let image = UIImage(named: photosName[indexPath.row]) // 4
-                viewController.image = image // 5
-            } else {
-                super.prepare(for: segue, sender: sender) // 6
+        if segue.identifier == "ShowSingleImage" {
+            if let viewController = segue.destination as? SingleImageViewController {
+                if let indexPath = sender as? IndexPath {
+                    let image = UIImage(named: photosName[indexPath.row])
+                    viewController.image = image
+                }
             }
+        } else {
+            super.prepare(for: segue, sender: sender)
         }
-    
+    }
 }
 
 extension ImagesListViewController: UITableViewDataSource {
@@ -67,7 +66,7 @@ extension ImagesListViewController {
         cell.picture.image = image
         cell.dateLabel.text = dateFormatter.string(from: Date())
         setLiked(to: cell.likeButton, state: isEvenIndex)
-//        cell.likeButton.setImage(isEvenIndex ? UIImage(named: "LikeButtonOn") : UIImage(named: "LikeButtonOff"), for: .normal )
+        //        cell.likeButton.setImage(isEvenIndex ? UIImage(named: "LikeButtonOn") : UIImage(named: "LikeButtonOff"), for: .normal )
     }
 }
 
@@ -75,7 +74,6 @@ extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "ShowSingleImage", sender: indexPath)
     }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let image = UIImage(named: photosName[indexPath.row]) else {
             return 0
@@ -87,6 +85,4 @@ extension ImagesListViewController: UITableViewDelegate {
         let cellHeight = image.size.height*scale + imageInsets.top + imageInsets.bottom
         return cellHeight
     }
-    
-    
 }
