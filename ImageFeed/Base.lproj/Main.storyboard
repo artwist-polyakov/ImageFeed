@@ -117,18 +117,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="BSn-72-rzZ">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="896" minimumZoomScale="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="BSn-72-rzZ">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="414" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="puv-I4-0aD" userLabel="SingleImageBig">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="414" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="puv-I4-0aD" userLabel="SingleImageBig">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="puv-I4-0aD" firstAttribute="leading" secondItem="BSn-72-rzZ" secondAttribute="leading" id="1dQ-Zy-olF"/>
                                     <constraint firstAttribute="trailing" secondItem="puv-I4-0aD" secondAttribute="trailing" id="dvp-cm-ia4"/>
-                                    <constraint firstItem="puv-I4-0aD" firstAttribute="top" secondItem="BSn-72-rzZ" secondAttribute="top" id="si3-v9-Mnp"/>
-                                    <constraint firstAttribute="bottom" secondItem="puv-I4-0aD" secondAttribute="bottom" id="zwX-MD-Etb"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="nus-Ow-fJB"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="Lo6-FL-H9P"/>
