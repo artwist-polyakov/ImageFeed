@@ -16,8 +16,8 @@ final class SingleImageViewController: UIViewController {
         }
     }
     
-    @IBOutlet var bigSinglePicture: UIImageView!
-    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet private weak var bigSinglePicture: UIImageView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     let screenSize = UIScreen.main.bounds.size
     @IBAction func didTapBackButton() {
         dismiss(animated: true, completion: nil)

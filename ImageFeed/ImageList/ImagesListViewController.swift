@@ -7,7 +7,7 @@
 
 import UIKit
 class ImagesListViewController: UIViewController {
-    @IBOutlet private var imagesTable: UITableView!
+    @IBOutlet private weak var imagesTable: UITableView!
     private let photosName: [String] = Array(0..<20).map{ "\($0)" }
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
