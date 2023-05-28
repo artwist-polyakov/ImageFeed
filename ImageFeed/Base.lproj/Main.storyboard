@@ -281,7 +281,7 @@
         <scene sceneID="CHi-ef-mbL">
             <objects>
                 <viewController id="cMe-gY-jNI" customClass="WebViewViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="tGJ-iG-nxG" customClass="WebViewViewController" customModule="ImageFeed" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="tGJ-iG-nxG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -312,11 +312,11 @@
                             <constraint firstAttribute="bottom" secondItem="zTp-B7-ZNq" secondAttribute="bottom" id="fj5-oe-VDX"/>
                             <constraint firstItem="zTp-B7-ZNq" firstAttribute="top" secondItem="tGJ-iG-nxG" secondAttribute="top" id="oJf-FA-gZh"/>
                         </constraints>
-                        <connections>
-                            <outlet property="webView" destination="zTp-B7-ZNq" id="9ac-X1-wko"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="Qrj-Ns-a4j"/>
+                    <connections>
+                        <outlet property="webView" destination="zTp-B7-ZNq" id="j91-RP-IJh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Wt-aD-3aN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

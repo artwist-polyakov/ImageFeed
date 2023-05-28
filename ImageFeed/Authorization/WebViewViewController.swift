@@ -9,6 +9,6 @@ import UIKit
 import WebKit
 
 class WebViewViewController: UIViewController {
-    var segueIdentifier: String?
-    @IBOutlet private var webView: WKWebView!
+
+    @IBOutlet private weak var webView: WKWebView!
 }
