@@ -11,4 +11,9 @@ import WebKit
 class WebViewViewController: UIViewController {
 
     @IBOutlet private weak var webView: WKWebView!
+    
+    @IBAction private func didTapBackButton(_ sender: Any) {
+    }
+    
+    
 }

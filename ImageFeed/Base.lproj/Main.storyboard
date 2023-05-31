@@ -293,24 +293,28 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_back_button" translatesAutoresizingMaskIntoConstraints="NO" id="g7B-HX-99W">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2mc-SX-Klx" userLabel="BackButton">
                                 <rect key="frame" x="9" y="10" width="24" height="24"/>
-                                <color key="tintColor" name="YP Black"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="24" id="Rlr-3z-lW4"/>
-                                    <constraint firstAttribute="height" constant="24" id="szs-ok-7yb"/>
+                                    <constraint firstAttribute="width" constant="24" id="3F9-Vk-Z2A"/>
+                                    <constraint firstAttribute="height" constant="24" id="jNc-yV-tm9"/>
                                 </constraints>
-                            </imageView>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button" image="nav_back_button"/>
+                                <connections>
+                                    <action selector="didTapBackButton:" destination="cMe-gY-jNI" eventType="touchUpInside" id="9QQ-Yn-7cE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wck-rB-L9p"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="zTp-B7-ZNq" firstAttribute="leading" secondItem="tGJ-iG-nxG" secondAttribute="leading" id="1qi-rH-QOZ"/>
-                            <constraint firstItem="g7B-HX-99W" firstAttribute="leading" secondItem="wck-rB-L9p" secondAttribute="leading" constant="9" id="7sB-Kw-py0"/>
+                            <constraint firstItem="2mc-SX-Klx" firstAttribute="top" secondItem="wck-rB-L9p" secondAttribute="top" constant="10" id="AMy-3W-I9h"/>
                             <constraint firstAttribute="trailing" secondItem="zTp-B7-ZNq" secondAttribute="trailing" id="Jwj-WQ-Wtx"/>
-                            <constraint firstItem="g7B-HX-99W" firstAttribute="top" secondItem="wck-rB-L9p" secondAttribute="top" constant="10" id="dIt-bH-qXH"/>
                             <constraint firstAttribute="bottom" secondItem="zTp-B7-ZNq" secondAttribute="bottom" id="fj5-oe-VDX"/>
                             <constraint firstItem="zTp-B7-ZNq" firstAttribute="top" secondItem="tGJ-iG-nxG" secondAttribute="top" id="oJf-FA-gZh"/>
+                            <constraint firstItem="2mc-SX-Klx" firstAttribute="leading" secondItem="wck-rB-L9p" secondAttribute="leading" constant="9" id="tib-M3-YTT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Qrj-Ns-a4j"/>
