@@ -19,6 +19,7 @@
 		AF66294E2A239B7E005F16C8 /* YS Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF66294C2A239B7E005F16C8 /* YS Display-Medium.ttf */; };
 		AF7743752A23A1B400A1BB26 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7743742A23A1B400A1BB26 /* AuthViewController.swift */; };
 		AF7743772A23B24D00A1BB26 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7743762A23B24D00A1BB26 /* WebViewViewController.swift */; };
+		AF7743792A27AE1B00A1BB26 /* WebViewViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7743782A27AE1B00A1BB26 /* WebViewViewControllerDelegate.swift */; };
 		AFF07B692A0D2D3900683324 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF07B682A0D2D3900683324 /* ProfileViewController.swift */; };
 		AFF07B6F2A0E9F9A00683324 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF07B6E2A0E9F9A00683324 /* SingleImageViewController.swift */; };
 		AFFE120E2A13F19000199FD5 /* GradientUnderDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFE120D2A13F19000199FD5 /* GradientUnderDate.swift */; };
@@ -39,6 +40,7 @@
 		AF66294C2A239B7E005F16C8 /* YS Display-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Medium.ttf"; sourceTree = "<group>"; };
 		AF7743742A23A1B400A1BB26 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		AF7743762A23B24D00A1BB26 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
+		AF7743782A27AE1B00A1BB26 /* WebViewViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewControllerDelegate.swift; sourceTree = "<group>"; };
 		AFF07B682A0D2D3900683324 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AFF07B6E2A0E9F9A00683324 /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		AFFE120D2A13F19000199FD5 /* GradientUnderDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientUnderDate.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			children = (
 				AF7743742A23A1B400A1BB26 /* AuthViewController.swift */,
 				AF7743762A23B24D00A1BB26 /* WebViewViewController.swift */,
+				AF7743782A27AE1B00A1BB26 /* WebViewViewControllerDelegate.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 				AF2694B529FC1BDB0023942A /* AppDelegate.swift in Sources */,
 				AFF07B6F2A0E9F9A00683324 /* SingleImageViewController.swift in Sources */,
 				AFFE120E2A13F19000199FD5 /* GradientUnderDate.swift in Sources */,
+				AF7743792A27AE1B00A1BB26 /* WebViewViewControllerDelegate.swift in Sources */,
 				AF2694B729FC1BDB0023942A /* SceneDelegate.swift in Sources */,
 				AF7743752A23A1B400A1BB26 /* AuthViewController.swift in Sources */,
 				AF6629482A2224AF005F16C8 /* Constants.swift in Sources */,
