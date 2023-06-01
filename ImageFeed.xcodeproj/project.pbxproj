@@ -20,6 +20,9 @@
 		AF7743752A23A1B400A1BB26 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7743742A23A1B400A1BB26 /* AuthViewController.swift */; };
 		AF7743772A23B24D00A1BB26 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7743762A23B24D00A1BB26 /* WebViewViewController.swift */; };
 		AF7743792A27AE1B00A1BB26 /* WebViewViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7743782A27AE1B00A1BB26 /* WebViewViewControllerDelegate.swift */; };
+		AF8D36172A28E4BE00217033 /* OAuthTokenResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D36162A28E4BE00217033 /* OAuthTokenResponseBody.swift */; };
+		AF8D36192A28EA8B00217033 /* OAuth2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D36182A28EA8B00217033 /* OAuth2Service.swift */; };
+		AF8D361B2A28ECB800217033 /* OAuth2TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D361A2A28ECB800217033 /* OAuth2TokenStorage.swift */; };
 		AFF07B692A0D2D3900683324 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF07B682A0D2D3900683324 /* ProfileViewController.swift */; };
 		AFF07B6F2A0E9F9A00683324 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF07B6E2A0E9F9A00683324 /* SingleImageViewController.swift */; };
 		AFFE120E2A13F19000199FD5 /* GradientUnderDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFE120D2A13F19000199FD5 /* GradientUnderDate.swift */; };
@@ -41,6 +44,9 @@
 		AF7743742A23A1B400A1BB26 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		AF7743762A23B24D00A1BB26 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		AF7743782A27AE1B00A1BB26 /* WebViewViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewControllerDelegate.swift; sourceTree = "<group>"; };
+		AF8D36162A28E4BE00217033 /* OAuthTokenResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponseBody.swift; sourceTree = "<group>"; };
+		AF8D36182A28EA8B00217033 /* OAuth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
+		AF8D361A2A28ECB800217033 /* OAuth2TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorage.swift; sourceTree = "<group>"; };
 		AFF07B682A0D2D3900683324 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AFF07B6E2A0E9F9A00683324 /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		AFFE120D2A13F19000199FD5 /* GradientUnderDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientUnderDate.swift; sourceTree = "<group>"; };
@@ -116,6 +122,9 @@
 				AF7743742A23A1B400A1BB26 /* AuthViewController.swift */,
 				AF7743762A23B24D00A1BB26 /* WebViewViewController.swift */,
 				AF7743782A27AE1B00A1BB26 /* WebViewViewControllerDelegate.swift */,
+				AF8D36162A28E4BE00217033 /* OAuthTokenResponseBody.swift */,
+				AF8D36182A28EA8B00217033 /* OAuth2Service.swift */,
+				AF8D361A2A28ECB800217033 /* OAuth2TokenStorage.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -212,8 +221,11 @@
 			files = (
 				AF7743772A23B24D00A1BB26 /* WebViewViewController.swift in Sources */,
 				AF2694B929FC1BDB0023942A /* ImagesListViewController.swift in Sources */,
+				AF8D36192A28EA8B00217033 /* OAuth2Service.swift in Sources */,
+				AF8D36172A28E4BE00217033 /* OAuthTokenResponseBody.swift in Sources */,
 				AF2694E929FEEF8A0023942A /* ImagesListCell.swift in Sources */,
 				AFF07B692A0D2D3900683324 /* ProfileViewController.swift in Sources */,
+				AF8D361B2A28ECB800217033 /* OAuth2TokenStorage.swift in Sources */,
 				AF2694B529FC1BDB0023942A /* AppDelegate.swift in Sources */,
 				AFF07B6F2A0E9F9A00683324 /* SingleImageViewController.swift in Sources */,
 				AFFE120E2A13F19000199FD5 /* GradientUnderDate.swift in Sources */,
