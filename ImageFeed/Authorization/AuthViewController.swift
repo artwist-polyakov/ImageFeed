@@ -9,10 +9,11 @@ import UIKit
 class AuthViewController: UIViewController {
     
     let segueIdentifier = "ShowWebView"
-  
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueIdentifier {
+            
             // Получение следующего View Controller
             guard let webViewViewController = segue.destination as? WebViewViewController else {
                 fatalError("Failed to prepare for \(segueIdentifier)")}
