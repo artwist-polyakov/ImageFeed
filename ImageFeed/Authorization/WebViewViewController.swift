@@ -76,33 +76,17 @@ final class WebViewViewController: UIViewController {
 }
 
 extension WebViewViewController: WKNavigationDelegate {
-    func webView(_ webView: WKWebView,
-                          decidePolicyFor navigationAction: WKNavigationAction,
-                          decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if let code = code(from: navigationAction) {
-            // Получение авторизационного токена и сохранение его в User Defaults
-            OAuth2Service.shared.fetchOAuthToken(code) { result in
-                switch result {
-                case .success(let authToken):
-                    // Успешно получен токен
-                    // Сохраняем Bearer Token в User Defaults
-                    OAuth2TokenStorage.shared.token = authToken
-                    
-                    // Можно выполнить дополнительные действия или перейти к другому экрану
-                    print("Access Token: \(authToken)")
-                    self.dismiss(animated: true, completion: nil)
-//                    self.delegate?.webViewViewController(self, didAuthenticateWithCode: code)
-                case .failure(let error):
-                    // Обработка ошибки получения токена
-                    print("Failed to fetch access token: \(error)")
-                }
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+            if let code = code(from: navigationAction) {
+                // Вызываем метод делегата для передачи кода аутентификации
+                delegate?.webViewViewController(self, didAuthenticateWithCode: code)
+                decisionHandler(.cancel)
+                self.dismiss(animated: true, completion: nil)
+                
+            } else {
+                decisionHandler(.allow)
             }
-            
-            decisionHandler(.cancel)
-        } else {
-            decisionHandler(.allow)
         }
-    }
     
     private func code (from navigationAction: WKNavigationAction) -> String? {
         if
