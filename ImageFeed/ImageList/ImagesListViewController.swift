@@ -53,7 +53,10 @@ extension ImagesListViewController: UITableViewDataSource {
 }
 
 extension ImagesListViewController {
-    private func setLiked(to likeButton: UIButton, state: Bool) {
+    private func setLiked(
+        to likeButton: UIButton,
+        state: Bool
+    ) {
         let picture = state ? UIImage(named: "LikeButtonOn") : UIImage(named: "LikeButtonOff")
         likeButton.setImage(picture, for: .normal)
     }
@@ -71,10 +74,16 @@ extension ImagesListViewController {
 }
 
 extension ImagesListViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath
+    ) {
         performSegue(withIdentifier: "ShowSingleImage", sender: indexPath)
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(
+        _ tableView: UITableView,
+        heightForRowAt indexPath: IndexPath
+    ) -> CGFloat {
         guard let image = UIImage(named: photosName[indexPath.row]) else {
             return 0
         }

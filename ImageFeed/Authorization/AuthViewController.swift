@@ -8,7 +8,10 @@
 import UIKit
 
 protocol AuthViewControllerDelegate: AnyObject {
-    func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String)
+    func authViewController(
+        _ vc: AuthViewController,
+        didAuthenticateWithCode code: String
+    )
 }
 
 class AuthViewController: UIViewController {
@@ -16,7 +19,10 @@ class AuthViewController: UIViewController {
     let segueIdentifier = "ShowWebView"
     weak var delegate: AuthViewControllerDelegate?
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(
+        for segue: UIStoryboardSegue,
+        sender: Any?
+    ) {
         if segue.identifier == segueIdentifier {
             
             // Получение следующего View Controller
@@ -30,7 +36,10 @@ class AuthViewController: UIViewController {
 }
 
 extension AuthViewController: WebViewViewControllerDelegate {
-    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
+    func webViewViewController(
+        _ vc: WebViewViewController,
+        didAuthenticateWithCode code: String
+    ) {
         delegate?.authViewController(self, didAuthenticateWithCode: code)
     }
     

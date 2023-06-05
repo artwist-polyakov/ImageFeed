@@ -11,12 +11,9 @@ import WebKit
 fileprivate let UnsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
 
 final class WebViewViewController: UIViewController {
-    
     weak var delegate: WebViewViewControllerDelegate?
-    
     @IBOutlet private var progressView: UIProgressView!
     @IBOutlet private weak var webView: WKWebView!
-    
     @IBAction private func didTapBackButton(_ sender: Any) {
         delegate?.webViewViewControllerDidCancel(self)
     }
@@ -78,7 +75,8 @@ final class WebViewViewController: UIViewController {
 extension WebViewViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView,
                  decidePolicyFor navigationAction: WKNavigationAction,
-                 decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+                 decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
+    ) {
         if let code = code(from: navigationAction) {
             // Вызываем метод делегата для передачи кода аутентификации
             delegate?.webViewViewController(self, didAuthenticateWithCode: code)
