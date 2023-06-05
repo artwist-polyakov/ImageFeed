@@ -23,20 +23,20 @@ final class OAuth2Service {
     func fetchOAuthToken(
         _ code: String,
         completion: @escaping (Result<String, Error>) -> Void
-        ) {
-            let request = authTokenRequest(code: code)
-            let task = object(for: request) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let body):
-                    let authToken = body.accessToken
-                    self.authToken = authToken
-                    completion(.success(authToken))
-                case .failure(let error):
-                    completion(.failure(error))
-                }
+    ) {
+        let request = authTokenRequest(code: code)
+        let task = object(for: request) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let body):
+                let authToken = body.accessToken
+                self.authToken = authToken
+                completion(.success(authToken))
+            case .failure(let error):
+                completion(.failure(error))
             }
-            task.resume()
+        }
+        task.resume()
     }
     
 }
@@ -97,32 +97,32 @@ extension URLSession {
     func data(
         for request: URLRequest,
         completion: @escaping (Result<Data, Error>) -> Void
-        ) -> URLSessionTask {
-            let fulfillCompletion: (Result<Data, Error>) -> Void = { result in
-                DispatchQueue.main.async {
-                    completion(result)
-                }
+    ) -> URLSessionTask {
+        let fulfillCompletion: (Result<Data, Error>) -> Void = { result in
+            DispatchQueue.main.async {
+                completion(result)
             }
-            let task = dataTask(with: request, completionHandler: { data, response, error in
-                if let data = data,
-                   let response = response,
-                   let statusCode = (response as? HTTPURLResponse)?.statusCode
-                {
-                    if 200 ..< 300 ~= statusCode {
-//                        print(String(data: data, encoding: .utf8)!)
-                        fulfillCompletion(.success(data))
-                    } else {
-                        fulfillCompletion(.failure(NetworkError .httpStatusCode(statusCode)))
-                    }
-                } else if let error = error {
-                    fulfillCompletion(.failure(NetworkError.urlRequestError(error)))
-                } else {
-                    fulfillCompletion(.failure(NetworkError.urlSessionError))
-                }
-            })
-            task.resume()
-            return task
         }
+        let task = dataTask(with: request, completionHandler: { data, response, error in
+            if let data = data,
+               let response = response,
+               let statusCode = (response as? HTTPURLResponse)?.statusCode
+            {
+                if 200 ..< 300 ~= statusCode {
+                    //                        print(String(data: data, encoding: .utf8)!)
+                    fulfillCompletion(.success(data))
+                } else {
+                    fulfillCompletion(.failure(NetworkError .httpStatusCode(statusCode)))
+                }
+            } else if let error = error {
+                fulfillCompletion(.failure(NetworkError.urlRequestError(error)))
+            } else {
+                fulfillCompletion(.failure(NetworkError.urlSessionError))
+            }
+        })
+        task.resume()
+        return task
+    }
 }
 
 enum NetworkError: Error {

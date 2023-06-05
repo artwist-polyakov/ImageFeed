@@ -13,7 +13,7 @@ fileprivate let UnsplashAuthorizeURLString = "https://unsplash.com/oauth/authori
 final class WebViewViewController: UIViewController {
     
     weak var delegate: WebViewViewControllerDelegate?
-
+    
     @IBOutlet private var progressView: UIProgressView!
     @IBOutlet private weak var webView: WKWebView!
     
@@ -31,7 +31,7 @@ final class WebViewViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-//        UserDefaults.standard.removeObject(forKey: "BearerToken")
+        //        UserDefaults.standard.removeObject(forKey: "BearerToken")
         webView.navigationDelegate = self
         
         
@@ -39,10 +39,10 @@ final class WebViewViewController: UIViewController {
         // нас интересует фрагмент https://share.cleanshot.com/yMSRhPDtVgxzhnZ7xWfp
         var urlComponents = URLComponents(string: UnsplashAuthorizeURLString)!
         urlComponents.queryItems = [
-        URLQueryItem(name: "client_id", value: AccessKey),
-        URLQueryItem(name: "redirect_uri", value: RedirectURI),
-        URLQueryItem(name: "response_type", value: "code"),
-        URLQueryItem(name: "scope", value: AccessScope)
+            URLQueryItem(name: "client_id", value: AccessKey),
+            URLQueryItem(name: "redirect_uri", value: RedirectURI),
+            URLQueryItem(name: "response_type", value: "code"),
+            URLQueryItem(name: "scope", value: AccessScope)
         ]
         let url = urlComponents.url!
         let request = URLRequest(url: url)
@@ -52,7 +52,7 @@ final class WebViewViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         webView.removeObserver(self, forKeyPath:
-        #keyPath(WKWebView.estimatedProgress), context: nil)
+                                #keyPath(WKWebView.estimatedProgress), context: nil)
     }
     
     override func observeValue(
@@ -67,7 +67,7 @@ final class WebViewViewController: UIViewController {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
-
+    
     private func updateProgress() {
         progressView.progress = Float(webView.estimatedProgress)
         progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
@@ -79,16 +79,16 @@ extension WebViewViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView,
                  decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-            if let code = code(from: navigationAction) {
-                // Вызываем метод делегата для передачи кода аутентификации
-                delegate?.webViewViewController(self, didAuthenticateWithCode: code)
-                decisionHandler(.cancel)
-//                self.dismiss(animated: true, completion: nil)
-                
-            } else {
-                decisionHandler(.allow)
-            }
+        if let code = code(from: navigationAction) {
+            // Вызываем метод делегата для передачи кода аутентификации
+            delegate?.webViewViewController(self, didAuthenticateWithCode: code)
+            decisionHandler(.cancel)
+            //                self.dismiss(animated: true, completion: nil)
+            
+        } else {
+            decisionHandler(.allow)
         }
+    }
     
     private func code (from navigationAction: WKNavigationAction) -> String? {
         if
