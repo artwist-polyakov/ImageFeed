@@ -29,27 +29,10 @@ final class OAuth2Service {
         completion: @escaping (Result<String, Error>) -> Void
     ) {
         assert(Thread.isMainThread)
-        
-        
-        if task != nil {                                    // 5
-                    if lastCode != code {                           // 6
-                        task?.cancel()                              // 7
-                    } else {
-                        return                                      // 8
-                    }
-        } else {
-                    if lastCode == code {                           // 9
-                        return
-                    }
-                }
+        if lastCode == code {return}
+        task?.cancel()
         lastCode = code
         let request = authTokenRequest(code: code)
-//        let task = urlSession.dataTask(with: request) { data, response, error in
-//            DispatchQueue.main.async {
-//
-//            }
-//        }
-            
         let task = object(for: request) { [weak self] result in
             DispatchQueue.main.async {
                 guard let self = self else { return }
