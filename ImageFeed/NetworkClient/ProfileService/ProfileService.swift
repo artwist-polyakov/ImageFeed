@@ -8,9 +8,12 @@
 import Foundation
 
 final class ProfileService {
+    static let shared = ProfileService()
+    
     private let urlSession = URLSession.shared
     private var task: URLSessionTask?
-    var profile: Profile?
+    private(set) var profile: Profile?
+    var avatarLink: URL?
     
     func fetchProfile(
         _ token: String,
@@ -27,7 +30,6 @@ final class ProfileService {
         var selfProfileRequest: URLRequest {
             URLRequest.makeHTTPRequest(path: "/me", httpMethod: "GET", needToken: true)
         }
-        print(selfProfileRequest)
         let task = object(for: selfProfileRequest) { result in
             DispatchQueue.main.async {
                 print("Я тута")
@@ -38,6 +40,14 @@ final class ProfileService {
                     print("Тут успех")
                     let profile = Profile(username: body.username, name: "\(body.firstName ?? "") \(body.lastName ?? "")", loginName: "@\(body.username)", bio: body.bio ?? "")
                     self.profile = profile
+                    var imageProfileRequest: URLRequest {
+                        URLRequest.makeHTTPRequest(path: "/users/\(body.username)", httpMethod: "GET", needToken: true)
+                        
+                    }
+                    let decoder = JSONDecoder()
+                    
+                    
+                    
                     completion(.success(profile))
                     self.task = nil
                     print("Вот какой профиль \(String(describing: self.profile))")

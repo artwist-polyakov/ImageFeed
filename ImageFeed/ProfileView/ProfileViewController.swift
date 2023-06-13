@@ -9,6 +9,9 @@ class ProfileViewController: UIViewController {
     private var userDescription: UILabel!
     private var userNickName: UILabel!
     private var userName: UILabel!
+    private let profileService = ProfileService.shared
+    
+    
     private func initProfileImage (view: UIView) {
         view.backgroundColor = UIColor(named: "YP Black")
         let profileImage = UIImage(named: "ProfilePhoto") ?? UIImage(named: "ProfilePhotoPlaceholder")
@@ -76,29 +79,18 @@ class ProfileViewController: UIViewController {
         userDescription.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
     }
     
+    private func updateProfileDetails (profile: Profile) {
+        userDescription.text = profile.bio ?? ""
+        userNickName.text = profile.loginName
+        userName.text = profile.name ?? ""
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initProfileImage (view: view)
         initLogoutButton(view: view)
         initLabels(view: view)
-        let token = OAuth2TokenStorage().token
-        let profileService = ProfileService()
-        if token != nil {
-            profileService.fetchProfile(token!) { result in
-                    switch result {
-                    case .success(let profile):
-                        self.userDescription.text = profile.bio ?? ""
-                        self.userNickName.text = profile.loginName
-                        self.userName.text = profile.name ?? ""
-
-                        // Обработка успешного получения профиля
-                    case .failure(_):
-                        print("ОШИБКА")
-                        break
-                        // Обработка ошибки
-                    }
-                }
-        }
+        updateProfileDetails(profile: profileService.profile!)
     }
     
     @objc
