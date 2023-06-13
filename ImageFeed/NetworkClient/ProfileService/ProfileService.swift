@@ -16,30 +16,39 @@ final class ProfileService {
         _ token: String,
         completion: @escaping (Result<Profile, Error>) -> Void
     ) {
+        print("До ассерта")
         assert(Thread.isMainThread)
-        
+        print("После ассерта")
         if task != nil {
+            print("Таск == нил")
             task?.cancel()
         }
         
         var selfProfileRequest: URLRequest {
             URLRequest.makeHTTPRequest(path: "/me", httpMethod: "GET", needToken: true)
         }
-        
-        let task = object(for: selfProfileRequest) { [weak self] result in
+        print(selfProfileRequest)
+        let task = object(for: selfProfileRequest) { result in
             DispatchQueue.main.async {
-                guard let self = self else { return }
+                print("Я тута")
+                print(result)
+//                guard let self = self else { print("тут гард"); return }
                 switch result {
                 case .success(let body):
-                    let profile = Profile(username: body.username, name: body.firstName + body.lastName, loginName: "@"+body.username, bio: body.bio)
+                    print("Тут успех")
+                    let profile = Profile(username: body.username, name: "\(body.firstName ?? "") \(body.lastName ?? "")", loginName: "@\(body.username)", bio: body.bio ?? "")
+                    self.profile = profile
                     completion(.success(profile))
                     self.task = nil
-                    self.profile = profile
+                    print("Вот какой профиль \(String(describing: self.profile))")
                 case .failure(let error):
+                    print("Тут не успех")
                     completion(.failure(error))
+                    self.task = nil
                 }
             }
         }
+        
         self.task = task
         task.resume()
     }
@@ -52,20 +61,10 @@ extension ProfileService {
     ) -> URLSessionTask {
         let decoder = JSONDecoder()
         return urlSession.data(for: request) { (result: Result<Data, Error>) in
-        switch result {
-            case .success(let data):
-                do {
-                    let object = try decoder.decode(
-                        ProfileResult.self,
-                        from: data
-                        )
-                    completion(.success(object))
-                    } catch {
-                        completion(.failure(error))
-                    }
-            case .failure(let error):
-                completion(.failure(error))
+            let response = result.flatMap { data -> Result<ProfileResult, Error> in
+                Result { try decoder.decode(ProfileResult.self, from: data) }
             }
+            completion(response)
         }
     }
 }

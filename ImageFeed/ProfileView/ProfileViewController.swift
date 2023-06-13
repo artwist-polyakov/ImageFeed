@@ -43,7 +43,7 @@ class ProfileViewController: UIViewController {
     }
     
     private func initLabels(view: UIView) {
-        let userName = UILabel()
+        userName = UILabel()
         userName.text = "Екатерина Новикова"
         userName.textColor = UIColor(named: "YP White")
         let boldFontSize: CGFloat = 23
@@ -54,7 +54,7 @@ class ProfileViewController: UIViewController {
         userName.topAnchor.constraint(equalTo: view.viewWithTag(1)!.bottomAnchor, constant: 8).isActive = true
         userName.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
         
-        let userNickName = UILabel()
+        userNickName = UILabel()
         userNickName.text = "@ekaterina_nov"
         userNickName.textColor = UIColor(named: "YP Gray")
         let regularFontSize: CGFloat = 13
@@ -65,7 +65,7 @@ class ProfileViewController: UIViewController {
         userNickName.topAnchor.constraint(equalTo: userName.bottomAnchor, constant: 8).isActive = true
         userNickName.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
         
-        let userDescription = UILabel()
+        userDescription = UILabel()
         userDescription.text = "Hello, world!"
         userDescription.textColor = UIColor(named: "YP White")
         userDescription.font = regularFont
@@ -82,16 +82,19 @@ class ProfileViewController: UIViewController {
         initLogoutButton(view: view)
         initLabels(view: view)
         let token = OAuth2TokenStorage().token
+        let profileService = ProfileService()
         if token != nil {
-            let profileService = ProfileService()
             profileService.fetchProfile(token!) { result in
                     switch result {
                     case .success(let profile):
-                        self.userDescription.text = profile.bio
+                        self.userDescription.text = profile.bio ?? ""
                         self.userNickName.text = profile.loginName
-                        self.userName.text = profile.name
+                        self.userName.text = profile.name ?? ""
+
                         // Обработка успешного получения профиля
-                    case .failure(_): break
+                    case .failure(_):
+                        print("ОШИБКА")
+                        break
                         // Обработка ошибки
                     }
                 }
