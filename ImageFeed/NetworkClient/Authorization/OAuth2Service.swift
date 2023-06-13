@@ -98,10 +98,17 @@ extension URLRequest {
     static func makeHTTPRequest(
         path: String,
         httpMethod: String,
-        baseURL: URL = DefaultBaseURL
+        baseURL: URL = DefaultBaseURL,
+        needToken: Bool = false
     ) -> URLRequest {
         var request = URLRequest(url: URL(string: path, relativeTo: baseURL)!)
         request.httpMethod = httpMethod
+        if (needToken) {
+            guard let authToken = OAuth2TokenStorage().token else {
+                return request
+            }
+            request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
+        }
         return request
     }
 }

@@ -17,7 +17,7 @@ class OAuth2TokenStorage {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: tokenKey)
-//            print("Устновил токен: \(newValue ?? "НОНЕ")")
+//            print("Установил токен: \(newValue ?? "NONE")")
         }
     }
 }
