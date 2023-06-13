@@ -30,11 +30,11 @@ final class ProfileService {
         var selfProfileRequest: URLRequest {
             URLRequest.makeHTTPRequest(path: "/me", httpMethod: "GET", needToken: true)
         }
-        let task = object(for: selfProfileRequest) { result in
+        let task = object(for: selfProfileRequest) { [weak self] result in
             DispatchQueue.main.async {
                 print("Я тута")
                 print(result)
-//                guard let self = self else { print("тут гард"); return }
+                guard let self = self else { print("тут гард"); return }
                 switch result {
                 case .success(let body):
                     print("Тут успех")
