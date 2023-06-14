@@ -1,0 +1,67 @@
+//
+//  ProfileImageService.swift
+//  ImageFeed
+//
+//  Created by Александр Поляков on 14.06.2023.
+//
+
+import Foundation
+final class ProfileImageService {
+    static let shared = ProfileImageService()
+    private let urlSession = URLSession.shared
+    private var task: URLSessionTask?
+    private(set) var avatarURL: String?
+    
+    func fetchProfileImageURL(
+        username: String,
+        completion: @escaping (Result<String?, Error>) -> Void
+    ) {
+        assert(Thread.isMainThread)
+        if task != nil {
+            print("Таск == нил")
+            task?.cancel()
+        }
+        
+        var profilePhotoRequest: URLRequest {
+            URLRequest.makeHTTPRequest(path: "/users/\(username)", httpMethod: "GET", needToken: true)
+        }
+        let task = object(for: profilePhotoRequest) { [weak self] result in
+            DispatchQueue.main.async {
+
+                guard let self = self else { print("тут гард"); return }
+                switch result {
+                case .success(let body):
+                    self.avatarURL = body.profileImage?.small
+                    completion(.success(self.avatarURL))
+                    self.task = nil
+                case .failure(let error):
+                    completion(.failure(error))
+                    self.task = nil
+                }
+            }
+        }
+        
+        self.task = task
+        task.resume()
+    }
+    
+}
+
+
+
+
+
+extension ProfileImageService {
+    private func object(
+        for request: URLRequest,
+        completion: @escaping (Result<UserResult, Error>) -> Void
+    ) -> URLSessionTask {
+        let decoder = JSONDecoder()
+        return urlSession.data(for: request) { (result: Result<Data, Error>) in
+            let response = result.flatMap { data -> Result<UserResult, Error> in
+                Result { try decoder.decode(UserResult.self, from: data) }
+            }
+            completion(response)
+        }
+    }
+}

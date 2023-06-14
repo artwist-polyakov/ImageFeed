@@ -13,10 +13,8 @@ final class ProfileService {
     private let urlSession = URLSession.shared
     private var task: URLSessionTask?
     private(set) var profile: Profile?
-    var avatarLink: URL?
     
     func fetchProfile(
-        _ token: String,
         completion: @escaping (Result<Profile, Error>) -> Void
     ) {
         assert(Thread.isMainThread)
@@ -36,14 +34,6 @@ final class ProfileService {
                 case .success(let body):
                     let profile = Profile(username: body.username, name: "\(body.firstName ?? "") \(body.lastName ?? "")", loginName: "@\(body.username)", bio: body.bio ?? "")
                     self.profile = profile
-                    var imageProfileRequest: URLRequest {
-                        URLRequest.makeHTTPRequest(path: "/users/\(body.username)", httpMethod: "GET", needToken: true)
-                        
-                    }
-                    let decoder = JSONDecoder()
-                    
-                    
-                    
                     completion(.success(profile))
                     self.task = nil
                 case .failure(let error):
