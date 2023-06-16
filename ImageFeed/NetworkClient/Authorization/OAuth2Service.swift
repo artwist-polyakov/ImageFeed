@@ -72,10 +72,10 @@ extension OAuth2Service {
         return URLRequest.makeHTTPRequest(
             path: "/oauth/token"
             + "?client_id=\(AccessKey)"
-            + "&&client_secret=\(SecretKey)"
-            + "&&redirect_uri=\(RedirectURI)"
-            + "&&code=\(code)"
-            + "&&grant_type=authorization_code",
+            + "&client_secret=\(SecretKey)"
+            + "&redirect_uri=\(RedirectURI)"
+            + "&code=\(code)"
+            + "&grant_type=authorization_code",
             httpMethod: "POST",
             baseURL: URL(string: "https://unsplash.com")!
         )
