@@ -5,6 +5,8 @@
 //  Created by Александр Поляков on 11.05.2023.
 //
 import UIKit
+import Kingfisher
+
 class ProfileViewController: UIViewController {
     private var userDescription: UILabel!
     private var userNickName: UILabel!
@@ -15,8 +17,10 @@ class ProfileViewController: UIViewController {
     
     private func initProfileImage (view: UIView) {
         view.backgroundColor = UIColor(named: "YP Black")
-        let profileImage = UIImage(named: "ProfilePhoto") ?? UIImage(named: "ProfilePhotoPlaceholder")
+        let profileImage = UIImage(named: "ProfilePhotoPlaceholder") ?? UIImage(named: "ProfilePhotoPlaceholder")
         let profilePhotoView = UIImageView(image: profileImage)
+        profilePhotoView.layer.cornerRadius = profilePhotoView.frame.width / 2
+        profilePhotoView.clipsToBounds = true
         if profileImage ==  UIImage(named: "ProfilePhotoPlaceholder") {
             profilePhotoView.tintColor = UIColor(named: "YP Gray")
         }
@@ -105,11 +109,29 @@ class ProfileViewController: UIViewController {
     }
     
     private func updateAvatar() {                                   // 8
-            guard
+        guard
                 let profileImageURL = ProfileImageService.shared.avatarURL,
-                let url = URL(string: profileImageURL)
+                let url = URL(string: profileImageURL),
+                let imageView = view.viewWithTag(1) as? UIImageView
             else { return }
-            // TODO [Sprint 11] Обновить аватар, используя Kingfisher
+            let processor = RoundCornerImageProcessor(cornerRadius: imageView.frame.width / 2)
+            let placeholderImage = UIImage(named: "ProfilePhotoPlaceholder")
+            imageView.kf.setImage(with: url,
+                                  placeholder: placeholderImage,
+                                  options: nil,
+                                  completionHandler: { [weak self] result in
+                                      guard let self = self else { return }
+                                      
+                                      switch result {
+                                      case .success(let value):
+                                          // Загрузка изображения прошла успешно
+                                          print("Фотокарточка загружена: \(value.source.url?.absoluteString ?? "")")
+                                      case .failure(let error):
+                                          // Возникла ошибка при загрузке изображения
+                                          print("Фотокарточка не загружена: \(error)")
+                                      }
+                                  })
+
         }
     
     @objc
