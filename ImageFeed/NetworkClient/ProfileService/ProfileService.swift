@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class ProfileService: NetworkService {
+final class ProfileService {
     static let shared = ProfileService()
     
     private let urlSession = URLSession.shared
@@ -26,7 +26,7 @@ final class ProfileService: NetworkService {
         var selfProfileRequest: URLRequest {
             URLRequest.makeHTTPRequest(path: "/me", httpMethod: "GET", needToken: true)
         }
-        let task = object(for: selfProfileRequest) { [weak self] (result: Result<ProfileResult, Error>) in
+        let task = urlSession.objectTask(for: selfProfileRequest) { [weak self] (result: Result<ProfileResult, Error>) in
             
             DispatchQueue.main.async {
 

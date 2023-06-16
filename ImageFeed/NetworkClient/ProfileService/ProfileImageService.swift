@@ -6,7 +6,7 @@
 //
 
 import Foundation
-final class ProfileImageService: NetworkService {
+final class ProfileImageService {
     static let shared = ProfileImageService()
     private let urlSession = URLSession.shared
     private var task: URLSessionTask?
@@ -17,6 +17,7 @@ final class ProfileImageService: NetworkService {
         username: String,
         completion: @escaping (Result<String?, Error>) -> Void
     ) {
+        
         assert(Thread.isMainThread)
         if task != nil {
             print("Таск == нил")
@@ -26,7 +27,7 @@ final class ProfileImageService: NetworkService {
         var profilePhotoRequest: URLRequest {
             URLRequest.makeHTTPRequest(path: "/users/\(username)", httpMethod: "GET", needToken: true)
         }
-        let task = object(for: profilePhotoRequest) { [weak self] (result: Result<UserResult, Error>) in
+        let task = urlSession.objectTask(for: profilePhotoRequest) { [weak self] (result: Result<UserResult, Error>) in
             DispatchQueue.main.async {
 
                 guard let self = self else { print("тут гард"); return }
@@ -49,5 +50,4 @@ final class ProfileImageService: NetworkService {
         self.task = task
         task.resume()
     }
-    
 }
