@@ -19,7 +19,6 @@ final class WebViewViewController: UIViewController {
         delegate?.webViewViewControllerDidCancel(self)
     }
     
-    
     override func viewDidLoad() {
         //        UserDefaults.standard.removeObject(forKey: "BearerToken")
         webView.navigationDelegate = self

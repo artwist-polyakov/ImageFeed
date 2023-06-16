@@ -8,14 +8,11 @@ import Foundation
 
 fileprivate let UnsplashTokenURL = "https://unsplash.com/oauth/token"
 
-
 final class OAuth2Service {
     static let shared = OAuth2Service()
     private let urlSession = URLSession.shared
-    
-    private var task: URLSessionTask?                       // 2
+    private var task: URLSessionTask?
     private var lastCode: String?
-    
     private (set) var authToken: String? {
         get {
             return OAuth2TokenStorage().token
@@ -24,7 +21,6 @@ final class OAuth2Service {
             OAuth2TokenStorage().token = newValue
         }
     }
-    
     
     func fetchOAuthToken(
         _ code: String,
@@ -70,25 +66,6 @@ final class OAuth2Service {
         )
     }
 
-
-extension URLRequest {
-    static func makeHTTPRequest(
-        path: String,
-        httpMethod: String,
-        baseURL: URL = DefaultBaseURL,
-        needToken: Bool = false
-    ) -> URLRequest {
-        var request = URLRequest(url: URL(string: path, relativeTo: baseURL)!)
-        request.httpMethod = httpMethod
-        if (needToken) {
-            guard let authToken = OAuth2TokenStorage().token else {
-                return request
-            }
-            request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
-        }
-        return request
-    }
-}
 
 
 enum NetworkError: Error {
