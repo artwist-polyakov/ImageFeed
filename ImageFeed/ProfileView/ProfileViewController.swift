@@ -120,7 +120,7 @@ class ProfileViewController: UIViewController {
                                   placeholder: placeholderImage,
                                   options: nil,
                                   completionHandler: { [weak self] result in
-                                      guard let self = self else { return }
+                                        guard self != nil else { return }
                                       
                                       switch result {
                                       case .success(let value):
@@ -136,6 +136,8 @@ class ProfileViewController: UIViewController {
     
     @objc
     private func didTapLogoutButton() {
+        let tokenStorage = OAuth2TokenStorage.shared
+        tokenStorage.removeToken()
         for view in view.subviews {
             if view is UILabel {
                 view.removeFromSuperview()
