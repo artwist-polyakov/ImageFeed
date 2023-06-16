@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class ProfileService {
+final class ProfileService: NetworkService {
     static let shared = ProfileService()
     
     private let urlSession = URLSession.shared
@@ -26,7 +26,8 @@ final class ProfileService {
         var selfProfileRequest: URLRequest {
             URLRequest.makeHTTPRequest(path: "/me", httpMethod: "GET", needToken: true)
         }
-        let task = object(for: selfProfileRequest) { [weak self] result in
+        let task = object(for: selfProfileRequest) { [weak self] (result: Result<ProfileResult, Error>) in
+            
             DispatchQueue.main.async {
 
                 guard let self = self else { print("тут гард"); return }
@@ -45,21 +46,6 @@ final class ProfileService {
         
         self.task = task
         task.resume()
-    }
-}
-
-extension ProfileService {
-    private func object(
-        for request: URLRequest,
-        completion: @escaping (Result<ProfileResult, Error>) -> Void
-    ) -> URLSessionTask {
-        let decoder = JSONDecoder()
-        return urlSession.data(for: request) { (result: Result<Data, Error>) in
-            let response = result.flatMap { data -> Result<ProfileResult, Error> in
-                Result { try decoder.decode(ProfileResult.self, from: data) }
-            }
-            completion(response)
-        }
     }
 }
 

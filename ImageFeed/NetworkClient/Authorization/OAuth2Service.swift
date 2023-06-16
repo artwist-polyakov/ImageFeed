@@ -4,9 +4,11 @@
 //
 //  Created by Александр Поляков on 01.06.2023.
 //
+import Foundation
+
 fileprivate let UnsplashTokenURL = "https://unsplash.com/oauth/token"
 
-import Foundation
+
 final class OAuth2Service {
     static let shared = OAuth2Service()
     private let urlSession = URLSession.shared
@@ -33,7 +35,7 @@ final class OAuth2Service {
         task?.cancel()
         lastCode = code
         let request = authTokenRequest(code: code)
-        let task = object(for: request) { [weak self] result in
+        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<OAuthTokenResponseBody, Error>) in
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 switch result {
@@ -54,19 +56,6 @@ final class OAuth2Service {
     
 }
 
-extension OAuth2Service {
-    private func object(
-        for request: URLRequest,
-        completion: @escaping (Result<OAuthTokenResponseBody, Error>) -> Void
-    ) -> URLSessionTask {
-        let decoder = JSONDecoder()
-        return urlSession.data(for: request) { (result: Result<Data, Error>) in
-            let response = result.flatMap { data -> Result<OAuthTokenResponseBody, Error> in
-                Result { try decoder.decode(OAuthTokenResponseBody.self, from: data) }
-            }
-            completion(response)
-        }
-    }
     
     private func authTokenRequest(code: String) -> URLRequest {
         return URLRequest.makeHTTPRequest(
@@ -80,7 +69,7 @@ extension OAuth2Service {
             baseURL: URL(string: "https://unsplash.com")!
         )
     }
-}
+
 
 extension URLRequest {
     static func makeHTTPRequest(
@@ -101,37 +90,6 @@ extension URLRequest {
     }
 }
 
-extension URLSession {
-    func data(
-        for request: URLRequest,
-        completion: @escaping (Result<Data, Error>) -> Void
-    ) -> URLSessionTask {
-        let fulfillCompletion: (Result<Data, Error>) -> Void = { result in
-            DispatchQueue.main.async {
-                completion(result)
-            }
-        }
-        let task = dataTask(with: request, completionHandler: { data, response, error in
-            if let data = data,
-               let response = response,
-               let statusCode = (response as? HTTPURLResponse)?.statusCode
-            {
-                if 200 ..< 300 ~= statusCode {
-                    //                        print(String(data: data, encoding: .utf8)!)
-                    fulfillCompletion(.success(data))
-                } else {
-                    fulfillCompletion(.failure(NetworkError .httpStatusCode(statusCode)))
-                }
-            } else if let error = error {
-                fulfillCompletion(.failure(NetworkError.urlRequestError(error)))
-            } else {
-                fulfillCompletion(.failure(NetworkError.urlSessionError))
-            }
-        })
-        task.resume()
-        return task
-    }
-}
 
 enum NetworkError: Error {
     case httpStatusCode(Int)

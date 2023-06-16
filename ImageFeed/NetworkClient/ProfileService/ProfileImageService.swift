@@ -6,7 +6,7 @@
 //
 
 import Foundation
-final class ProfileImageService {
+final class ProfileImageService: NetworkService {
     static let shared = ProfileImageService()
     private let urlSession = URLSession.shared
     private var task: URLSessionTask?
@@ -26,7 +26,7 @@ final class ProfileImageService {
         var profilePhotoRequest: URLRequest {
             URLRequest.makeHTTPRequest(path: "/users/\(username)", httpMethod: "GET", needToken: true)
         }
-        let task = object(for: profilePhotoRequest) { [weak self] result in
+        let task = object(for: profilePhotoRequest) { [weak self] (result: Result<UserResult, Error>) in
             DispatchQueue.main.async {
 
                 guard let self = self else { print("тут гард"); return }
@@ -50,23 +50,4 @@ final class ProfileImageService {
         task.resume()
     }
     
-}
-
-
-
-
-
-extension ProfileImageService {
-    private func object(
-        for request: URLRequest,
-        completion: @escaping (Result<UserResult, Error>) -> Void
-    ) -> URLSessionTask {
-        let decoder = JSONDecoder()
-        return urlSession.data(for: request) { (result: Result<Data, Error>) in
-            let response = result.flatMap { data -> Result<UserResult, Error> in
-                Result { try decoder.decode(UserResult.self, from: data) }
-            }
-            completion(response)
-        }
-    }
 }

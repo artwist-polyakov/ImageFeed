@@ -89,7 +89,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                 profileImageService.fetchProfileImageURL(username:profileService.profile!.username) { imageResult in
                     switch imageResult {
                     case .success:
-                        print("ПРИЁМ \(self.profileImageService.avatarURL)")
+                        print("Фотка тут \(self.profileImageService.avatarURL)")
                     case .failure:
                         break
                         

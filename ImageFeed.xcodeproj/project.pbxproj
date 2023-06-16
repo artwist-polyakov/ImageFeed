@@ -26,6 +26,8 @@
 		AF8D361B2A28ECB800217033 /* OAuth2TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D361A2A28ECB800217033 /* OAuth2TokenStorage.swift */; };
 		AF9EC57D2A39C21200CD7754 /* ProfileImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9EC57C2A39C21200CD7754 /* ProfileImageService.swift */; };
 		AF9EC57F2A39C25700CD7754 /* UserResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9EC57E2A39C25700CD7754 /* UserResult.swift */; };
+		AF9EC5812A3CD20100CD7754 /* ext.URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9EC5802A3CD20100CD7754 /* ext.URLSession.swift */; };
+		AF9EC5832A3CD6EC00CD7754 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9EC5822A3CD6EC00CD7754 /* NetworkService.swift */; };
 		AFB4C31C2A2C9011004575AF /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB4C31B2A2C9011004575AF /* SplashViewController.swift */; };
 		AFE0497E2A31FA31002C431F /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = AFE0497D2A31FA31002C431F /* ProgressHUD */; };
 		AFE049802A350280002C431F /* UIBlockingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE0497F2A350280002C431F /* UIBlockingProgressHUD.swift */; };
@@ -58,6 +60,8 @@
 		AF8D361A2A28ECB800217033 /* OAuth2TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorage.swift; sourceTree = "<group>"; };
 		AF9EC57C2A39C21200CD7754 /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
 		AF9EC57E2A39C25700CD7754 /* UserResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResult.swift; sourceTree = "<group>"; };
+		AF9EC5802A3CD20100CD7754 /* ext.URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ext.URLSession.swift; sourceTree = "<group>"; };
+		AF9EC5822A3CD6EC00CD7754 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		AFB4C31B2A2C9011004575AF /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		AFE0497F2A350280002C431F /* UIBlockingProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBlockingProgressHUD.swift; sourceTree = "<group>"; };
 		AFE049822A365461002C431F /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 				AFE049812A365444002C431F /* ProfileService */,
 				AF6629492A239ABC005F16C8 /* Authorization */,
 				AF6629472A2224AF005F16C8 /* Constants.swift */,
+				AF9EC5802A3CD20100CD7754 /* ext.URLSession.swift */,
+				AF9EC5822A3CD6EC00CD7754 /* NetworkService.swift */,
 			);
 			path = NetworkClient;
 			sourceTree = "<group>";
@@ -266,6 +272,7 @@
 			files = (
 				AF7743772A23B24D00A1BB26 /* WebViewViewController.swift in Sources */,
 				AF2694B929FC1BDB0023942A /* ImagesListViewController.swift in Sources */,
+				AF9EC5832A3CD6EC00CD7754 /* NetworkService.swift in Sources */,
 				AF8D36192A28EA8B00217033 /* OAuth2Service.swift in Sources */,
 				AFE049802A350280002C431F /* UIBlockingProgressHUD.swift in Sources */,
 				AF8D36172A28E4BE00217033 /* OAuthTokenResponseBody.swift in Sources */,
@@ -275,6 +282,7 @@
 				AFE049832A365461002C431F /* ProfileService.swift in Sources */,
 				AF8D361B2A28ECB800217033 /* OAuth2TokenStorage.swift in Sources */,
 				AF2694B529FC1BDB0023942A /* AppDelegate.swift in Sources */,
+				AF9EC5812A3CD20100CD7754 /* ext.URLSession.swift in Sources */,
 				AFF07B6F2A0E9F9A00683324 /* SingleImageViewController.swift in Sources */,
 				AFB4C31C2A2C9011004575AF /* SplashViewController.swift in Sources */,
 				AFFE120E2A13F19000199FD5 /* GradientUnderDate.swift in Sources */,
