@@ -2,7 +2,7 @@ import UIKit
 
 final class SplashViewController: UIViewController {
     private let ShowAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
-    
+    let alertPresenter = AlertPresenter()
     private let oauth2Service = OAuth2Service()
     private let oauth2TokenStorage = OAuth2TokenStorage()
     private let profileService = ProfileService.shared
@@ -91,17 +91,36 @@ extension SplashViewController: AuthViewControllerDelegate {
                     case .success:
                         print("Фотка тут \(self.profileImageService.avatarURL)")
                     case .failure:
-                        break
-                        
+                        self.showAlert()
                     }
                 }
                 self.switchToTabBarController()
                     
             case .failure:
                 UIBlockingProgressHUD.dismiss()
-                // TODO [Sprint 11] Показать ошибку
-                break
+                self.showAlert()
             }
+        }
+    }
+    
+    func showAlert() {
+        alertPresenter.show(in: self, model: AlertModel(
+            title: "Что-то пошло не так(",
+            message: "Не удалось войти в систему",
+            buttonText: "Ок",
+            completion: { [weak self] in
+                self?.retryFetchingProfile()
+            }
+        ))
+    }
+    
+    private func retryFetchingProfile() {
+        UIBlockingProgressHUD.show()
+        
+        if let token = oauth2TokenStorage.token {
+            fetchProfile(token: token)
+        } else {
+            performSegue(withIdentifier: ShowAuthenticationScreenSegueIdentifier, sender: nil)
         }
     }
 }
