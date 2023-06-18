@@ -202,22 +202,6 @@
             </objects>
             <point key="canvasLocation" x="-871" y="299"/>
         </scene>
-        <!--Profile View Controller-->
-        <scene sceneID="Vn3-cr-fSf">
-            <objects>
-                <viewController storyboardIdentifier="ProfileViewController" id="aqS-1y-ua3" customClass="ProfileViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Mi7-UN-UpP">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="2JC-2m-NyG"/>
-                        <color key="backgroundColor" name="YP Black"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="a6b-5m-Axq"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ixU-6Q-Abl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="45" y="676"/>
-        </scene>
         <!--Auth View Controller-->
         <scene sceneID="bu3-7p-X2P">
             <objects>
