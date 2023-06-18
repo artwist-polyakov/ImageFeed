@@ -10,17 +10,37 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
+//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+//        guard let scene = (scene as? UIWindowScene) else { return }
+//        window = UIWindow(windowScene: scene)                   // 1
+//        // если не написать строчку ниже — то буде чёрный экран
+//        // еще можно было не объявлять окно строчкой выше
+//        window?.makeKeyAndVisible()
+//        window?.rootViewController = UIStoryboard(              // 2
+//            name: "Main",
+//            bundle: .main
+//        ).instantiateInitialViewController()
+//    }
+    
+//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+//        guard let windowScene = (scene as? UIWindowScene) else { return }
+//        let window = UIWindow(windowScene: windowScene)
+//
+//        let splashViewController = SplashViewController()
+//        let navigationController = UINavigationController(rootViewController: splashViewController)
+//        navigationController.navigationBar.isHidden = true
+//
+//        window.rootViewController = navigationController
+//        self.window = window
+//        window.makeKeyAndVisible()
+//    }
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let scene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: scene)                   // 1
-        // если не написать строчку ниже — то буде чёрный экран
-        // еще можно было не объявлять окно строчкой выше
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(windowScene: windowScene)
+        window?.rootViewController = SplashViewController()
         window?.makeKeyAndVisible()
-        window?.rootViewController = UIStoryboard(              // 2
-            name: "Main",
-            bundle: .main
-        ).instantiateInitialViewController()
-    }
+        }
     
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
