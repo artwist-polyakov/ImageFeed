@@ -108,7 +108,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="864" y="-3"/>
+            <point key="canvasLocation" x="45" y="-3"/>
         </scene>
         <!--Single Image View Controller-->
         <scene sceneID="gws-oe-Wfc">
@@ -181,12 +181,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kjM-cT-pdz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1682.608695652174" y="-3.3482142857142856"/>
+            <point key="canvasLocation" x="864" y="-3"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="D1Q-MO-zQj">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarViewController" id="CH6-fL-jVn" customClass="TabBarController" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" id="CH6-fL-jVn" customClass="TabBarController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ihi-kz-pC9">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -197,10 +197,6 @@
                             <color key="backgroundColor" name="YP Black"/>
                         </tabBarAppearance>
                     </tabBar>
-                    <connections>
-                        <segue destination="lij-5o-nkO" kind="relationship" relationship="viewControllers" id="9VS-2r-9gQ"/>
-                        <segue destination="VD7-ek-py6" kind="relationship" relationship="viewControllers" id="lDX-JK-o5V"/>
-                    </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Hv-5X-eXQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -220,7 +216,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ixU-6Q-Abl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="864" y="659"/>
+            <point key="canvasLocation" x="45" y="676"/>
         </scene>
         <!--Auth View Controller-->
         <scene sceneID="bu3-7p-X2P">
@@ -335,27 +331,6 @@
             <point key="canvasLocation" x="767" y="1356"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="UWx-Oo-bA5">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="lij-5o-nkO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="tab_editorial_active" id="gdm-hu-AMM"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LId-9Z-K8K">
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" name="YP White"/>
-                        <color key="barTintColor" name="YP White"/>
-                        <navigationBarAppearance key="standardAppearance"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="bTF-GW-Q1S"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4P3-xe-yuQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="46.376811594202906" y="-2.6785714285714284"/>
-        </scene>
-        <!--Navigation Controller-->
         <scene sceneID="hLg-dK-bht">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pJb-5T-Brc" sceneMemberID="viewController">
@@ -372,25 +347,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d7U-8J-uJq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-871" y="1356"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="OAi-ax-oMz">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VD7-ek-py6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="tab_profile_active" id="D6k-ud-fgz"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kUb-u7-0gd">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="aqS-1y-ua3" kind="relationship" relationship="rootViewController" id="Rf1-s5-9gv"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NTE-Xu-iZ1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="44.927536231884062" y="658.92857142857144"/>
         </scene>
         <!--Splash View Controller-->
         <scene sceneID="zec-zH-9ZD">
@@ -433,8 +389,6 @@
         <image name="nav_back_button" width="24" height="24"/>
         <image name="sharing_button" width="51" height="50"/>
         <image name="single_image_back_button" width="9" height="16"/>
-        <image name="tab_editorial_active" width="30" height="30"/>
-        <image name="tab_profile_active" width="30" height="30"/>
         <namedColor name="YP Black">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
