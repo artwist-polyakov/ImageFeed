@@ -9,7 +9,7 @@ final class SplashViewController: UIViewController {
     private let profileImageService = ProfileImageService.shared
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         if let token = oauth2TokenStorage.token {
             print("SPLASH: Получаем пользовательскую инфо")
             self.fetchProfile(token: token)
@@ -34,6 +34,7 @@ final class SplashViewController: UIViewController {
     }
     
     private func initLayout(view: UIView){
+        print("SPLASH: Init Layout")
         view.backgroundColor = UIColor(named: "YP Black")
         let screenImage = UIImage(named: "launchscreenLogo") ?? UIImage(named: "launchscreenLogo")
         let screenImageView = UIImageView(image: screenImage)
@@ -49,7 +50,6 @@ final class SplashViewController: UIViewController {
     override func viewDidLoad() {
             super.viewDidLoad()
             initLayout(view: view)
-            
         }
     
     
@@ -118,7 +118,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                         print("Фотка тут \(String(describing: self.profileImageService.avatarURL))")
                         UIBlockingProgressHUD.dismiss()
                     case .failure:
-                        
+                        UIBlockingProgressHUD.dismiss()
                         self.showAlert()
                     }
                 }
@@ -153,6 +153,6 @@ extension SplashViewController: AuthViewControllerDelegate {
 
             showAuthViewController()
         }
-        UIBlockingProgressHUD.dismiss()
+
     }
 }
