@@ -17,8 +17,9 @@ final class ProfileImageService {
         username: String,
         completion: @escaping (Result<String?, Error>) -> Void
     ) {
-        
+        print("Получаю фотографию пользователя")
         assert(Thread.isMainThread)
+        
         if task != nil {
             print("Таск == нил")
             task?.cancel()

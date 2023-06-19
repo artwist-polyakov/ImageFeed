@@ -11,14 +11,27 @@ final class SplashViewController: UIViewController {
         super.viewDidAppear(animated)
         
         if let token = oauth2TokenStorage.token {
+            print("SPLASH: Получаем пользовательскую инфо")
+            switchToTabBarController()
             self.fetchProfile(token: token)
+            
         } else {
             // Show Auth Screen
-            let authViewController = AuthViewController()
-            authViewController.delegate = self
-            authViewController.modalPresentationStyle = .fullScreen
-            present(authViewController, animated: true, completion: nil)
+            showAuthViewController()
         }
+    }
+    
+    
+    private func showAuthViewController(){
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        guard let authViewController = storyboard.instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController
+        else {
+            assertionFailure("Что-то пошло не так")
+            return
+        }
+        authViewController.delegate = self
+        authViewController.modalPresentationStyle = .fullScreen
+        present(authViewController, animated: true, completion: nil)
     }
     
     private func initLayout(view: UIView){
@@ -54,6 +67,7 @@ final class SplashViewController: UIViewController {
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
         let tabBarController = UIStoryboard(name: "Main", bundle: .main)
             .instantiateViewController(withIdentifier: "TabBarViewController")
+        UIBlockingProgressHUD.dismiss()
         window.rootViewController = tabBarController
     }
 }
@@ -88,17 +102,23 @@ extension SplashViewController: AuthViewControllerDelegate {
     }
     
     private func fetchProfile(token: String) {
-        profileService.fetchProfile {[weak self] result in
+        profileService.fetchProfile {result in
             UIBlockingProgressHUD.show()
-            guard let self = self else { return }
+            print ("SPLASH: мы в fetchProfile до гарда")
+//            guard let self = self else {
+//                print("SPLASH: сработал гард")
+//                return }
+            print ("SPLASH: мы в fetchProfile после гарда")
             switch result {
             case .success:
                 UIBlockingProgressHUD.dismiss()
-                profileImageService.fetchProfileImageURL(username:profileService.profile!.username) { imageResult in
+                self.profileImageService.fetchProfileImageURL(username:self.profileService.profile!.username) { imageResult in
                     switch imageResult {
                     case .success:
-                        print("Фотка тут \(self.profileImageService.avatarURL)")
+                        print("Фотка тут \(String(describing: self.profileImageService.avatarURL))")
+                        UIBlockingProgressHUD.dismiss()
                     case .failure:
+                        UIBlockingProgressHUD.dismiss()
                         self.showAlert()
                     }
                 }
@@ -126,9 +146,12 @@ extension SplashViewController: AuthViewControllerDelegate {
         UIBlockingProgressHUD.show()
         
         if let token = oauth2TokenStorage.token {
+            print("SPLASH: мы в ретри цикле")
             fetchProfile(token: token)
+            
         } else {
-            performSegue(withIdentifier: ShowAuthenticationScreenSegueIdentifier, sender: nil)
+            UIBlockingProgressHUD.dismiss()
+            showAuthViewController()
         }
     }
 }

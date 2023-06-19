@@ -149,7 +149,8 @@ class ProfileViewController: UIViewController {
             }
         }
         // После логаута мы должны снова запустить наш Сплешскрин — instantiateInitialViewController()
-        UIApplication.shared.windows.first?.rootViewController = UIStoryboard(name: "Main", bundle: .main).instantiateInitialViewController()
+//        UIApplication.shared.windows.first?.rootViewController = UIStoryboard(name: "Main", bundle: .main).instantiateInitialViewController()
+        present(SplashViewController(), animated: true, completion: nil)
         
     }
 }
