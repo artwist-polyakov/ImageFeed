@@ -29,7 +29,7 @@ final class ProfileService {
         let task = urlSession.objectTask(for: selfProfileRequest) { [weak self] (result: Result<ProfileResult, Error>) in
             
             DispatchQueue.main.async {
-
+                
                 guard let self = self else { print("тут гард"); return }
                 switch result {
                 case .success(let body):

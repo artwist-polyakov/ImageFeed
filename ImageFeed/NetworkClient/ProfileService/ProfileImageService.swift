@@ -30,16 +30,16 @@ final class ProfileImageService {
         }
         let task = urlSession.objectTask(for: profilePhotoRequest) { [weak self] (result: Result<UserResult, Error>) in
             DispatchQueue.main.async {
-
+                
                 guard let self = self else { print("тут гард"); return }
                 switch result {
                 case .success(let body):
                     self.avatarURL = body.profileImage?.medium
                     completion(.success(self.avatarURL))
                     NotificationCenter.default.post(
-                            name: ProfileImageService.DidChangeNotification,
-                            object: self,
-                            userInfo: ["URL": self.avatarURL ?? ""])
+                        name: ProfileImageService.DidChangeNotification,
+                        object: self,
+                        userInfo: ["URL": self.avatarURL ?? ""])
                     self.task = nil
                 case .failure(let error):
                     print(error)

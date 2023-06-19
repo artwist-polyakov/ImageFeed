@@ -18,7 +18,7 @@ final class SplashViewController: UIViewController {
             showAuthViewController()
         }
     }
-
+    
     
     private func showAuthViewController(){
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
@@ -44,13 +44,13 @@ final class SplashViewController: UIViewController {
         screenImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         screenImageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         screenImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
-
+        
     }
     
     override func viewDidLoad() {
-            super.viewDidLoad()
-            initLayout(view: view)
-        }
+        super.viewDidLoad()
+        initLayout(view: view)
+    }
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,7 +83,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             self.fetchOAuthToken(code)
         }
     }
-     
+    
     private func fetchOAuthToken(_ code: String) {
         oauth2Service.fetchOAuthToken(code) { [weak self] result in
             guard let self = self else { return }
@@ -103,9 +103,9 @@ extension SplashViewController: AuthViewControllerDelegate {
         profileService.fetchProfile {result in
             UIBlockingProgressHUD.show()
             print ("SPLASH: мы в fetchProfile до гарда")
-//            guard let self = self else {
-//                print("SPLASH: сработал гард")
-//                return }
+            //            guard let self = self else {
+            //                print("SPLASH: сработал гард")
+            //                return }
             print ("SPLASH: мы в fetchProfile после гарда")
             switch result {
             case .success:
@@ -119,7 +119,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                     }
                 }
                 self.switchToTabBarController()
-                    
+                
             case .failure:
                 self.showAlert()
             }
@@ -146,9 +146,9 @@ extension SplashViewController: AuthViewControllerDelegate {
             fetchProfile(token: token)
             
         } else {
-
+            
             showAuthViewController()
         }
-
+        
     }
 }

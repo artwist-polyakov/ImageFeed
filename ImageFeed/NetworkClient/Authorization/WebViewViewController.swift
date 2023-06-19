@@ -23,12 +23,12 @@ final class WebViewViewController: UIViewController {
         //        UserDefaults.standard.removeObject(forKey: "BearerToken")
         webView.navigationDelegate = self
         estimatedProgressObservation = webView.observe(
-                    \.estimatedProgress,
-                    options: [],
-                    changeHandler: { [weak self] _, _ in
-                        guard let self = self else { return }
-                        self.updateProgress()
-                    })
+            \.estimatedProgress,
+             options: [],
+             changeHandler: { [weak self] _, _ in
+                 guard let self = self else { return }
+                 self.updateProgress()
+             })
         
         // документация тут https://unsplash.com/documentation/user-authentication-workflow
         // нас интересует фрагмент https://share.cleanshot.com/yMSRhPDtVgxzhnZ7xWfp
