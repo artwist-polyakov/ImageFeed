@@ -42,6 +42,7 @@ final class ProfileImageService {
                             userInfo: ["URL": self.avatarURL ?? ""])
                     self.task = nil
                 case .failure(let error):
+                    print(error)
                     completion(.failure(error))
                     self.task = nil
                 }

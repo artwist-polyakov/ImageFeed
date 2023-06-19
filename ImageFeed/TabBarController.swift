@@ -11,7 +11,7 @@ final class TabBarController: UITabBarController {
     override func awakeFromNib() {
         super.awakeFromNib()
                
-        
+        UIBlockingProgressHUD.dismiss()
         // находим наши вьюконтроллеры по идентификатору
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         let imagesListViewController = storyboard.instantiateViewController(

@@ -38,6 +38,7 @@ final class ProfileService {
                     completion(.success(profile))
                     self.task = nil
                 case .failure(let error):
+                    print(error)
                     completion(.failure(error))
                     self.task = nil
                 }
