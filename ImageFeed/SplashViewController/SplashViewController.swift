@@ -42,8 +42,8 @@ final class SplashViewController: UIViewController {
         screenImageView.translatesAutoresizingMaskIntoConstraints = false
         screenImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         screenImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        screenImageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        screenImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        screenImageView.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        screenImageView.widthAnchor.constraint(equalToConstant: 75).isActive = true
         
     }
     
