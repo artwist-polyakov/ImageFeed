@@ -12,7 +12,6 @@ final class SplashViewController: UIViewController {
         
         if let token = oauth2TokenStorage.token {
             print("SPLASH: Получаем пользовательскую инфо")
-            switchToTabBarController()
             self.fetchProfile(token: token)
             
         } else {
@@ -20,7 +19,7 @@ final class SplashViewController: UIViewController {
             showAuthViewController()
         }
     }
-    
+
     
     private func showAuthViewController(){
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
@@ -93,6 +92,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success(let token):
                 self.fetchProfile(token: token)
+                
             case .failure:
                 UIBlockingProgressHUD.dismiss()
                 // TODO [Sprint 11]
@@ -111,14 +111,15 @@ extension SplashViewController: AuthViewControllerDelegate {
             print ("SPLASH: мы в fetchProfile после гарда")
             switch result {
             case .success:
-                UIBlockingProgressHUD.dismiss()
+                
                 self.profileImageService.fetchProfileImageURL(username:self.profileService.profile!.username) { imageResult in
                     switch imageResult {
                     case .success:
                         print("Фотка тут \(String(describing: self.profileImageService.avatarURL))")
+                        self.profileImageService.up
                         UIBlockingProgressHUD.dismiss()
                     case .failure:
-                        UIBlockingProgressHUD.dismiss()
+                        
                         self.showAlert()
                     }
                 }
@@ -150,8 +151,9 @@ extension SplashViewController: AuthViewControllerDelegate {
             fetchProfile(token: token)
             
         } else {
-            UIBlockingProgressHUD.dismiss()
+
             showAuthViewController()
         }
+        UIBlockingProgressHUD.dismiss()
     }
 }
