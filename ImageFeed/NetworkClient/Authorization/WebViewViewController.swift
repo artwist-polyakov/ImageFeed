@@ -75,7 +75,7 @@ extension WebViewViewController: WKNavigationDelegate {
             // Вызываем метод делегата для передачи кода аутентификации
             delegate?.webViewViewController(self, didAuthenticateWithCode: code)
             decisionHandler(.cancel)
-            //                self.dismiss(animated: true, completion: nil)
+//            self.dismiss(animated: true, completion: nil)
             
         } else {
             decisionHandler(.allow)
