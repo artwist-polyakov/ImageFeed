@@ -97,42 +97,42 @@ class ProfileViewController: UIViewController {
         initLabels(view: view)
         updateProfileDetails(profile: profileService.profile!)
         profileImageServiceObserver = NotificationCenter.default.addObserver(
-                        forName: ProfileImageService.DidChangeNotification, // 3
-                        object: nil,                                        // 4
-                        queue: .main                                        // 5
-                    ) { [weak self] _ in
-                        guard let self = self else { return }
-                        self.updateAvatar()                                 // 6
-                    }
+            forName: ProfileImageService.DidChangeNotification, // 3
+            object: nil,                                        // 4
+            queue: .main                                        // 5
+        ) { [weak self] _ in
+            guard let self = self else { return }
+            self.updateAvatar()                                 // 6
+        }
         updateAvatar()                                              // 7
-
+        
     }
     
     private func updateAvatar() {                                   // 8
         guard
-                let profileImageURL = ProfileImageService.shared.avatarURL,
-                let url = URL(string: profileImageURL),
-                let imageView = view.viewWithTag(1) as? UIImageView
-            else { return }
-            let processor = RoundCornerImageProcessor(cornerRadius: imageView.frame.width / 2)
-            let placeholderImage = UIImage(named: "ProfilePhotoPlaceholder")
-            imageView.kf.setImage(with: url,
-                                  placeholder: placeholderImage,
-                                  options: nil,
-                                  completionHandler: { [weak self] result in
-                                        guard self != nil else { return }
-                                      
-                                      switch result {
-                                      case .success(let value):
-                                          // Загрузка изображения прошла успешно
-                                          print("Фотокарточка загружена: \(value.source.url?.absoluteString ?? "")")
-                                      case .failure(let error):
-                                          // Возникла ошибка при загрузке изображения
-                                          print("Фотокарточка не загружена: \(error)")
-                                      }
-                                  })
-
-        }
+            let profileImageURL = ProfileImageService.shared.avatarURL,
+            let url = URL(string: profileImageURL),
+            let imageView = view.viewWithTag(1) as? UIImageView
+        else { return }
+        let processor = RoundCornerImageProcessor(cornerRadius: imageView.frame.width / 2)
+        let placeholderImage = UIImage(named: "ProfilePhotoPlaceholder")
+        imageView.kf.setImage(with: url,
+                              placeholder: placeholderImage,
+                              options: nil,
+                              completionHandler: { [weak self] result in
+            guard self != nil else { return }
+            
+            switch result {
+            case .success(let value):
+                // Загрузка изображения прошла успешно
+                print("Фотокарточка загружена: \(value.source.url?.absoluteString ?? "")")
+            case .failure(let error):
+                // Возникла ошибка при загрузке изображения
+                print("Фотокарточка не загружена: \(error)")
+            }
+        })
+        
+    }
     
     @objc
     private func didTapLogoutButton() {
@@ -149,7 +149,7 @@ class ProfileViewController: UIViewController {
             }
         }
         // После логаута мы должны снова запустить наш Сплешскрин — instantiateInitialViewController()
-//        UIApplication.shared.windows.first?.rootViewController = UIStoryboard(name: "Main", bundle: .main).instantiateInitialViewController()
+        //        UIApplication.shared.windows.first?.rootViewController = UIStoryboard(name: "Main", bundle: .main).instantiateInitialViewController()
         present(SplashViewController(), animated: true, completion: nil)
         
     }
