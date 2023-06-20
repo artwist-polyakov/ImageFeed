@@ -8,13 +8,14 @@ final class SplashViewController: UIViewController {
     private let profileImageService = ProfileImageService.shared
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        UIBlockingProgressHUD.show()
         if let token = oauth2TokenStorage.token {
-            UIBlockingProgressHUD.show()
             print("SPLASH: Получаем пользовательскую инфо")
             self.fetchProfile(token: token)
             
         } else {
             // Show Auth Screen
+            UIBlockingProgressHUD.dismiss()
             showAuthViewController()
         }
     }
@@ -77,7 +78,6 @@ extension SplashViewController: AuthViewControllerDelegate {
         _ vc: AuthViewController,
         didAuthenticateWithCode code: String
     ) {
-        UIBlockingProgressHUD.show()
         self.fetchOAuthToken(code)
 //        dismiss(animated: true) { [weak self] in
 //            guard let self = self else { return }
@@ -92,7 +92,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success(let token):
                 oauth2TokenStorage.token = token
-                switchToTabBarController()
+//                switchToTabBarController()
                 self.fetchProfile(token: token)
                 dismiss(animated: true, completion: nil)
             case .failure:
@@ -104,7 +104,6 @@ extension SplashViewController: AuthViewControllerDelegate {
     
     private func fetchProfile(token: String) {
         profileService.fetchProfile {result in
-            UIBlockingProgressHUD.show()
             print ("SPLASH: мы в fetchProfile до гарда")
             //            guard let self = self else {
             //                print("SPLASH: сработал гард")
@@ -121,6 +120,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                         self.showAlert()
                     }
                 }
+                UIBlockingProgressHUD.dismiss()
                 self.switchToTabBarController()
                 
             case .failure:
@@ -143,13 +143,12 @@ extension SplashViewController: AuthViewControllerDelegate {
     
     private func retryFetchingProfile() {
         UIBlockingProgressHUD.show()
-        
         if let token = oauth2TokenStorage.token {
             print("SPLASH: мы в ретри цикле")
             fetchProfile(token: token)
             
         } else {
-            
+            UIBlockingProgressHUD.dismiss()
             showAuthViewController()
         }
         
