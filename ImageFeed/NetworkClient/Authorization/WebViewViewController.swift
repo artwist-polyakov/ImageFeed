@@ -12,25 +12,23 @@ fileprivate let UnsplashAuthorizeURLString = "https://unsplash.com/oauth/authori
 
 final class WebViewViewController: UIViewController {
     weak var delegate: WebViewViewControllerDelegate?
+    private var estimatedProgressObservation: NSKeyValueObservation?
     @IBOutlet private var progressView: UIProgressView!
     @IBOutlet private weak var webView: WKWebView!
     @IBAction private func didTapBackButton(_ sender: Any) {
         delegate?.webViewViewControllerDidCancel(self)
     }
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        webView.addObserver(
-            self,
-            forKeyPath: #keyPath(WKWebView.estimatedProgress),
-            options: .new,
-            context: nil)
-    }
-    
     override func viewDidLoad() {
         //        UserDefaults.standard.removeObject(forKey: "BearerToken")
         webView.navigationDelegate = self
-        
+        estimatedProgressObservation = webView.observe(
+            \.estimatedProgress,
+             options: [],
+             changeHandler: { [weak self] _, _ in
+                 guard let self = self else { return }
+                 self.updateProgress()
+             })
         
         // документация тут https://unsplash.com/documentation/user-authentication-workflow
         // нас интересует фрагмент https://share.cleanshot.com/yMSRhPDtVgxzhnZ7xWfp
@@ -47,10 +45,6 @@ final class WebViewViewController: UIViewController {
     }
     
     
-    override func viewDidDisappear(_ animated: Bool) {
-        webView.removeObserver(self, forKeyPath:
-                                #keyPath(WKWebView.estimatedProgress), context: nil)
-    }
     
     override func observeValue(
         forKeyPath keyPath: String?,
@@ -81,7 +75,7 @@ extension WebViewViewController: WKNavigationDelegate {
             // Вызываем метод делегата для передачи кода аутентификации
             delegate?.webViewViewController(self, didAuthenticateWithCode: code)
             decisionHandler(.cancel)
-            //                self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
             
         } else {
             decisionHandler(.allow)

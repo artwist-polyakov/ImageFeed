@@ -1,21 +1,58 @@
 import UIKit
 
 final class SplashViewController: UIViewController {
-    private let ShowAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
-    
+    let alertPresenter = AlertPresenter()
     private let oauth2Service = OAuth2Service()
     private let oauth2TokenStorage = OAuth2TokenStorage()
-    
+    private let profileService = ProfileService.shared
+    private let profileImageService = ProfileImageService.shared
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        UIBlockingProgressHUD.show()
         if let token = oauth2TokenStorage.token {
-            switchToTabBarController()
+            print("SPLASH: Получаем пользовательскую инфо")
+            self.fetchProfile(token: token)
+            
         } else {
             // Show Auth Screen
-            performSegue(withIdentifier: ShowAuthenticationScreenSegueIdentifier, sender: nil)
+            UIBlockingProgressHUD.dismiss()
+            showAuthViewController()
         }
     }
+    
+    
+    private func showAuthViewController(){
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        
+        guard let authViewController = storyboard.instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController
+        else {
+            assertionFailure("Что-то пошло не так")
+            return
+        }
+        authViewController.delegate = self
+        authViewController.modalPresentationStyle = .fullScreen
+        present(authViewController, animated: true, completion: nil)
+    }
+    
+    private func initLayout(view: UIView){
+        print("SPLASH: Init Layout")
+        view.backgroundColor = UIColor(named: "YP Black")
+        let screenImage = UIImage(named: "launchscreenLogo") ?? UIImage(named: "launchscreenLogo")
+        let screenImageView = UIImageView(image: screenImage)
+        view.addSubview(screenImageView)
+        screenImageView.translatesAutoresizingMaskIntoConstraints = false
+        screenImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        screenImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        screenImageView.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        screenImageView.widthAnchor.constraint(equalToConstant: 75).isActive = true
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initLayout(view: view)
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -34,44 +71,86 @@ final class SplashViewController: UIViewController {
     }
 }
 
-extension SplashViewController {
-    override func prepare(
-        for segue: UIStoryboardSegue,
-        sender: Any?
-    ) {
-        if segue.identifier == ShowAuthenticationScreenSegueIdentifier {
-            guard
-                let navigationController = segue.destination as? UINavigationController,
-                let viewController = navigationController.viewControllers[0] as? AuthViewController
-            else { fatalError("Failed to prepare for \(ShowAuthenticationScreenSegueIdentifier)") }
-            viewController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
-    }
-}
+
 
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(
         _ vc: AuthViewController,
         didAuthenticateWithCode code: String
     ) {
-        dismiss(animated: true) { [weak self] in
-            guard let self = self else { return }
-            self.fetchOAuthToken(code)
-        }
+        self.fetchOAuthToken(code)
+//        dismiss(animated: true) { [weak self] in
+//            guard let self = self else { return }
+//            UIBlockingProgressHUD.show()
+//            self.fetchOAuthToken(code)
+//        }
     }
     
     private func fetchOAuthToken(_ code: String) {
         oauth2Service.fetchOAuthToken(code) { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success:
-                self.switchToTabBarController()
+            case .success(let token):
+                oauth2TokenStorage.token = token
+//                switchToTabBarController()
+                self.fetchProfile(token: token)
+                dismiss(animated: true, completion: nil)
             case .failure:
                 // TODO [Sprint 11]
                 break
             }
         }
+    }
+    
+    private func fetchProfile(token: String) {
+        profileService.fetchProfile {result in
+            print ("SPLASH: мы в fetchProfile до гарда")
+            //            guard let self = self else {
+            //                print("SPLASH: сработал гард")
+            //                return }
+            print ("SPLASH: мы в fetchProfile после гарда")
+            switch result {
+            case .success:
+                
+                self.profileImageService.fetchProfileImageURL(username:self.profileService.profile!.username) { imageResult in
+                    switch imageResult {
+                    case .success:
+                        print("Фотка тут \(String(describing: self.profileImageService.avatarURL))")
+                    case .failure:
+                        self.showAlert()
+                    }
+                }
+                UIBlockingProgressHUD.dismiss()
+                self.switchToTabBarController()
+                
+            case .failure:
+                self.showAlert()
+            }
+        }
+    }
+    
+    func showAlert() {
+        UIBlockingProgressHUD.dismiss()
+        alertPresenter.show(in: self, model: AlertModel(
+            title: "Что-то пошло не так(",
+            message: "Не удалось войти в систему",
+            buttonText: "Ок",
+            completion: { [weak self] in
+                self?.retryFetchingProfile()
+            }
+        ))
+    }
+    
+    private func retryFetchingProfile() {
+        UIBlockingProgressHUD.show()
+        if let token = oauth2TokenStorage.token {
+            print("SPLASH: мы в ретри цикле")
+            fetchProfile(token: token)
+            
+        } else {
+            UIBlockingProgressHUD.dismiss()
+            showAuthViewController()
+        }
+        
     }
 }
