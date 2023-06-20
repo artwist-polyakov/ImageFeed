@@ -117,7 +117,8 @@ extension SplashViewController: AuthViewControllerDelegate {
                     case .success:
                         print("Фотка тут \(String(describing: self.profileImageService.avatarURL))")
                     case .failure:
-                        self.showAlert()
+                        print("Что-то пошло не так")
+//                        self.showAlert()
                     }
                 }
                 UIBlockingProgressHUD.dismiss()
