@@ -19,7 +19,7 @@ final class ProfileService {
     ) {
         assert(Thread.isMainThread)
         if task != nil {
-            print("Таск == нил")
+            print("Останавливаю выполнение, потому что запущена задача ProfileService")
             task?.cancel()
         }
         

@@ -21,7 +21,7 @@ final class ProfileImageService {
         assert(Thread.isMainThread)
         
         if task != nil {
-            print("Таск == нил")
+            print("Останавливаю выполнение, потому что запущена задача fetchProfileImageURL")
             task?.cancel()
         }
         
