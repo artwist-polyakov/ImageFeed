@@ -9,14 +9,27 @@ import Foundation
 
 struct PhotoResult: Codable {
     let photoList: [OnePhotoResult]
+    enum CodingKeys: String, CodingKey {
+        case photoList = ""
+    }
+    
+    init(from decoder: Decoder) throws {
+            var container = try decoder.unkeyedContainer()
+            var photos = [OnePhotoResult]()
+            while !container.isAtEnd {
+                let photo = try container.decode(OnePhotoResult.self)
+                photos.append(photo)
+            }
+            photoList = photos
+        }
 }
 
 struct OnePhotoResult: Codable {
     let id: String
-    let width: Double
-    let height: Double
-    let createdAt: Date
-    let description: String
+    let width: Int
+    let height: Int
+    let createdAt: String
+    let description: String?
     let urls: UrlsResult
     let isLiked: Bool
     enum CodingKeys: String, CodingKey {
