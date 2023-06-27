@@ -9,6 +9,8 @@ import UIKit
 class ImagesListViewController: UIViewController {
     @IBOutlet private weak var imagesTable: UITableView!
     private let photosName: [String] = Array(0..<20).map{ "\($0)" }
+    private let imagesListService = ImagesListService.shared
+    private var currentPhotosCount: Int = 0
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
@@ -21,6 +23,20 @@ class ImagesListViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         imagesTable.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+    }
+    
+    func updateTableViewAnimated() {
+        let newCount = imagesListService.photos.count
+        let photos = imagesListService.photos
+        if currentPhotosCount != newCount {
+            imagesTable.performBatchUpdates {
+                let indexPaths = (currentPhotosCount..<newCount).map { i in
+                    IndexPath(row: i, section: 0)
+                }
+                imagesTable.insertRows(at: indexPaths, with: .automatic)
+            } completion: { _ in }
+            currentPhotosCount = newCount
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -39,7 +55,7 @@ class ImagesListViewController: UIViewController {
 
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return photosName.count
+        return imagesListService.photos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

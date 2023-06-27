@@ -9,7 +9,6 @@ import Foundation
 final class ImagesListService {
     private static let BATCH_SIZE = 10
     static let shared = ImagesListService()
-
     private (set) var photos: [Photo] = []
     static let DidChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
     private var lastLoadedPage: Int?
