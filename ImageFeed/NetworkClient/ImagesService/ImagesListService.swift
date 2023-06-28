@@ -15,6 +15,9 @@ final class ImagesListService {
     private var task: URLSessionTask?
     private let urlSession = URLSession.shared
     
+    func getCurreentBatchSize() -> Int {
+        return ImagesListService.BATCH_SIZE
+    }
     
     func fetchPhotosNextPage() {
         let nextPage = 1 + (Int(photos.count) / ImagesListService.BATCH_SIZE)
