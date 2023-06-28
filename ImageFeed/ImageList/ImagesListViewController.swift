@@ -54,8 +54,10 @@ class ImagesListViewController: UIViewController {
                 }
                 print("updateTableViewAnimated: \(indexPaths)")
                 imagesTable.insertRows(at: indexPaths, with: .automatic)
-            } completion: { _ in }
-            currentPhotosCount = newCount
+            } completion: { _ in
+                self.currentPhotosCount = newCount
+            }
+            
         }
     }
     
