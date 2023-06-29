@@ -12,7 +12,7 @@ import ProgressHUD
 class ImagesListViewController: UIViewController {
     @IBOutlet private weak var imagesTable: UITableView!
     private let photosName: [String] = Array(0..<20).map{ "\($0)" }
-    let placeholderImage = UIImage(named: "placeholder_cell")
+    let placeholderImage = UIImage(named: "stub")
     private let imagesListService = ImagesListService.shared
     private var currentPhotosCount: Int = 0
     private var profileImageServiceObserver: NSObjectProtocol?
@@ -108,10 +108,18 @@ extension ImagesListViewController {
         else {return}
         let isEvenIndex = indexPath.row % 2 == 0
 //        cell.picture.kf.indicatorType = .custom(indicator: ProgressHUD.self as! Indicator)
+        
+        let placeholderColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
+        let options: KingfisherOptionsInfo = [
+            .backgroundDecode,
+            .onFailureImage(placeholderImage?.kf.image(withBlendMode: .normal, backgroundColor: placeholderColor))
+        ]
+        cell.picture.contentMode = .center
+        let processor = RoundCornerImageProcessor(cornerRadius: 16)
         cell.picture.kf.setImage(
             with:url,
             placeholder: placeholderImage,
-            options: nil,
+            options: options,
             completionHandler:{ [weak self] result in
                 guard self != nil else { return }
                 
@@ -119,6 +127,7 @@ extension ImagesListViewController {
                 case .success(let value):
                     // Загрузка изображения прошла успешно
                     print("Фотокарточка загружена: \(value.source.url?.absoluteString ?? "")")
+                    cell.picture.contentMode = .scaleAspectFill
                     self?.imagesTable.reloadRows(at: [indexPath], with: .automatic)
                 case .failure(let error):
                     // Возникла ошибка при загрузке изображения
