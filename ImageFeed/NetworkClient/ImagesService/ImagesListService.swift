@@ -34,7 +34,7 @@ final class ImagesListService {
             URLRequest.makeHTTPRequest(path: "/photos", httpMethod: "GET", needToken: true, parameters: parameters)
         }
         print("ImagesListService: запрашиваю изображения с параметрами: \(parameters)")
-        let task = urlSession.objectTask(for: photosPageRequest) { [weak self] (result: Result<PhotoResult, Error>) in
+        let task = urlSession.objectTask(for: photosPageRequest) { [weak self] (result: Result<[OnePhotoResult], Error>) in
             print("ImagesListService запущена задача")
             DispatchQueue.main.async {
                 
@@ -42,7 +42,7 @@ final class ImagesListService {
                 switch result {
                 case .success(let body):
                     print("ImagesListService: обновляю фотографии, текущая длина массива фото \(self.photos.count)")
-                    self.photos += body.photoList.map {
+                    self.photos += body.map {
                         Photo(id: $0.id,
                               size: CGSize(width: Double($0.width) ,height: Double($0.height)),
                               createdAt: $0.createdAt,
