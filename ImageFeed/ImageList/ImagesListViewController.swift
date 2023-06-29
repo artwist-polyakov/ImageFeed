@@ -48,6 +48,7 @@ class ImagesListViewController: UIViewController {
     func updateTableViewAnimated() {
         let newCount = imagesListService.photos.count
         if currentPhotosCount != newCount {
+            self.currentPhotosCount = newCount
             imagesTable.performBatchUpdates {
                 let indexPaths = (currentPhotosCount..<newCount).map { i in
                     IndexPath(row: i, section: 0)
@@ -55,7 +56,7 @@ class ImagesListViewController: UIViewController {
                 print("updateTableViewAnimated: \(indexPaths)")
                 imagesTable.insertRows(at: indexPaths, with: .automatic)
             } completion: { _ in
-                self.currentPhotosCount = newCount
+                
             }
             
         }
@@ -138,18 +139,21 @@ extension ImagesListViewController: UITableViewDelegate {
     ) {
         performSegue(withIdentifier: "ShowSingleImage", sender: indexPath)
     }
+    
     func tableView(
         _ tableView: UITableView,
         heightForRowAt indexPath: IndexPath
     ) -> CGFloat {
-        guard let image = UIImage(named: photosName[indexPath.row]) else {
-            return 0
-        }
+        print("counter = \(indexPath.row)")
+        guard indexPath.row < imagesListService.photos.count else {
+                return 0
+            }
+        let photo = imagesListService.photos[indexPath.row]
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
         let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
-        let imageWidth = image.size.width
+        let imageWidth = photo.size.width
         let scale = imageViewWidth / imageWidth
-        let cellHeight = image.size.height*scale + imageInsets.top + imageInsets.bottom
+        let cellHeight = photo.size.height * scale + imageInsets.top + imageInsets.bottom
         return cellHeight
     }
     
