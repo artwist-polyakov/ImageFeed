@@ -42,6 +42,7 @@
 		AFE049852A36547C002C431F /* ProfileResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE049842A36547C002C431F /* ProfileResult.swift */; };
 		AFF07B692A0D2D3900683324 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF07B682A0D2D3900683324 /* ProfileViewController.swift */; };
 		AFF07B6F2A0E9F9A00683324 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF07B6E2A0E9F9A00683324 /* SingleImageViewController.swift */; };
+		AFF7321B2A4E04F5003B2390 /* ProgressHUDIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF7321A2A4E04F5003B2390 /* ProgressHUDIndicator.swift */; };
 		AFFE120E2A13F19000199FD5 /* GradientUnderDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFE120D2A13F19000199FD5 /* GradientUnderDate.swift */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,7 @@
 		AFE049842A36547C002C431F /* ProfileResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResult.swift; sourceTree = "<group>"; };
 		AFF07B682A0D2D3900683324 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AFF07B6E2A0E9F9A00683324 /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
+		AFF7321A2A4E04F5003B2390 /* ProgressHUDIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHUDIndicator.swift; sourceTree = "<group>"; };
 		AFFE120D2A13F19000199FD5 /* GradientUnderDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientUnderDate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,6 +143,7 @@
 				AF2694B829FC1BDB0023942A /* ImagesListViewController.swift */,
 				AFF07B6E2A0E9F9A00683324 /* SingleImageViewController.swift */,
 				AFFE120D2A13F19000199FD5 /* GradientUnderDate.swift */,
+				AFF7321A2A4E04F5003B2390 /* ProgressHUDIndicator.swift */,
 			);
 			path = ImageList;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				AF7743752A23A1B400A1BB26 /* AuthViewController.swift in Sources */,
 				AF2E23BC2A388B5B007A65AF /* Profile.swift in Sources */,
 				AF9EC5962A460FC600CD7754 /* ImagesListService.swift in Sources */,
+				AFF7321B2A4E04F5003B2390 /* ProgressHUDIndicator.swift in Sources */,
 				AF9EC57D2A39C21200CD7754 /* ProfileImageService.swift in Sources */,
 				AFE049852A36547C002C431F /* ProfileResult.swift in Sources */,
 				AF6629482A2224AF005F16C8 /* Constants.swift in Sources */,

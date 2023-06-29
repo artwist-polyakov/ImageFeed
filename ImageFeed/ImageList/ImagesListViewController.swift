@@ -107,7 +107,8 @@ extension ImagesListViewController {
         guard let url = URL(string: imageLink)
         else {return}
         let isEvenIndex = indexPath.row % 2 == 0
-//        cell.picture.kf.indicatorType = .custom(indicator: ProgressHUD.self as! Indicator)
+        let indicator = ProgressHUDIndicator()
+        cell.picture.kf.indicatorType = .custom(indicator: indicator)
         
         let placeholderColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
         let options: KingfisherOptionsInfo = [
