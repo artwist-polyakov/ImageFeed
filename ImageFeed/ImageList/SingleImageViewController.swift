@@ -17,6 +17,7 @@ final class SingleImageViewController: UIViewController {
             rescaleAndCenterImageInScrollView(image: image)
         }
     }
+    var imageToLoad: Photo!
     
     @IBOutlet private weak var bigSinglePicture: UIImageView!
     @IBOutlet private weak var scrollView: UIScrollView!
@@ -39,8 +40,21 @@ final class SingleImageViewController: UIViewController {
         feedbackGenerator.prepare()
         scrollView.minimumZoomScale = 0.1
         scrollView.maximumZoomScale = 20
-        bigSinglePicture.image = image
-        rescaleAndCenterImageInScrollView(image: image)
+        let indicator = ProgressHUDIndicator()
+        bigSinglePicture.kf.indicatorType = .custom(indicator: indicator)
+        let url = URL(string: imageToLoad.largeImageURL)
+        bigSinglePicture.kf.setImage(with: url) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let value):
+                self.bigSinglePicture.image = value.image
+                self.rescaleAndCenterImageInScrollView(image: value.image)
+                self.bigSinglePicture.setNeedsLayout()
+            case .failure(let error):
+                print("Failed to load image: \(error)")
+            }
+        }
     }
     
     private func rescaleAndCenterImageInScrollView(image: UIImage) {

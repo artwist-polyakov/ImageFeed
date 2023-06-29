@@ -66,8 +66,10 @@ class ImagesListViewController: UIViewController {
         if segue.identifier == "ShowSingleImage" {
             if let viewController = segue.destination as? SingleImageViewController {
                 if let indexPath = sender as? IndexPath {
-                    let image = UIImage(named: photosName[indexPath.row])
-                    viewController.image = image
+//                    let image = UIImage(named: photosName[indexPath.row])
+                    let photo = imagesListService.photos[indexPath.row]
+//                    viewController.image = image
+                    viewController.imageToLoad = photo
                 }
             }
         } else {
