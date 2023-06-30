@@ -23,6 +23,18 @@ class ImagesListViewController: UIViewController {
         return formatter
     }()
     
+    func convertStringtoDate(unsplashDate: String) -> Date {
+        let unsplashDateFormatter = DateFormatter()
+        unsplashDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let date = unsplashDateFormatter.date(from: unsplashDate)
+        if let date = date {
+            return date
+        } else {
+            return Date()
+        }
+        
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,20 +117,22 @@ extension ImagesListViewController {
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         print("Мы в configCell")
-        let imageLink  = imagesListService.photos[indexPath.row].thumbImageURL
+        let photo = imagesListService.photos[indexPath.row]
+        let imageLink  = photo.thumbImageURL
         guard let url = URL(string: imageLink)
         else {return}
-        let isEvenIndex = indexPath.row % 2 == 0
+//        let isEvenIndex = indexPath.row % 2 == 0
         let indicator = ProgressHUDIndicator()
         cell.picture.kf.indicatorType = .custom(indicator: indicator)
         
         let placeholderColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
+        let processor = RoundCornerImageProcessor(cornerRadius: 16)
         let options: KingfisherOptionsInfo = [
             .backgroundDecode,
-            .onFailureImage(placeholderImage?.kf.image(withBlendMode: .normal, backgroundColor: placeholderColor))
+            .onFailureImage(placeholderImage?.kf.image(withBlendMode: .normal, backgroundColor: placeholderColor)),
+            .processor(processor)
         ]
         cell.picture.contentMode = .center
-        let processor = RoundCornerImageProcessor(cornerRadius: 16)
         cell.picture.kf.setImage(
             with:url,
             placeholder: placeholderImage,
@@ -137,8 +151,8 @@ extension ImagesListViewController {
                     print("Фотокарточка не загружена: \(error)")
                 }
             })
-        cell.dateLabel.text = dateFormatter.string(from: Date())
-        setLiked(to: cell.likeButton, state: isEvenIndex)
+        cell.dateLabel.text = dateFormatter.string(from: convertStringtoDate(unsplashDate: photo.createdAt))
+        setLiked(to: cell.likeButton, state: photo.isLiked)
         //        cell.likeButton.setImage(isEvenIndex ? UIImage(named: "LikeButtonOn") : UIImage(named: "LikeButtonOff"), for: .normal )
     }
     
