@@ -71,6 +71,7 @@ final class ImagesListService {
     func changeLike(
         photoId: String,
         hasLike: Bool,
+        index: Int,
         _ completion: @escaping (Result<LikedPhoto, Error>) -> Void)
     {
         let httpMethod = hasLike ? "DELETE" : "POST"
@@ -96,9 +97,7 @@ final class ImagesListService {
                     let likedPhoto = body.photo
                     print("LikeService ImagesListService Like: обновил лайк для \(likedPhoto.id)")
                     completion(.success(likedPhoto))
-                    if let index = self.photos.firstIndex(where: { $0.id == likedPhoto.id }) {
-                        self.photos[index].isLiked = !hasLike
-                    }
+                    self.photos[index].isLiked = !hasLike
                     self.likeTask = nil
                 case .failure(let error):
                     print("LikeService ImagesListService Like ОШИБКА \(error)")

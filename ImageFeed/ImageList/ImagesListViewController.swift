@@ -80,6 +80,8 @@ class ImagesListViewController: UIViewController {
                 if let indexPath = sender as? IndexPath {
 //                    let image = UIImage(named: photosName[indexPath.row])
                     let photo = imagesListService.photos[indexPath.row]
+                    print("ShowSingleImage загружаю картинку \(photo.largeImageURL)")
+                    print("ShowSingleImage маленькая картинка \(photo.thumbImageURL)")
 //                    viewController.image = image
                     viewController.imageToLoad = photo
                 }
@@ -201,7 +203,7 @@ extension ImagesListViewController: ImagesListCellDelegate {
         print("LikeService Обновляю лайк")
         guard let indexPath = imagesTable.indexPath(for: cell) else { return }
         let photo = imagesListService.photos[indexPath.row]
-        imagesListService.changeLike(photoId: photo.id, hasLike: photo.isLiked) {result in
+        imagesListService.changeLike(photoId: photo.id, hasLike: photo.isLiked, index: indexPath.row) {result in
             switch result {
             case .success:
                 print("LikeService обновил лайк в \(indexPath)")
