@@ -117,6 +117,7 @@ extension ImagesListViewController {
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         print("Мы в configCell")
+        cell.delegate = self
         let photo = imagesListService.photos[indexPath.row]
         let imageLink  = photo.thumbImageURL
         guard let url = URL(string: imageLink)
@@ -193,4 +194,22 @@ extension ImagesListViewController: UITableViewDelegate {
         }
     }
 
+}
+
+extension ImagesListViewController: ImagesListCellDelegate {
+    func imageListCellDidTapLike(_ cell: ImagesListCell) {
+        print("LikeService Обновляю лайк")
+        guard let indexPath = imagesTable.indexPath(for: cell) else { return }
+        let photo = imagesListService.photos[indexPath.row]
+        imagesListService.changeLike(photoId: photo.id, hasLike: photo.isLiked) {result in
+            switch result {
+            case .success:
+                print("LikeService обновил лайк в \(indexPath)")
+                self.imagesTable.reloadData()
+            case .failure:
+                print("Что-то не получилось поставить лайк")
+            }
+     
+        }
+    }
 }

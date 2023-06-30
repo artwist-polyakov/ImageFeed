@@ -13,6 +13,7 @@ final class ImagesListService {
     static let DidChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
     private var lastLoadedPage: Int?
     private var task: URLSessionTask?
+    private var likeTask: URLSessionTask?
     private let urlSession = URLSession.shared
     
     func getCurreentBatchSize() -> Int {
@@ -66,4 +67,52 @@ final class ImagesListService {
         self.task = task
         task.resume()
     }
+    
+    func changeLike(
+        photoId: String,
+        hasLike: Bool,
+        _ completion: @escaping (Result<LikedPhoto, Error>) -> Void)
+    {
+        let httpMethod = hasLike ? "DELETE" : "POST"
+        assert(Thread.isMainThread)
+        if likeTask != nil {
+            print("LikeService Останавливаю выполнение, потому что запущена задача ImagesListService Like")
+            likeTask?.cancel()
+        }
+        print("LikeService - готовлю  запросы")
+        var changeLikeRequest: URLRequest {
+            URLRequest.makeHTTPRequest(
+                path: "/photos/\(photoId)/like",
+                httpMethod: httpMethod,
+                needToken: true)
+        }
+        print("LikeService - готовлю  задачи")
+        let task = urlSession.objectTask(for: changeLikeRequest) { [weak self] (result: Result<LikeUpdateResult, Error>) in
+            print("LikeService ImagesListService Like запущена задача")
+            DispatchQueue.main.async {
+                guard let self = self else { print("ImagesListService Like тут гард"); return }
+                switch result {
+                case .success(let body):
+                    let likedPhoto = body.photo
+                    print("LikeService ImagesListService Like: обновил лайк для \(likedPhoto.id)")
+                    completion(.success(likedPhoto))
+                    if let index = self.photos.firstIndex(where: { $0.id == likedPhoto.id }) {
+                        self.photos[index].isLiked = !hasLike
+                    }
+                    self.likeTask = nil
+                case .failure(let error):
+                    print("LikeService ImagesListService Like ОШИБКА \(error)")
+                    completion(.failure(error))
+                    self.likeTask = nil
+
+                }
+                
+            }
+            
+        }
+        self.likeTask = task
+        task.resume()
+        
+    }
+    
 }
