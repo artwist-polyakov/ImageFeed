@@ -6,10 +6,12 @@
 //
 
 import Foundation
-struct AlertModel{
-    var title:String
+struct AlertModel {
+    var title: String
     var message: String
-    var buttonText: String
-    var completion: (()->())
-    
+    var primaryButtonText: String
+    var primaryButtonCompletion: (() -> ())
+    var secondaryButtonText: String? // Опциональный параметр
+    var secondaryButtonCompletion: (() -> ())? // Опциональный параметр
 }
+

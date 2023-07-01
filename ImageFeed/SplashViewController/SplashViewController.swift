@@ -135,8 +135,8 @@ extension SplashViewController: AuthViewControllerDelegate {
         alertPresenter.show(in: self, model: AlertModel(
             title: "Что-то пошло не так(",
             message: "Не удалось войти в систему",
-            buttonText: "Ок",
-            completion: { [weak self] in
+            primaryButtonText: "Ок",
+            primaryButtonCompletion: { [weak self] in
                 self?.retryFetchingProfile()
             }
         ))

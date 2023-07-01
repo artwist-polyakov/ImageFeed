@@ -42,18 +42,19 @@ final class SingleImageViewController: UIViewController {
         scrollView.maximumZoomScale = 200
         let indicator = ProgressHUDIndicator()
         bigSinglePicture.kf.indicatorType = .custom(indicator: indicator)
-        let url = URL(string: imageToLoad.largeImageURL)
-        bigSinglePicture.kf.setImage(with: url) { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let value):
-                self.bigSinglePicture.image = value.image
-                self.rescaleAndCenterImageInScrollView(image: value.image)
-            case .failure(let error):
-                print("Failed to load image: \(error)")
-            }
-        }
+        guard let url = URL(string: imageToLoad.largeImageURL ) else { return }
+        loadImage(from: url)
+//        bigSinglePicture.kf.setImage(with: url) { [weak self] result in
+//            guard let self = self else { return }
+//
+//            switch result {
+//            case .success(let value):
+//                self.bigSinglePicture.image = value.image
+//                self.rescaleAndCenterImageInScrollView(image: value.image)
+//            case .failure(let error):
+//                print("Failed to load image: \(error)")
+//            }
+//        }
     }
     
     private func rescaleAndCenterImageInScrollView(image: UIImage) {
@@ -89,6 +90,26 @@ final class SingleImageViewController: UIViewController {
         let horizontalPadding = imageViewSize.width < scrollViewSize.width ? (scrollViewSize.width - imageViewSize.width) / 2 : 0
         
         scrollView.contentInset = UIEdgeInsets(top: verticalPadding, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
+    }
+    
+    func loadImage(from url:URL) {
+        bigSinglePicture.kf.setImage(with: url) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let value):
+                self.bigSinglePicture.image = value.image
+                self.rescaleAndCenterImageInScrollView(image: value.image)
+            case .failure(let error):
+                print("Failed to load image: \(error)")
+                let alertPresenter = AlertPresenter()
+                let alert = AlertModel(title: "УПС!", message: "Что-то пошло не так", primaryButtonText: "Не надо", primaryButtonCompletion: {
+                }, secondaryButtonText: "Повторить") {
+                    self.loadImage(from: url)
+                }
+                alertPresenter.show(in: self, model:alert)
+            }
+        }
     }
 }
 
