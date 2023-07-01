@@ -90,6 +90,7 @@ final class ImagesListService {
         print("LikeService - готовлю  задачи")
         let task = urlSession.objectTask(for: changeLikeRequest) { [weak self] (result: Result<LikeUpdateResult, Error>) in
             print("LikeService ImagesListService Like запущена задача")
+            UIBlockingProgressHUD.show()
             DispatchQueue.main.async {
                 guard let self = self else { print("ImagesListService Like тут гард"); return }
                 switch result {
@@ -99,11 +100,12 @@ final class ImagesListService {
                     completion(.success(likedPhoto))
                     self.photos[index].isLiked = !hasLike
                     self.likeTask = nil
+                    UIBlockingProgressHUD.dismiss()
                 case .failure(let error):
                     print("LikeService ImagesListService Like ОШИБКА \(error)")
                     completion(.failure(error))
                     self.likeTask = nil
-
+                    UIBlockingProgressHUD.dismiss()
                 }
                 
             }
