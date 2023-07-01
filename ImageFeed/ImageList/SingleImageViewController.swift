@@ -38,8 +38,8 @@ final class SingleImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         feedbackGenerator.prepare()
-        scrollView.minimumZoomScale = 0.1
-        scrollView.maximumZoomScale = 20
+        scrollView.minimumZoomScale = 0.01
+        scrollView.maximumZoomScale = 200
         let indicator = ProgressHUDIndicator()
         bigSinglePicture.kf.indicatorType = .custom(indicator: indicator)
         let url = URL(string: imageToLoad.largeImageURL)
@@ -64,15 +64,24 @@ final class SingleImageViewController: UIViewController {
         let scale = min(scrollView.maximumZoomScale, max(scrollView.minimumZoomScale, min(hScale, vScale)))
         let targetWidth = imageSize.width * scale
         let targetHeight = imageSize.height * scale
+        print("verticalPadding scale = \(scale), visibleRectSize = \(visibleRectSize), imageSize= \(imageSize) ")
+        print("verticalPadding targetWidth = \(targetWidth), targetHeight = \(targetHeight) ")
+
         bigSinglePicture.frame = CGRect(x: 0, y: 0, width: targetWidth, height: targetHeight)
         scrollView.contentSize = bigSinglePicture.frame.size
+        print("verticalPadding scrollView.contentSize = \( scrollView.contentSize)")
+        print("verticalPadding scrollView.bounds.height = \( scrollView.contentSize)")
+
         view.layoutIfNeeded()
         scrollView.layoutIfNeeded()
         scrollView.zoomScale = scale
-        let verticalPadding =  max(0, (scrollView.contentSize.height - scrollView.bounds.height) / 2)
-        
-        let horizontalPadding =  max(0, (scrollView.contentSize.width - scrollView.bounds.width) / 2)
-        scrollView.contentOffset = CGPoint(x: horizontalPadding, y: verticalPadding)
+        let verticalPadding =  max(0, (scrollView.bounds.height - scrollView.contentSize.height) / 2)
+        print("verticalPadding = \(verticalPadding)")
+        let horizontalPadding =  max(0, (scrollView.bounds.width - scrollView.contentSize.width) / 2)
+        print("verticalPadding horizontalPadding= \(horizontalPadding)")
+
+//        scrollView.contentOffset = CGPoint(x: horizontalPadding, y: verticalPadding)
+        scrollView.contentInset = UIEdgeInsets(top: verticalPadding, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
     }
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
