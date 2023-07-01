@@ -6,6 +6,7 @@
 //
 import UIKit
 import Kingfisher
+import WebKit
 
 class ProfileViewController: UIViewController {
     private var userDescription: UILabel!
@@ -138,6 +139,14 @@ class ProfileViewController: UIViewController {
     private func didTapLogoutButton() {
         let tokenStorage = OAuth2TokenStorage.shared
         tokenStorage.removeToken()
+        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+           // Запрашиваем все данные из локального хранилища.
+           WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+              // Массив полученных записей удаляем из хранилища.
+              records.forEach { record in
+                 WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+              }
+           }
         for view in view.subviews {
             if view is UILabel {
                 view.removeFromSuperview()
