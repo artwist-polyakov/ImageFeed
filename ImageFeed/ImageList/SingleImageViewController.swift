@@ -50,7 +50,6 @@ final class SingleImageViewController: UIViewController {
             case .success(let value):
                 self.bigSinglePicture.image = value.image
                 self.rescaleAndCenterImageInScrollView(image: value.image)
-                self.bigSinglePicture.setNeedsLayout()
             case .failure(let error):
                 print("Failed to load image: \(error)")
             }
