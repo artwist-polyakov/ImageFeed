@@ -24,16 +24,13 @@ class ImagesListViewController: UIViewController {
     }()
     
     func convertStringtoDate(unsplashDate: String) -> Date {
-        let unsplashDateFormatter = DateFormatter()
-        unsplashDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        let date = unsplashDateFormatter.date(from: unsplashDate)
+        let dateFormatter = ISO8601DateFormatter()
+        let date = dateFormatter.date(from: unsplashDate)
         if let date = date {
             return date
         } else {
             return Date()
         }
-        
-        
     }
     
     override func viewDidLoad() {
