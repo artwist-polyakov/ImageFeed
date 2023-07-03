@@ -48,8 +48,6 @@ class ImagesListViewController: UIViewController {
             queue: .main                                        // 5
         ) { [weak self] _ in
             guard let self = self else { return }
-//            self.imagesTable.reloadData()
-            print("Перед обновлением тейблвью")
             self.updateTableViewAnimated()                                 // 6
         }
     }
@@ -76,11 +74,9 @@ class ImagesListViewController: UIViewController {
         if segue.identifier == "ShowSingleImage" {
             if let viewController = segue.destination as? SingleImageViewController {
                 if let indexPath = sender as? IndexPath {
-//                    let image = UIImage(named: photosName[indexPath.row])
                     let photo = imagesListService.photos[indexPath.row]
                     print("ShowSingleImage загружаю картинку \(photo.largeImageURL)")
                     print("ShowSingleImage маленькая картинка \(photo.thumbImageURL)")
-//                    viewController.image = image
                     viewController.imageToLoad = photo
                 }
             }
@@ -100,7 +96,6 @@ extension ImagesListViewController: UITableViewDataSource {
         guard let imageListCell = cell as? ImagesListCell else {
             return UITableViewCell()
         }
-        print("Мы в тейблвью, заправшиваем ячейку")
         configCell(for: imageListCell, with: indexPath)
         return imageListCell
     }
@@ -122,7 +117,6 @@ extension ImagesListViewController {
         let imageLink  = photo.thumbImageURL
         guard let url = URL(string: imageLink)
         else {return}
-//        let isEvenIndex = indexPath.row % 2 == 0
         let indicator = ProgressHUDIndicator()
         cell.picture.kf.indicatorType = .custom(indicator: indicator)
         
@@ -140,7 +134,6 @@ extension ImagesListViewController {
             options: options,
             completionHandler:{ [weak self] result in
                 guard self != nil else { return }
-                
                 switch result {
                 case .success(let value):
                     // Загрузка изображения прошла успешно
@@ -152,9 +145,9 @@ extension ImagesListViewController {
                     print("Фотокарточка не загружена: \(error)")
                 }
             })
-        cell.dateLabel.text = dateFormatter.string(from: convertStringtoDate(unsplashDate: photo.createdAt))
         setLiked(to: cell.likeButton, state: photo.isLiked)
-        //        cell.likeButton.setImage(isEvenIndex ? UIImage(named: "LikeButtonOn") : UIImage(named: "LikeButtonOff"), for: .normal )
+        guard let createdAt = photo.createdAt else {cell.dateLabel.text = ""; return}
+        cell.dateLabel.text = dateFormatter.string(from: convertStringtoDate(unsplashDate: createdAt))
     }
     
 }

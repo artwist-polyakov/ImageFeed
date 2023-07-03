@@ -11,7 +11,7 @@ struct AlertModel {
     var message: String
     var primaryButtonText: String
     var primaryButtonCompletion: (() -> ())
-    var secondaryButtonText: String? // Опциональный параметр
-    var secondaryButtonCompletion: (() -> ())? // Опциональный параметр
+    var secondaryButtonText: String?
+    var secondaryButtonCompletion: (() -> ())? 
 }
 

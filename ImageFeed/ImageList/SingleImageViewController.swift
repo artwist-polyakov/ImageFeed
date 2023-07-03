@@ -44,17 +44,17 @@ final class SingleImageViewController: UIViewController {
         bigSinglePicture.kf.indicatorType = .custom(indicator: indicator)
         guard let url = URL(string: imageToLoad.largeImageURL ) else { return }
         loadImage(from: url)
-//        bigSinglePicture.kf.setImage(with: url) { [weak self] result in
-//            guard let self = self else { return }
-//
-//            switch result {
-//            case .success(let value):
-//                self.bigSinglePicture.image = value.image
-//                self.rescaleAndCenterImageInScrollView(image: value.image)
-//            case .failure(let error):
-//                print("Failed to load image: \(error)")
-//            }
-//        }
+        //        bigSinglePicture.kf.setImage(with: url) { [weak self] result in
+        //            guard let self = self else { return }
+        //
+        //            switch result {
+        //            case .success(let value):
+        //                self.bigSinglePicture.image = value.image
+        //                self.rescaleAndCenterImageInScrollView(image: value.image)
+        //            case .failure(let error):
+        //                print("Failed to load image: \(error)")
+        //            }
+        //        }
     }
     
     private func rescaleAndCenterImageInScrollView(image: UIImage) {
