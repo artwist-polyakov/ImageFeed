@@ -18,7 +18,7 @@ class ImagesListViewController: UIViewController {
     private var profileImageServiceObserver: NSObjectProtocol?
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateStyle = .long
+        formatter.dateStyle = .medium
         formatter.timeStyle = .none
         return formatter
     }()
