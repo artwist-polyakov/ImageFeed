@@ -42,7 +42,6 @@ class ImagesListViewController: UIViewController {
         DispatchQueue.main.async {
             if self.currentPhotosCount == 0 {
                 self.imagesListService.fetchPhotosNextPage()
-                self.currentPhotosCount += self.imagesListService.getCurreentBatchSize()
             }
         }
         imagesTable.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
@@ -52,17 +51,19 @@ class ImagesListViewController: UIViewController {
             queue: .main                                        // 5
         ) { [weak self] _ in
             guard let self = self else { return }
-            self.imagesTable.reloadData()
+//            self.imagesTable.reloadData()
+            print("Перед обновлением тейблвью")
             self.updateTableViewAnimated()                                 // 6
         }
     }
     
     func updateTableViewAnimated() {
-        let newCount = imagesListService.photos.count
-        if currentPhotosCount != newCount {
+        let newCount = self.imagesListService.photos.count
+        if self.currentPhotosCount != newCount {
+            let previousCount = self.currentPhotosCount
             self.currentPhotosCount = newCount
             imagesTable.performBatchUpdates {
-                let indexPaths = (currentPhotosCount..<newCount).map { i in
+                let indexPaths = (previousCount..<newCount).map { i in
                     IndexPath(row: i, section: 0)
                 }
                 print("updateTableViewAnimated: \(indexPaths)")
