@@ -104,11 +104,6 @@ extension SplashViewController: AuthViewControllerDelegate {
     
     private func fetchProfile(token: String) {
         profileService.fetchProfile {result in
-            print ("SPLASH: мы в fetchProfile до гарда")
-            //            guard let self = self else {
-            //                print("SPLASH: сработал гард")
-            //                return }
-            print ("SPLASH: мы в fetchProfile после гарда")
             switch result {
             case .success:
                 
@@ -125,6 +120,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                 self.switchToTabBarController()
                 
             case .failure:
+                print(result)
                 self.showAlert()
             }
         }

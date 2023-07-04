@@ -14,6 +14,7 @@ class ProfileViewController: UIViewController {
     private var userName: UILabel!
     private let profileService = ProfileService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
+    private let alertPresenter = AlertPresenter()
     
     
     private func initProfileImage (view: UIView) {
@@ -137,6 +138,28 @@ class ProfileViewController: UIViewController {
     
     @objc
     private func didTapLogoutButton() {
+        let primaryButtonCompletion = {
+        
+            self.clearSecretsAndData()
+            for view in self.view.subviews {
+                if view is UILabel {
+                    view.removeFromSuperview()
+                } else {
+                    if let imageView = view as? UIImageView {
+                        imageView.image = UIImage(named: "ProfilePhotoPlaceholder")
+                        imageView.tintColor = UIColor(named: "YP Gray")
+                    }
+                }
+            }
+            self.present(SplashViewController(), animated: true, completion: nil)
+        }
+        
+        let alert = AlertModel(title: "Пока, пока!", message: "Уверены, что хотите выйти?", primaryButtonText: "Да", primaryButtonCompletion: primaryButtonCompletion, secondaryButtonText: "Нет") {}
+        
+        alertPresenter.show(in: self, model:alert)
+    }
+    
+    private func clearSecretsAndData() {
         let tokenStorage = OAuth2TokenStorage.shared
         tokenStorage.removeToken()
         HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
@@ -147,20 +170,6 @@ class ProfileViewController: UIViewController {
                  WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
               }
            }
-        for view in view.subviews {
-            if view is UILabel {
-                view.removeFromSuperview()
-            } else {
-                if let imageView = view as? UIImageView {
-                    imageView.image = UIImage(named: "ProfilePhotoPlaceholder")
-                    imageView.tintColor = UIColor(named: "YP Gray")
-                }
-            }
-        }
-        // После логаута мы должны снова запустить наш Сплешскрин — instantiateInitialViewController()
-        //        UIApplication.shared.windows.first?.rootViewController = UIStoryboard(name: "Main", bundle: .main).instantiateInitialViewController()
-        present(SplashViewController(), animated: true, completion: nil)
-        
     }
 }
 

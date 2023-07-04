@@ -35,7 +35,6 @@ class ImagesListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         DispatchQueue.main.async {
             if self.currentPhotosCount == 0 {
                 self.imagesListService.fetchPhotosNextPage()
@@ -111,7 +110,6 @@ extension ImagesListViewController {
     }
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        print("Мы в configCell")
         cell.delegate = self
         let photo = imagesListService.photos[indexPath.row]
         let imageLink  = photo.thumbImageURL

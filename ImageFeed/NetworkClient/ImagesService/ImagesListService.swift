@@ -100,14 +100,12 @@ final class ImagesListService {
                     completion(.success(likedPhoto))
                     self.photos[index].isLiked = !hasLike
                     self.likeTask = nil
-                    UIBlockingProgressHUD.dismiss()
                 case .failure(let error):
                     print("LikeService ImagesListService Like ОШИБКА \(error)")
                     completion(.failure(error))
                     self.likeTask = nil
-                    UIBlockingProgressHUD.dismiss()
                 }
-                
+                UIBlockingProgressHUD.dismiss()
             }
             
         }
