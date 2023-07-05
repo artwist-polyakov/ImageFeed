@@ -10,11 +10,8 @@ final class SplashViewController: UIViewController {
         super.viewDidAppear(animated)
         UIBlockingProgressHUD.show()
         if let token = oauth2TokenStorage.token {
-            print("SPLASH: Получаем пользовательскую инфо")
             self.fetchProfile(token: token)
-            
         } else {
-            // Show Auth Screen
             UIBlockingProgressHUD.dismiss()
             showAuthViewController()
         }
@@ -35,7 +32,6 @@ final class SplashViewController: UIViewController {
     }
     
     private func initLayout(view: UIView){
-        print("SPLASH: Init Layout")
         view.backgroundColor = UIColor(named: "YP Black")
         let screenImage = UIImage(named: "launchscreenLogo") ?? UIImage(named: "launchscreenLogo")
         let screenImageView = UIImageView(image: screenImage)
@@ -91,10 +87,8 @@ extension SplashViewController: AuthViewControllerDelegate {
             guard let self = self else { return }
             switch result {
             case .success(let token):
-                oauth2TokenStorage.token = token
-                //                switchToTabBarController()
-//                self.fetchProfile(token: token)
-                dismiss(animated: true, completion: nil)
+                self.oauth2TokenStorage.token = token
+                self.dismiss(animated: true, completion: nil)
             case .failure:
                 // TODO [Sprint 11]
                 break
@@ -110,9 +104,9 @@ extension SplashViewController: AuthViewControllerDelegate {
                 self.profileImageService.fetchProfileImageURL(username:self.profileService.profile!.username) { imageResult in
                     switch imageResult {
                     case .success:
-                        print("Фотка тут \(String(describing: self.profileImageService.avatarURL))")
+                        print("Фотография тут \(String(describing: self.profileImageService.avatarURL))")
                     case .failure:
-                        print("Что-то пошло не так")
+                        print("Не удалось завершить получение фотографии")
 //                        self.showAlert()
                     }
                 }
@@ -141,7 +135,6 @@ extension SplashViewController: AuthViewControllerDelegate {
     private func retryFetchingProfile() {
         UIBlockingProgressHUD.show()
         if let token = oauth2TokenStorage.token {
-            print("SPLASH: мы в ретри цикле")
             fetchProfile(token: token)
             
         } else {

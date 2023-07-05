@@ -17,7 +17,6 @@ final class ProfileImageService {
         username: String,
         completion: @escaping (Result<String?, Error>) -> Void
     ) {
-        print("Получаю фотографию пользователя")
         assert(Thread.isMainThread)
         
         if task != nil {
@@ -31,7 +30,7 @@ final class ProfileImageService {
         let task = urlSession.objectTask(for: profilePhotoRequest) { [weak self] (result: Result<UserResult, Error>) in
             DispatchQueue.main.async {
                 
-                guard let self = self else { print("тут гард"); return }
+                guard let self = self else { return }
                 switch result {
                 case .success(let body):
                     self.avatarURL = body.profileImage?.medium

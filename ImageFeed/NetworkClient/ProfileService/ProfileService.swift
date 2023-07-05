@@ -17,7 +17,6 @@ final class ProfileService {
     func fetchProfile(
         completion: @escaping (Result<Profile, Error>) -> Void
     ) {
-        print("currentTask = \(String(describing: task))")
         assert(Thread.isMainThread)
         if task != nil {
             print("Останавливаю выполнение, потому что запущена задача ProfileService")
@@ -31,7 +30,7 @@ final class ProfileService {
             
             DispatchQueue.main.async {
                 
-                guard let self = self else { print("тут гард"); return }
+                guard let self = self else { return }
                 switch result {
                 case .success(let body):
                     let profile = Profile(username: body.username, name: "\(body.firstName ?? "") \(body.lastName ?? "")", loginName: "@\(body.username)", bio: body.bio ?? "")

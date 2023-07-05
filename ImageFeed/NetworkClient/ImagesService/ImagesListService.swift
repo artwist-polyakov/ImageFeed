@@ -46,15 +46,12 @@ final class ImagesListService {
         var photosPageRequest: URLRequest {
             URLRequest.makeHTTPRequest(path: "/photos", httpMethod: "GET", needToken: true, parameters: parameters)
         }
-        print("ImagesListService: запрашиваю изображения с параметрами: \(parameters)")
         let task = urlSession.objectTask(for: photosPageRequest) { [weak self] (result: Result<[OnePhotoResult], Error>) in
-            print("ImagesListService запущена задача")
             DispatchQueue.main.async {
                 
-                guard let self = self else { print("ImagesListService тут гард"); return }
+                guard let self = self else { return }
                 switch result {
                 case .success(let body):
-                    print("ImagesListService: обновляю фотографии, текущая длина массива фото \(self.photos.count)")
                     self.photos += body.map {
                         Photo(id: $0.id,
                               size: CGSize(width: Double($0.width) ,height: Double($0.height)),
@@ -64,7 +61,6 @@ final class ImagesListService {
                               largeImageURL: $0.urls.full ?? "",
                               isLiked: $0.isLiked)
                     }
-                    print("ImagesListService: обновил фотографии, текущая длина массива фото \(self.photos.count)")
                     NotificationCenter.default.post(
                         name: ImagesListService.DidChangeNotification,
                         object: self,
@@ -92,19 +88,16 @@ final class ImagesListService {
             print("LikeService Останавливаю выполнение, потому что запущена задача ImagesListService Like")
             likeTask?.cancel()
         }
-        print("LikeService - готовлю  запросы")
         var changeLikeRequest: URLRequest {
             URLRequest.makeHTTPRequest(
                 path: "/photos/\(photoId)/like",
                 httpMethod: httpMethod,
                 needToken: true)
         }
-        print("LikeService - готовлю  задачи")
         let task = urlSession.objectTask(for: changeLikeRequest) { [weak self] (result: Result<LikeUpdateResult, Error>) in
-            print("LikeService ImagesListService Like запущена задача")
             UIBlockingProgressHUD.show()
             DispatchQueue.main.async {
-                guard let self = self else { print("ImagesListService Like тут гард"); return }
+                guard let self = self else { return }
                 switch result {
                 case .success(let body):
                     let likedPhoto = body.photo

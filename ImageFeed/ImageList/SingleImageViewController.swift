@@ -90,7 +90,6 @@ final class SingleImageViewController: UIViewController {
                 self.bigSinglePicture.image = value.image
                 self.rescaleAndCenterImageInScrollView(image: value.image)
             case .failure(let error):
-                print("Failed to load image: \(error)")
                 let alertPresenter = AlertPresenter()
                 let alert = AlertModel(title: "УПС!", message: "Что-то пошло не так", primaryButtonText: "Не надо", primaryButtonCompletion: {
                 }, secondaryButtonText: "Повторить") {

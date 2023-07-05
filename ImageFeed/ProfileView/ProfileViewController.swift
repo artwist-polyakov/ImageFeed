@@ -128,10 +128,10 @@ class ProfileViewController: UIViewController {
             switch result {
             case .success(let value):
                 // Загрузка изображения прошла успешно
-                print("Фотокарточка загружена: \(value.source.url?.absoluteString ?? "")")
+                print("Фотография загружена: \(value.source.url?.absoluteString ?? "")")
             case .failure(let error):
                 // Возникла ошибка при загрузке изображения
-                print("Фотокарточка не загружена: \(error)")
+                print("Фотография не загружена: \(error)")
             }
         })
         

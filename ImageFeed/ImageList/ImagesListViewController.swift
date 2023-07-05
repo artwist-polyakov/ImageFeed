@@ -60,7 +60,6 @@ class ImagesListViewController: UIViewController {
                 let indexPaths = (previousCount..<newCount).map { i in
                     IndexPath(row: i, section: 0)
                 }
-                print("updateTableViewAnimated: \(indexPaths)")
                 imagesTable.insertRows(at: indexPaths, with: .automatic)
             } completion: { _ in
                 
@@ -74,8 +73,6 @@ class ImagesListViewController: UIViewController {
             if let viewController = segue.destination as? SingleImageViewController {
                 if let indexPath = sender as? IndexPath {
                     let photo = imagesListService.photos[indexPath.row]
-                    print("ShowSingleImage загружаю картинку \(photo.largeImageURL)")
-                    print("ShowSingleImage маленькая картинка \(photo.thumbImageURL)")
                     viewController.imageToLoad = photo
                 }
             }
@@ -135,12 +132,12 @@ extension ImagesListViewController {
                 switch result {
                 case .success(let value):
                     // Загрузка изображения прошла успешно
-                    print("Фотокарточка загружена: \(value.source.url?.absoluteString ?? "")")
+                    print("Фотография загружена: \(value.source.url?.absoluteString ?? "")")
                     cell.picture.contentMode = .scaleAspectFill
                     self?.imagesTable.reloadRows(at: [indexPath], with: .automatic)
                 case .failure(let error):
                     // Возникла ошибка при загрузке изображения
-                    print("Фотокарточка не загружена: \(error)")
+                    print("Фотография не загружена: \(error)")
                 }
             })
         setLiked(to: cell.likeButton, state: photo.isLiked)
@@ -162,7 +159,6 @@ extension ImagesListViewController: UITableViewDelegate {
         _ tableView: UITableView,
         heightForRowAt indexPath: IndexPath
     ) -> CGFloat {
-        print("counter = \(indexPath.row)")
         guard indexPath.row < imagesListService.photos.count else {
                 return 0
             }
@@ -189,7 +185,6 @@ extension ImagesListViewController: UITableViewDelegate {
 
 extension ImagesListViewController: ImagesListCellDelegate {
     func imageListCellDidTapLike(_ cell: ImagesListCell) {
-        print("LikeService Обновляю лайк")
         guard let indexPath = imagesTable.indexPath(for: cell) else { return }
         let photo = imagesListService.photos[indexPath.row]
         imagesListService.changeLike(photoId: photo.id, hasLike: photo.isLiked, index: indexPath.row) {result in
@@ -198,7 +193,7 @@ extension ImagesListViewController: ImagesListCellDelegate {
                 print("LikeService обновил лайк в \(indexPath)")
                 self.imagesTable.reloadData()
             case .failure:
-                print("Что-то не получилось поставить лайк")
+                print("Что-то не получилось поставить лайк в \(indexPath)")
             }
      
         }
