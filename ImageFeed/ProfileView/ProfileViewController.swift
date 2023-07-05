@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController {
     private let profileService = ProfileService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
     private let alertPresenter = AlertPresenter()
+    static let LogoutNotification = Notification.Name(rawValue: "Logoutcompleted")
     
     
     private func initProfileImage (view: UIView) {
@@ -139,7 +140,10 @@ class ProfileViewController: UIViewController {
     @objc
     private func didTapLogoutButton() {
         let primaryButtonCompletion = {
-        
+            NotificationCenter.default.post(
+                name: ProfileViewController.LogoutNotification,
+                object: self,
+                userInfo: nil)
             self.clearSecretsAndData()
             for view in self.view.subviews {
                 if view is UILabel {

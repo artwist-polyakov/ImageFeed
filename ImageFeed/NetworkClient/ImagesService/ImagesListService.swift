@@ -15,6 +15,18 @@ final class ImagesListService {
     private var task: URLSessionTask?
     private var likeTask: URLSessionTask?
     private let urlSession = URLSession.shared
+    private var profileImageServiceObserver: NSObjectProtocol?
+    
+    init() {
+        profileImageServiceObserver = NotificationCenter.default.addObserver(
+            forName: ProfileViewController.LogoutNotification, // 3
+            object: nil,                                        // 4
+            queue: .main                                        // 5
+        ) { [weak self] _ in
+            guard let self = self else { return }
+            self.photos = []                                 // 6
+        }
+    }
     
     func getCurreentBatchSize() -> Int {
         return ImagesListService.BATCH_SIZE
