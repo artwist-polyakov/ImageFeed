@@ -93,7 +93,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .success(let token):
                 oauth2TokenStorage.token = token
                 //                switchToTabBarController()
-                self.fetchProfile(token: token)
+//                self.fetchProfile(token: token)
                 dismiss(animated: true, completion: nil)
             case .failure:
                 // TODO [Sprint 11]
@@ -119,9 +119,9 @@ extension SplashViewController: AuthViewControllerDelegate {
                 UIBlockingProgressHUD.dismiss()
                 self.switchToTabBarController()
                 
-            case .failure:
-                print(result)
-                self.showAlert()
+            case .failure(let error):
+                        print("Ошибка при загрузке профиля: \(error.localizedDescription)")
+                        self.showAlert()
             }
         }
     }

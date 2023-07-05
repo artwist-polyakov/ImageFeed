@@ -17,6 +17,7 @@ final class ProfileService {
     func fetchProfile(
         completion: @escaping (Result<Profile, Error>) -> Void
     ) {
+        print("currentTask = \(String(describing: task))")
         assert(Thread.isMainThread)
         if task != nil {
             print("Останавливаю выполнение, потому что запущена задача ProfileService")
