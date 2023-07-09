@@ -6,6 +6,7 @@
 //
 import UIKit
 import Kingfisher
+import WebKit
 
 class ProfileViewController: UIViewController {
     private var userDescription: UILabel!
@@ -13,6 +14,8 @@ class ProfileViewController: UIViewController {
     private var userName: UILabel!
     private let profileService = ProfileService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
+    private let alertPresenter = AlertPresenter()
+    static let LogoutNotification = Notification.Name(rawValue: "Logoutcompleted")
     
     
     private func initProfileImage (view: UIView) {
@@ -125,10 +128,10 @@ class ProfileViewController: UIViewController {
             switch result {
             case .success(let value):
                 // Загрузка изображения прошла успешно
-                print("Фотокарточка загружена: \(value.source.url?.absoluteString ?? "")")
+                print("Фотография загружена: \(value.source.url?.absoluteString ?? "")")
             case .failure(let error):
                 // Возникла ошибка при загрузке изображения
-                print("Фотокарточка не загружена: \(error)")
+                print("Фотография не загружена: \(error)")
             }
         })
         
@@ -136,22 +139,41 @@ class ProfileViewController: UIViewController {
     
     @objc
     private func didTapLogoutButton() {
-        let tokenStorage = OAuth2TokenStorage.shared
-        tokenStorage.removeToken()
-        for view in view.subviews {
-            if view is UILabel {
-                view.removeFromSuperview()
-            } else {
-                if let imageView = view as? UIImageView {
-                    imageView.image = UIImage(named: "ProfilePhotoPlaceholder")
-                    imageView.tintColor = UIColor(named: "YP Gray")
+        let primaryButtonCompletion = {
+            NotificationCenter.default.post(
+                name: ProfileViewController.LogoutNotification,
+                object: self,
+                userInfo: nil)
+            self.clearSecretsAndData()
+            for view in self.view.subviews {
+                if view is UILabel {
+                    view.removeFromSuperview()
+                } else {
+                    if let imageView = view as? UIImageView {
+                        imageView.image = UIImage(named: "ProfilePhotoPlaceholder")
+                        imageView.tintColor = UIColor(named: "YP Gray")
+                    }
                 }
             }
+            self.present(SplashViewController(), animated: true, completion: nil)
         }
-        // После логаута мы должны снова запустить наш Сплешскрин — instantiateInitialViewController()
-        //        UIApplication.shared.windows.first?.rootViewController = UIStoryboard(name: "Main", bundle: .main).instantiateInitialViewController()
-        present(SplashViewController(), animated: true, completion: nil)
         
+        let alert = AlertModel(title: "Пока, пока!", message: "Уверены, что хотите выйти?", primaryButtonText: "Да", primaryButtonCompletion: primaryButtonCompletion, secondaryButtonText: "Нет") {}
+        
+        alertPresenter.show(in: self, model:alert)
+    }
+    
+    private func clearSecretsAndData() {
+        let tokenStorage = OAuth2TokenStorage.shared
+        tokenStorage.removeToken()
+        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+           // Запрашиваем все данные из локального хранилища.
+           WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+              // Массив полученных записей удаляем из хранилища.
+              records.forEach { record in
+                 WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+              }
+           }
     }
 }
 

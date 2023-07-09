@@ -19,7 +19,7 @@ final class ProfileService {
     ) {
         assert(Thread.isMainThread)
         if task != nil {
-            print("Таск == нил")
+            print("Останавливаю выполнение, потому что запущена задача ProfileService")
             task?.cancel()
         }
         
@@ -30,7 +30,7 @@ final class ProfileService {
             
             DispatchQueue.main.async {
                 
-                guard let self = self else { print("тут гард"); return }
+                guard let self = self else { return }
                 switch result {
                 case .success(let body):
                     let profile = Profile(username: body.username, name: "\(body.firstName ?? "") \(body.lastName ?? "")", loginName: "@\(body.username)", bio: body.bio ?? "")

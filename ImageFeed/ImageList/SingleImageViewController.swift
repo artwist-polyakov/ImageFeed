@@ -17,6 +17,7 @@ final class SingleImageViewController: UIViewController {
             rescaleAndCenterImageInScrollView(image: image)
         }
     }
+    var imageToLoad: Photo!
     
     @IBOutlet private weak var bigSinglePicture: UIImageView!
     @IBOutlet private weak var scrollView: UIScrollView!
@@ -37,29 +38,37 @@ final class SingleImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         feedbackGenerator.prepare()
-        scrollView.minimumZoomScale = 0.1
-        scrollView.maximumZoomScale = 20
-        bigSinglePicture.image = image
-        rescaleAndCenterImageInScrollView(image: image)
+        scrollView.minimumZoomScale = 0.01
+        scrollView.maximumZoomScale = 200
+        let indicator = ProgressHUDIndicator()
+        bigSinglePicture.kf.indicatorType = .custom(indicator: indicator)
+        guard let url = URL(string: imageToLoad.largeImageURL ) else { return }
+        loadImage(from: url)
     }
     
     private func rescaleAndCenterImageInScrollView(image: UIImage) {
+        let minZoomScale = scrollView.minimumZoomScale
+        let maxZoomScale = scrollView.maximumZoomScale
+        
+        view.layoutIfNeeded()
+        
         let visibleRectSize = scrollView.bounds.size
+        
         let imageSize = image.size
+        
         let hScale = visibleRectSize.width / imageSize.width
         let vScale = visibleRectSize.height / imageSize.height
-        let scale = min(scrollView.maximumZoomScale, max(scrollView.minimumZoomScale, min(hScale, vScale)))
-        let targetWidth = imageSize.width * scale
-        let targetHeight = imageSize.height * scale
-        bigSinglePicture.frame = CGRect(x: 0, y: 0, width: targetWidth, height: targetHeight)
-        scrollView.contentSize = bigSinglePicture.frame.size
-        view.layoutIfNeeded()
-        scrollView.layoutIfNeeded()
-        scrollView.zoomScale = scale
-        let verticalPadding =  max(0, (scrollView.contentSize.height - scrollView.bounds.height) / 2)
         
-        let horizontalPadding =  max(0, (scrollView.contentSize.width - scrollView.bounds.width) / 2)
-        scrollView.contentOffset = CGPoint(x: horizontalPadding, y: verticalPadding)
+        let scale = min(maxZoomScale, max(minZoomScale, min(hScale, vScale)))
+        
+        scrollView.setZoomScale (scale, animated: false)
+        scrollView.layoutIfNeeded ()
+        
+        let newContentSize = scrollView.contentSize
+        let x = (newContentSize.width - visibleRectSize.width) / 2
+        let y = (newContentSize.height - visibleRectSize.height) / 2
+        
+        scrollView.setContentOffset(CGPoint(x: x, y: y), animated: false)
     }
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
@@ -70,6 +79,25 @@ final class SingleImageViewController: UIViewController {
         let horizontalPadding = imageViewSize.width < scrollViewSize.width ? (scrollViewSize.width - imageViewSize.width) / 2 : 0
         
         scrollView.contentInset = UIEdgeInsets(top: verticalPadding, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
+    }
+    
+    func loadImage(from url:URL) {
+        bigSinglePicture.kf.setImage(with: url) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let value):
+                self.bigSinglePicture.image = value.image
+                self.rescaleAndCenterImageInScrollView(image: value.image)
+            case .failure(let error):
+                let alertPresenter = AlertPresenter()
+                let alert = AlertModel(title: "УПС!", message: "Что-то пошло не так", primaryButtonText: "Не надо", primaryButtonCompletion: {
+                }, secondaryButtonText: "Повторить") {
+                    self.loadImage(from: url)
+                }
+                alertPresenter.show(in: self, model:alert)
+            }
+        }
     }
 }
 

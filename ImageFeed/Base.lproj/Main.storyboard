@@ -47,6 +47,9 @@
                                                     <rect key="frame" x="354" y="4" width="44" height="44"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="LikeButtonOn"/>
+                                                    <connections>
+                                                        <action selector="likeButtonClicked" destination="DnA-5T-tAa" eventType="touchUpInside" id="74V-0I-8IL"/>
+                                                    </connections>
                                                 </button>
                                                 <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KsD-JL-DEb" customClass="GradientUnderDate" customModule="ImageFeed" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="189" width="382" height="30"/>
