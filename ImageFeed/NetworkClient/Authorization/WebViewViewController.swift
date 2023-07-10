@@ -10,40 +10,36 @@ import WebKit
 
 fileprivate let UnsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
 
-final class WebViewViewController: UIViewController {
+final class WebViewViewController: UIViewController & WebViewViewControllerProtocol {
     weak var delegate: WebViewViewControllerDelegate?
     private var estimatedProgressObservation: NSKeyValueObservation?
+    var presenter: WebViewPresenterProtocol?
     @IBOutlet private var progressView: UIProgressView!
     @IBOutlet private weak var webView: WKWebView!
     @IBAction private func didTapBackButton(_ sender: Any) {
         delegate?.webViewViewControllerDidCancel(self)
     }
     
-    override func viewDidLoad() {
-        //        UserDefaults.standard.removeObject(forKey: "BearerToken")
-        webView.navigationDelegate = self
-        estimatedProgressObservation = webView.observe(
-            \.estimatedProgress,
-             options: [],
-             changeHandler: { [weak self] _, _ in
-                 guard let self = self else { return }
-                 self.updateProgress()
-             })
-        
-        // документация тут https://unsplash.com/documentation/user-authentication-workflow
-        // нас интересует фрагмент https://share.cleanshot.com/yMSRhPDtVgxzhnZ7xWfp
-        var urlComponents = URLComponents(string: UnsplashAuthorizeURLString)!
-        urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: AccessKey),
-            URLQueryItem(name: "redirect_uri", value: RedirectURI),
-            URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "scope", value: AccessScope)
-        ]
-        let url = urlComponents.url!
-        let request = URLRequest(url: url)
-        webView.load(request)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // NOTE: Since the class is marked as `final` we don't need to pass a context.
+        // In case of inhertiance context must not be nil.
+        webView.addObserver(
+            self,
+            forKeyPath: #keyPath(WKWebView.estimatedProgress),
+            options: .new,
+            context: nil)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), context: nil)
+    }
+    
+    override func viewDidLoad() {
+        webView.navigationDelegate = self
+        presenter?.viewDidLoad()
+    }
     
     
     override func observeValue(
@@ -53,15 +49,22 @@ final class WebViewViewController: UIViewController {
         context: UnsafeMutableRawPointer?
     ) {
         if keyPath == #keyPath(WKWebView.estimatedProgress) {
-            updateProgress()
+            presenter?.didUpdateProgressValue(webView.estimatedProgress)
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
     
-    private func updateProgress() {
-        progressView.progress = Float(webView.estimatedProgress)
-        progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
+    func setProgressValue(_ newValue: Float) {
+        progressView.progress = newValue
+    }
+
+    func setProgressHidden(_ isHidden: Bool) {
+        progressView.isHidden = isHidden
+    } 
+    
+    func load(request: URLRequest) {
+        webView.load(request)
     }
     
 }
@@ -83,15 +86,9 @@ extension WebViewViewController: WKNavigationDelegate {
     }
     
     private func code (from navigationAction: WKNavigationAction) -> String? {
-        if
-            let url = navigationAction.request.url,
-            let urlComponents = URLComponents(string: url.absoluteString),
-            urlComponents.path == "/oauth/authorize/native",
-            let items = urlComponents.queryItems,
-            let codeItem = items.first(where: {$0.name == "code"}) {
-            return codeItem.value
-        } else {
+        if let url = navigationAction.request.url {
+                return presenter?.code(from: url)
+            }
             return nil
-        }
     }
 }
