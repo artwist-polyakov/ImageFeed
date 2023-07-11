@@ -89,7 +89,7 @@ final class SingleImageViewController: UIViewController {
             case .success(let value):
                 self.bigSinglePicture.image = value.image
                 self.rescaleAndCenterImageInScrollView(image: value.image)
-            case .failure(let error):
+            case .failure:
                 let alertPresenter = AlertPresenter()
                 let alert = AlertModel(title: "УПС!", message: "Что-то пошло не так", primaryButtonText: "Не надо", primaryButtonCompletion: {
                 }, secondaryButtonText: "Повторить") {
