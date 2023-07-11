@@ -15,6 +15,8 @@
 		AF2694C129FC1BDC0023942A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF2694BF29FC1BDC0023942A /* LaunchScreen.storyboard */; };
 		AF2694E929FEEF8A0023942A /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2694E829FEEF8A0023942A /* ImagesListCell.swift */; };
 		AF2E23BC2A388B5B007A65AF /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2E23BB2A388B5B007A65AF /* Profile.swift */; };
+		AF30C7CE2A5DD19000911B41 /* ProfileViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF30C7CD2A5DD19000911B41 /* ProfileViewPresenterProtocol.swift */; };
+		AF30C7D02A5DD23100911B41 /* ProfileViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF30C7CF2A5DD23100911B41 /* ProfileViewControllerProtocol.swift */; };
 		AF54CD102A5C584800743172 /* WebViewViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF54CD0F2A5C584800743172 /* WebViewViewControllerProtocol.swift */; };
 		AF54CD122A5C58DB00743172 /* WebViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF54CD112A5C58DB00743172 /* WebViewPresenterProtocol.swift */; };
 		AF54CD142A5C58FC00743172 /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF54CD132A5C58FC00743172 /* WebViewPresenter.swift */; };
@@ -77,6 +79,8 @@
 		AF2694C229FC1BDC0023942A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF2694E829FEEF8A0023942A /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		AF2E23BB2A388B5B007A65AF /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		AF30C7CD2A5DD19000911B41 /* ProfileViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewPresenterProtocol.swift; sourceTree = "<group>"; };
+		AF30C7CF2A5DD23100911B41 /* ProfileViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerProtocol.swift; sourceTree = "<group>"; };
 		AF54CD0F2A5C584800743172 /* WebViewViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewControllerProtocol.swift; sourceTree = "<group>"; };
 		AF54CD112A5C58DB00743172 /* WebViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenterProtocol.swift; sourceTree = "<group>"; };
 		AF54CD132A5C58FC00743172 /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
@@ -170,8 +174,7 @@
 				AF9EC5872A3CDD5D00CD7754 /* Presentation */,
 				AFF07B672A0D2D1600683324 /* ProfileView */,
 				AF66294A2A239B5C005F16C8 /* Resources */,
-				AFB4C31A2A2C8FE2004575AF /* SplashViewController */,
-				AF9EC5902A3F9A2E00CD7754 /* TabBarController.swift */,
+				AFB4C31A2A2C8FE2004575AF /* Navigation */,
 			);
 			path = ImageFeed;
 			sourceTree = "<group>";
@@ -205,7 +208,6 @@
 				AF9EC5922A460F6100CD7754 /* ImagesService */,
 				AFE049812A365444002C431F /* ProfileService */,
 				AF6629492A239ABC005F16C8 /* Authorization */,
-				AF6629472A2224AF005F16C8 /* AuthConfiguration.swift */,
 				AF9EC5802A3CD20100CD7754 /* extension URLSession.swift */,
 			);
 			path = NetworkClient;
@@ -214,6 +216,7 @@
 		AF6629492A239ABC005F16C8 /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
+				AF6629472A2224AF005F16C8 /* AuthConfiguration.swift */,
 				AF7743742A23A1B400A1BB26 /* AuthViewController.swift */,
 				AF7743762A23B24D00A1BB26 /* WebViewViewController.swift */,
 				AF7743782A27AE1B00A1BB26 /* WebViewViewControllerDelegate.swift */,
@@ -269,12 +272,13 @@
 			path = ImagesService;
 			sourceTree = "<group>";
 		};
-		AFB4C31A2A2C8FE2004575AF /* SplashViewController */ = {
+		AFB4C31A2A2C8FE2004575AF /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				AF9EC5902A3F9A2E00CD7754 /* TabBarController.swift */,
 				AFB4C31B2A2C9011004575AF /* SplashViewController.swift */,
 			);
-			path = SplashViewController;
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 		AFE049812A365444002C431F /* ProfileService */ = {
@@ -290,6 +294,8 @@
 			isa = PBXGroup;
 			children = (
 				AFF07B682A0D2D3900683324 /* ProfileViewController.swift */,
+				AF30C7CD2A5DD19000911B41 /* ProfileViewPresenterProtocol.swift */,
+				AF30C7CF2A5DD23100911B41 /* ProfileViewControllerProtocol.swift */,
 			);
 			path = ProfileView;
 			sourceTree = "<group>";
@@ -416,6 +422,7 @@
 				AF9EC5942A460F7D00CD7754 /* Photo.swift in Sources */,
 				AF2694E929FEEF8A0023942A /* ImagesListCell.swift in Sources */,
 				AF54CD142A5C58FC00743172 /* WebViewPresenter.swift in Sources */,
+				AF30C7CE2A5DD19000911B41 /* ProfileViewPresenterProtocol.swift in Sources */,
 				AF54CD102A5C584800743172 /* WebViewViewControllerProtocol.swift in Sources */,
 				AFF07B692A0D2D3900683324 /* ProfileViewController.swift in Sources */,
 				AF9EC5992A46233700CD7754 /* PhotoResult.swift in Sources */,
@@ -430,6 +437,7 @@
 				AFB4C31C2A2C9011004575AF /* SplashViewController.swift in Sources */,
 				AFFE120E2A13F19000199FD5 /* GradientUnderDate.swift in Sources */,
 				AF7743792A27AE1B00A1BB26 /* WebViewViewControllerDelegate.swift in Sources */,
+				AF30C7D02A5DD23100911B41 /* ProfileViewControllerProtocol.swift in Sources */,
 				AF2694B729FC1BDB0023942A /* SceneDelegate.swift in Sources */,
 				AF9EC5912A3F9A2E00CD7754 /* TabBarController.swift in Sources */,
 				AF7743752A23A1B400A1BB26 /* AuthViewController.swift in Sources */,

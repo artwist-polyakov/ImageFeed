@@ -93,7 +93,6 @@ final class ImageFeedTests: XCTestCase {
         guard let testUrl = components.url else {return}
         
         // when
-        
         let code = authHelper.code(from: testUrl)
         
         // then

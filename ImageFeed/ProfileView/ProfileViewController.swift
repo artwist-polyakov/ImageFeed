@@ -121,7 +121,7 @@ class ProfileViewController: UIViewController {
         let placeholderImage = UIImage(named: "ProfilePhotoPlaceholder")
         imageView.kf.setImage(with: url,
                               placeholder: placeholderImage,
-                              options: nil,
+                              options: [.processor(processor)],
                               completionHandler: { [weak self] result in
             guard self != nil else { return }
             
