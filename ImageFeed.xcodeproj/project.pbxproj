@@ -22,6 +22,7 @@
 		AF54CD182A5C881100743172 /* AuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF54CD172A5C881100743172 /* AuthHelper.swift */; };
 		AF54CD202A5C8A7400743172 /* WebViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF54CD1F2A5C8A7400743172 /* WebViewTests.swift */; };
 		AF54CD272A5C8B3600743172 /* WebViewPresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF54CD262A5C8B3600743172 /* WebViewPresenterSpy.swift */; };
+		AF54CD292A5C8FA900743172 /* WebViewViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF54CD282A5C8FA900743172 /* WebViewViewControllerSpy.swift */; };
 		AF6629482A2224AF005F16C8 /* AuthConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6629472A2224AF005F16C8 /* AuthConfiguration.swift */; };
 		AF66294D2A239B7E005F16C8 /* YS Display-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF66294B2A239B7E005F16C8 /* YS Display-Bold.ttf */; };
 		AF66294E2A239B7E005F16C8 /* YS Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF66294C2A239B7E005F16C8 /* YS Display-Medium.ttf */; };
@@ -84,6 +85,7 @@
 		AF54CD1D2A5C8A7400743172 /* ImageFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF54CD1F2A5C8A7400743172 /* WebViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewTests.swift; sourceTree = "<group>"; };
 		AF54CD262A5C8B3600743172 /* WebViewPresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenterSpy.swift; sourceTree = "<group>"; };
+		AF54CD282A5C8FA900743172 /* WebViewViewControllerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewControllerSpy.swift; sourceTree = "<group>"; };
 		AF6629472A2224AF005F16C8 /* AuthConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthConfiguration.swift; sourceTree = "<group>"; };
 		AF66294B2A239B7E005F16C8 /* YS Display-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Bold.ttf"; sourceTree = "<group>"; };
 		AF66294C2A239B7E005F16C8 /* YS Display-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Medium.ttf"; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			children = (
 				AF54CD1F2A5C8A7400743172 /* WebViewTests.swift */,
 				AF54CD262A5C8B3600743172 /* WebViewPresenterSpy.swift */,
+				AF54CD282A5C8FA900743172 /* WebViewViewControllerSpy.swift */,
 			);
 			path = ImageFeedTests;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF54CD202A5C8A7400743172 /* WebViewTests.swift in Sources */,
+				AF54CD292A5C8FA900743172 /* WebViewViewControllerSpy.swift in Sources */,
 				AF54CD272A5C8B3600743172 /* WebViewPresenterSpy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
