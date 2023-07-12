@@ -9,7 +9,6 @@ import Foundation
 public protocol ProfileViewPresenterProtocol {
     var view: ProfileViewControllerProtocol? { get set }
     func viewDidLoad()
-    func didTapLogoutButton()
     func updateProfileDetails()
     func updateAvatar(tag: Int)
     func clearSecretsAndData()

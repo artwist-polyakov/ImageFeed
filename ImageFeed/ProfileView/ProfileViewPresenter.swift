@@ -8,9 +8,12 @@
 import Foundation
 import UIKit
 import Kingfisher
+import WebKit
 final class ProfileViewPresenter: ProfileViewPresenterProtocol {
+    
     var view: ProfileViewControllerProtocol?
     private let profileService = ProfileService.shared
+    private var profileImageServiceObserver: NSObjectProtocol?
     
     init(view:ProfileViewControllerProtocol?){
         guard let view = view else {return}
@@ -18,12 +21,19 @@ final class ProfileViewPresenter: ProfileViewPresenterProtocol {
     }
     
     func viewDidLoad() {
-        return
+        self.updateProfileDetails()
+        profileImageServiceObserver = NotificationCenter.default.addObserver(
+            forName: ProfileImageService.DidChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            guard let self = self
+            else { return }
+            self.updateAvatar(tag: 1)
+        }
+        self.updateAvatar(tag: 1)
     }
     
-    func didTapLogoutButton() {
-        return
-    }
     
     func updateProfileDetails() {
         guard let view = self.view else {return}
@@ -36,8 +46,8 @@ final class ProfileViewPresenter: ProfileViewPresenterProtocol {
         guard
             let profileImageURL = ProfileImageService.shared.avatarURL,
             let url = URL(string: profileImageURL),
-            let targetView = self.view?.view.viewWithTag(tag), 
-            let imageView = targetView as? UIImageView
+            let targetView = self.view?.view.viewWithTag(tag),
+                let imageView = targetView as? UIImageView
         else { return }
         let processor = RoundCornerImageProcessor(cornerRadius: imageView.frame.width / 2)
         let placeholderImage = UIImage(named: "ProfilePhotoPlaceholder")
@@ -55,12 +65,19 @@ final class ProfileViewPresenter: ProfileViewPresenterProtocol {
                 print("Фотография не загружена: \(error)")
             }
         })
-            
-        
     }
     
     func clearSecretsAndData() {
-        return
+        let tokenStorage = OAuth2TokenStorage.shared
+        tokenStorage.removeToken()
+        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+        // Запрашиваем все данные из локального хранилища.
+        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+            // Массив полученных записей удаляем из хранилища.
+            records.forEach { record in
+                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+            }
+        }
     }
     
     

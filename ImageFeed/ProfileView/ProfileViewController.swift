@@ -5,19 +5,19 @@
 //  Created by Александр Поляков on 11.05.2023.
 //
 import UIKit
-import Kingfisher
-import WebKit
 
 class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
+    
+    // MARK: -  VARIABLES
     var presenter: ProfileViewPresenterProtocol?
     var userDescription: UILabel!
     var userNickName: UILabel!
     var userName: UILabel!
-    private var profileImageServiceObserver: NSObjectProtocol?
+    
     private let alertPresenter = AlertPresenter()
     static let LogoutNotification = Notification.Name(rawValue: "Logoutcompleted")
     
-    
+    // MARK: -  INTERFACE METHODS
     private func initProfileImage (view: UIView) {
         view.backgroundColor = UIColor(named: "YP Black")
         let profileImage = UIImage(named: "ProfilePhotoPlaceholder") ?? UIImage(named: "ProfilePhotoPlaceholder")
@@ -35,7 +35,6 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
         profilePhotoView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40).isActive = true
         profilePhotoView.heightAnchor.constraint(equalToConstant: 70).isActive = true
         profilePhotoView.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        
     }
     
     private func initLogoutButton(view: UIView) {
@@ -44,7 +43,6 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
             target: self,
             action: #selector(Self.didTapLogoutButton)
         )
-        
         logOutButton.tintColor = UIColor(named: "YP Red")
         view.addSubview(logOutButton)
         logOutButton.translatesAutoresizingMaskIntoConstraints = false
@@ -87,25 +85,14 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
         userDescription.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
     }
     
-    
+    // MARK: -  VIEW DID LOAD
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter = ProfileViewPresenter(view: self)
-        initProfileImage (view: view)
-        initLogoutButton(view: view)
-        initLabels(view: view)
-        self.presenter?.updateProfileDetails()
-        profileImageServiceObserver = NotificationCenter.default.addObserver(
-            forName: ProfileImageService.DidChangeNotification, // 3
-            object: nil,                                        // 4
-            queue: .main                                        // 5
-        ) { [weak self] _ in
-            guard let self = self,
-                  let presenter = self.presenter
-            else { return }
-            presenter.updateAvatar(tag: 1)                                 // 6
-        }
-        self.presenter?.updateAvatar(tag: 1)                                         // 7
+        self.initProfileImage (view: view)
+        self.initLogoutButton(view: view)
+        self.initLabels(view: view)
+        presenter?.viewDidLoad()                                  // 7
         
     }
     
@@ -116,7 +103,7 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
                 name: ProfileViewController.LogoutNotification,
                 object: self,
                 userInfo: nil)
-            self.clearSecretsAndData()
+            self.presenter?.clearSecretsAndData()
             for view in self.view.subviews {
                 if view is UILabel {
                     view.removeFromSuperview()
@@ -133,19 +120,6 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
         let alert = AlertModel(title: "Пока, пока!", message: "Уверены, что хотите выйти?", primaryButtonText: "Да", primaryButtonCompletion: primaryButtonCompletion, secondaryButtonText: "Нет") {}
         
         alertPresenter.show(in: self, model:alert)
-    }
-    
-    private func clearSecretsAndData() {
-        let tokenStorage = OAuth2TokenStorage.shared
-        tokenStorage.removeToken()
-        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
-           // Запрашиваем все данные из локального хранилища.
-           WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
-              // Массив полученных записей удаляем из хранилища.
-              records.forEach { record in
-                 WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
-              }
-           }
     }
 }
 
