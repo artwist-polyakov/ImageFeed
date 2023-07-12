@@ -15,11 +15,6 @@ final class ProfileViewPresenter: ProfileViewPresenterProtocol {
     private let profileService = ProfileService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
     
-    init(view:ProfileViewControllerProtocol?){
-        guard let view = view else {return}
-        self.view = view
-    }
-    
     func viewDidLoad() {
         self.updateProfileDetails()
         profileImageServiceObserver = NotificationCenter.default.addObserver(

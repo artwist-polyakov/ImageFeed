@@ -88,7 +88,7 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
     // MARK: -  VIEW DID LOAD
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.presenter = ProfileViewPresenter(view: self)
+        self.presenter?.view = self
         self.initProfileImage (view: view)
         self.initLogoutButton(view: view)
         self.initLabels(view: view)

@@ -18,6 +18,8 @@
 		AF30C7CE2A5DD19000911B41 /* ProfileViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF30C7CD2A5DD19000911B41 /* ProfileViewPresenterProtocol.swift */; };
 		AF30C7D02A5DD23100911B41 /* ProfileViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF30C7CF2A5DD23100911B41 /* ProfileViewControllerProtocol.swift */; };
 		AF30C7D22A5EC73600911B41 /* ProfileViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF30C7D12A5EC73600911B41 /* ProfileViewPresenter.swift */; };
+		AF30C7D42A5F321C00911B41 /* ProfileViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF30C7D32A5F321C00911B41 /* ProfileViewTests.swift */; };
+		AF30C7D62A5F341300911B41 /* ProfileViewPresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF30C7D52A5F341300911B41 /* ProfileViewPresenterSpy.swift */; };
 		AF54CD102A5C584800743172 /* WebViewViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF54CD0F2A5C584800743172 /* WebViewViewControllerProtocol.swift */; };
 		AF54CD122A5C58DB00743172 /* WebViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF54CD112A5C58DB00743172 /* WebViewPresenterProtocol.swift */; };
 		AF54CD142A5C58FC00743172 /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF54CD132A5C58FC00743172 /* WebViewPresenter.swift */; };
@@ -83,6 +85,8 @@
 		AF30C7CD2A5DD19000911B41 /* ProfileViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewPresenterProtocol.swift; sourceTree = "<group>"; };
 		AF30C7CF2A5DD23100911B41 /* ProfileViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerProtocol.swift; sourceTree = "<group>"; };
 		AF30C7D12A5EC73600911B41 /* ProfileViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewPresenter.swift; sourceTree = "<group>"; };
+		AF30C7D32A5F321C00911B41 /* ProfileViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewTests.swift; sourceTree = "<group>"; };
+		AF30C7D52A5F341300911B41 /* ProfileViewPresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewPresenterSpy.swift; sourceTree = "<group>"; };
 		AF54CD0F2A5C584800743172 /* WebViewViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewControllerProtocol.swift; sourceTree = "<group>"; };
 		AF54CD112A5C58DB00743172 /* WebViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenterProtocol.swift; sourceTree = "<group>"; };
 		AF54CD132A5C58FC00743172 /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
@@ -200,6 +204,8 @@
 				AF54CD1F2A5C8A7400743172 /* WebViewTests.swift */,
 				AF54CD262A5C8B3600743172 /* WebViewPresenterSpy.swift */,
 				AF54CD282A5C8FA900743172 /* WebViewViewControllerSpy.swift */,
+				AF30C7D32A5F321C00911B41 /* ProfileViewTests.swift */,
+				AF30C7D52A5F341300911B41 /* ProfileViewPresenterSpy.swift */,
 			);
 			path = ImageFeedTests;
 			sourceTree = "<group>";
@@ -463,6 +469,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF54CD202A5C8A7400743172 /* WebViewTests.swift in Sources */,
+				AF30C7D62A5F341300911B41 /* ProfileViewPresenterSpy.swift in Sources */,
+				AF30C7D42A5F321C00911B41 /* ProfileViewTests.swift in Sources */,
 				AF54CD292A5C8FA900743172 /* WebViewViewControllerSpy.swift in Sources */,
 				AF54CD272A5C8B3600743172 /* WebViewPresenterSpy.swift in Sources */,
 			);
