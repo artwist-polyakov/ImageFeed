@@ -17,7 +17,7 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
     private let alertPresenter = AlertPresenter()
     static let LogoutNotification = Notification.Name(rawValue: "Logoutcompleted")
     
-    // MARK: -  INTERFACE METHODS
+    // MARK: -  INTERFACE INIT METHODS
     private func initProfileImage (view: UIView) {
         view.backgroundColor = UIColor(named: "YP Black")
         let profileImage = UIImage(named: "ProfilePhotoPlaceholder") ?? UIImage(named: "ProfilePhotoPlaceholder")
@@ -96,6 +96,7 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
         
     }
     
+    // MARK: -  LOGOUT BUTON
     @objc
     private func didTapLogoutButton() {
         let primaryButtonCompletion = {

@@ -11,10 +11,12 @@ import Kingfisher
 import WebKit
 final class ProfileViewPresenter: ProfileViewPresenterProtocol {
     
+    // MARK: -  VARIABLES
     var view: ProfileViewControllerProtocol?
     private let profileService = ProfileService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
     
+    // // MARK: -  viewDidLoad
     func viewDidLoad() {
         self.updateProfileDetails()
         profileImageServiceObserver = NotificationCenter.default.addObserver(
@@ -29,7 +31,7 @@ final class ProfileViewPresenter: ProfileViewPresenterProtocol {
         self.updateAvatar(tag: 1)
     }
     
-    
+    // MARK: -  updateProfileDetails
     func updateProfileDetails() {
         guard let view = self.view else {return}
         view.userDescription.text = profileService.profile?.bio ?? ""
@@ -37,6 +39,7 @@ final class ProfileViewPresenter: ProfileViewPresenterProtocol {
         view.userName.text = profileService.profile?.name ?? ""
     }
     
+    // MARK: -  updateAvatar
     func updateAvatar(tag: Int) {
         guard
             let profileImageURL = ProfileImageService.shared.avatarURL,
@@ -62,6 +65,7 @@ final class ProfileViewPresenter: ProfileViewPresenterProtocol {
         })
     }
     
+    // MARK: -  clearSecretsAndData
     func clearSecretsAndData() {
         let tokenStorage = OAuth2TokenStorage.shared
         tokenStorage.removeToken()
