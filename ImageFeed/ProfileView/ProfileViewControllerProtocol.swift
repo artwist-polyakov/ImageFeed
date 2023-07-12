@@ -6,6 +6,11 @@
 //
 
 import Foundation
-public protocol ProfileViewControllerProtocol: AnyObject {
+import UIKit
+
+public protocol ProfileViewControllerProtocol: UIViewController {
     var presenter: ProfileViewPresenterProtocol? { get set }
+    var userDescription: UILabel! { get set }
+    var userNickName: UILabel! { get set }
+    var userName: UILabel! { get set }
 }
