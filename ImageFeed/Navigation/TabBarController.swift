@@ -19,6 +19,7 @@ final class TabBarController: UITabBarController {
         )
         
         let profileViewController = ProfileViewController()
+        profileViewController.configure(ProfileViewPresenter())
         
         // присваиваем вью контроллерам иконки для таб бара
         imagesListViewController.tabBarItem = UITabBarItem(

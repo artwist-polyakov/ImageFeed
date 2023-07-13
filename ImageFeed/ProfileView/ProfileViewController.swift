@@ -88,7 +88,6 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
     // MARK: -  VIEW DID LOAD
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.presenter.view = self
         self.initProfileImage (view: view)
         self.initLogoutButton(view: view)
         self.initLabels(view: view)
@@ -122,6 +121,12 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
         
         alertPresenter.show(in: self, model:alert)
     }
+    
+    func configure(_ presenter: ProfileViewPresenterProtocol) {
+        self.presenter = presenter
+        self.presenter.view = self
+    }
+    
 }
 
 
