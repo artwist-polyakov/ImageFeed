@@ -9,9 +9,12 @@ import UIKit
 import Kingfisher
 import ProgressHUD
 
-class ImagesListViewController: UIViewController {
-    @IBOutlet private weak var imagesTable: UITableView!
-    private let photosName: [String] = Array(0..<20).map{ "\($0)" }
+class ImagesListViewController: UIViewController & ImagesListViewControllerProtocol {
+    @IBOutlet weak var imagesTable: UITableView!
+    private var presenter = ImagesListViewPresenter()
+//    private let photosName: [String] = Array(0..<20).map{ "\($0)" }
+    
+    // MARK: TO DELETE
     let placeholderImage = UIImage(named: "stub")
     private let imagesListService = ImagesListService.shared
     private var currentPhotosCount: Int = 0
@@ -23,6 +26,8 @@ class ImagesListViewController: UIViewController {
         return formatter
     }()
     
+
+    // MARK: TO DELETE
     func convertStringtoDate(unsplashDate: String) -> Date {
         let dateFormatter = ISO8601DateFormatter()
         let date = dateFormatter.date(from: unsplashDate)
@@ -33,14 +38,19 @@ class ImagesListViewController: UIViewController {
         }
     }
     
+    // MARK: TO SAVE
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // MARK: TO DELETE
         DispatchQueue.main.async {
             if self.currentPhotosCount == 0 {
                 self.imagesListService.fetchPhotosNextPage()
             }
         }
+        // MARK: TO SAVE
         imagesTable.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        // MARK: TO DELETE
         profileImageServiceObserver = NotificationCenter.default.addObserver(
             forName: ImagesListService.DidChangeNotification, // 3
             object: nil,                                        // 4
@@ -79,6 +89,19 @@ class ImagesListViewController: UIViewController {
         } else {
             super.prepare(for: segue, sender: sender)
         }
+    }
+    
+    func configure (presenter: ImagesListViewPresenter) {
+        self.presenter = presenter
+        self.presenter.view = self
+    }
+    
+    func imagesTableGetter() -> UITableView  {
+        return self.imagesTable
+    }
+    
+    func imagesTableSetter(push: UITableView) {
+        self.imagesTable = push
     }
 }
 
