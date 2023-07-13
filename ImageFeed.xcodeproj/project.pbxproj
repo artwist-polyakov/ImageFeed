@@ -20,6 +20,8 @@
 		AF30C7D22A5EC73600911B41 /* ProfileViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF30C7D12A5EC73600911B41 /* ProfileViewPresenter.swift */; };
 		AF30C7D42A5F321C00911B41 /* ProfileViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF30C7D32A5F321C00911B41 /* ProfileViewTests.swift */; };
 		AF30C7D62A5F341300911B41 /* ProfileViewPresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF30C7D52A5F341300911B41 /* ProfileViewPresenterSpy.swift */; };
+		AF30C7D82A5F50F800911B41 /* ProfileServiceStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF30C7D72A5F50F800911B41 /* ProfileServiceStub.swift */; };
+		AF30C7DA2A5F56B800911B41 /* ProfileServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF30C7D92A5F56B800911B41 /* ProfileServiceProtocol.swift */; };
 		AF54CD102A5C584800743172 /* WebViewViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF54CD0F2A5C584800743172 /* WebViewViewControllerProtocol.swift */; };
 		AF54CD122A5C58DB00743172 /* WebViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF54CD112A5C58DB00743172 /* WebViewPresenterProtocol.swift */; };
 		AF54CD142A5C58FC00743172 /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF54CD132A5C58FC00743172 /* WebViewPresenter.swift */; };
@@ -87,6 +89,8 @@
 		AF30C7D12A5EC73600911B41 /* ProfileViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewPresenter.swift; sourceTree = "<group>"; };
 		AF30C7D32A5F321C00911B41 /* ProfileViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewTests.swift; sourceTree = "<group>"; };
 		AF30C7D52A5F341300911B41 /* ProfileViewPresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewPresenterSpy.swift; sourceTree = "<group>"; };
+		AF30C7D72A5F50F800911B41 /* ProfileServiceStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileServiceStub.swift; sourceTree = "<group>"; };
+		AF30C7D92A5F56B800911B41 /* ProfileServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileServiceProtocol.swift; sourceTree = "<group>"; };
 		AF54CD0F2A5C584800743172 /* WebViewViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewControllerProtocol.swift; sourceTree = "<group>"; };
 		AF54CD112A5C58DB00743172 /* WebViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenterProtocol.swift; sourceTree = "<group>"; };
 		AF54CD132A5C58FC00743172 /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
@@ -206,6 +210,7 @@
 				AF54CD282A5C8FA900743172 /* WebViewViewControllerSpy.swift */,
 				AF30C7D32A5F321C00911B41 /* ProfileViewTests.swift */,
 				AF30C7D52A5F341300911B41 /* ProfileViewPresenterSpy.swift */,
+				AF30C7D72A5F50F800911B41 /* ProfileServiceStub.swift */,
 			);
 			path = ImageFeedTests;
 			sourceTree = "<group>";
@@ -294,6 +299,7 @@
 			children = (
 				AFE049822A365461002C431F /* ProfileService.swift */,
 				AF9EC57C2A39C21200CD7754 /* ProfileImageService.swift */,
+				AF30C7D92A5F56B800911B41 /* ProfileServiceProtocol.swift */,
 			);
 			path = ProfileService;
 			sourceTree = "<group>";
@@ -425,6 +431,7 @@
 				AF7743772A23B24D00A1BB26 /* WebViewViewController.swift in Sources */,
 				AF2694B929FC1BDB0023942A /* ImagesListViewController.swift in Sources */,
 				AF8D36192A28EA8B00217033 /* OAuth2Service.swift in Sources */,
+				AF30C7DA2A5F56B800911B41 /* ProfileServiceProtocol.swift in Sources */,
 				AFE049802A350280002C431F /* UIBlockingProgressHUD.swift in Sources */,
 				AF8D36172A28E4BE00217033 /* OAuthTokenResponseBody.swift in Sources */,
 				AF9EC57F2A39C25700CD7754 /* UserResult.swift in Sources */,
@@ -473,6 +480,7 @@
 				AF30C7D42A5F321C00911B41 /* ProfileViewTests.swift in Sources */,
 				AF54CD292A5C8FA900743172 /* WebViewViewControllerSpy.swift in Sources */,
 				AF54CD272A5C8B3600743172 /* WebViewPresenterSpy.swift in Sources */,
+				AF30C7D82A5F50F800911B41 /* ProfileServiceStub.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@ import UIKit
 class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
     
     // MARK: -  VARIABLES
-    var presenter: ProfileViewPresenterProtocol?
+    var presenter: ProfileViewPresenterProtocol = ProfileViewPresenter()
     var userDescription: UILabel!
     var userNickName: UILabel!
     var userName: UILabel!
@@ -88,11 +88,11 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
     // MARK: -  VIEW DID LOAD
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.presenter?.view = self
+        self.presenter.view = self
         self.initProfileImage (view: view)
         self.initLogoutButton(view: view)
         self.initLabels(view: view)
-        presenter?.viewDidLoad()                                  // 7
+        presenter.viewDidLoad()                                  // 7
         
     }
     
@@ -104,7 +104,7 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
                 name: ProfileViewController.LogoutNotification,
                 object: self,
                 userInfo: nil)
-            self.presenter?.clearSecretsAndData()
+            self.presenter.clearSecretsAndData()
             for view in self.view.subviews {
                 if view is UILabel {
                     view.removeFromSuperview()

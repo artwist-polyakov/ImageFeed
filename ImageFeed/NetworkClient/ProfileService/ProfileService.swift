@@ -7,12 +7,18 @@
 
 import Foundation
 
-final class ProfileService {
-    static let shared = ProfileService()
-    
+final class ProfileService: ProfileServiceProtocol {
+    static var shared: ProfileServiceProtocol = ProfileService()
     private let urlSession = URLSession.shared
     private var task: URLSessionTask?
     private(set) var profile: Profile?
+    
+    init(){
+    }
+    
+    init(service shared: ProfileServiceProtocol) {
+        ProfileService.shared = shared
+    }
     
     func fetchProfile(
         completion: @escaping (Result<Profile, Error>) -> Void

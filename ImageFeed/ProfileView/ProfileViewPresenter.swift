@@ -13,10 +13,10 @@ final class ProfileViewPresenter: ProfileViewPresenterProtocol {
     
     // MARK: -  VARIABLES
     var view: ProfileViewControllerProtocol?
-    private let profileService = ProfileService.shared
+    var profileService = ProfileService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
     
-    // // MARK: -  viewDidLoad
+    // MARK: -  viewDidLoad
     func viewDidLoad() {
         self.updateProfileDetails()
         profileImageServiceObserver = NotificationCenter.default.addObserver(
@@ -78,6 +78,5 @@ final class ProfileViewPresenter: ProfileViewPresenterProtocol {
             }
         }
     }
-    
     
 }
