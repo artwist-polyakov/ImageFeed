@@ -8,6 +8,8 @@
 import XCTest
 private let emailSecret = ""
 private let passwordSecret = ""
+private let nameLastName = "Александр Поляков"
+private let userName = "@artwist"
 
 final class ImageFeedUITests: XCTestCase {
     
@@ -63,9 +65,9 @@ final class ImageFeedUITests: XCTestCase {
         
         let cellToLike = tablesQuery.children(matching: .cell).element(boundBy: 1)
         
-        cellToLike.buttons["likebutton"].tap()
+        cellToLike.buttons["likeButtonToTap"].tap()
         sleep(2)
-        cellToLike.buttons["likebutton"].tap()
+        cellToLike.buttons["likeButtonToTap"].tap()
         
         sleep(2)
         
@@ -84,7 +86,15 @@ final class ImageFeedUITests: XCTestCase {
     }
     
     func testProfile() throws {
-        // тестируем сценарий профиля
+        sleep(3)
+            app.tabBars.buttons.element(boundBy: 1).tap()
+           
+            XCTAssertTrue(app.staticTexts[nameLastName].exists)
+            XCTAssertTrue(app.staticTexts[userName].exists)
+            
+            app.buttons["LogoutButtonId"].tap()
+            
+            app.alerts["Пока, пока!"].scrollViews.otherElements.buttons["Да"].tap()
     }
     
     func dismissKeyboardIfPresent() {
