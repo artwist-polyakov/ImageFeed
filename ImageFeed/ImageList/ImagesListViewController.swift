@@ -74,7 +74,6 @@ class ImagesListViewController: UIViewController & ImagesListViewControllerProto
             } completion: { _ in
                 
             }
-            
         }
     }
     
@@ -135,8 +134,6 @@ extension ImagesListViewController {
         let imageLink  = photo.thumbImageURL
         guard let url = URL(string: imageLink)
         else {return}
-//        let indicator = ProgressHUDIndicator()
-//        cell.picture.kf.indicatorType = .custom(indicator: indicator)
         
         let placeholderColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
         let processor = RoundCornerImageProcessor(cornerRadius: 16)

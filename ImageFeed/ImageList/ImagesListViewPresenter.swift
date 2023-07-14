@@ -48,4 +48,20 @@ final class ImagesListViewPresenter: ImageListViewPresenterProtocol {
         }
     }
     
+    func updateTableViewAnimated() {
+        let newCount = self.imagesListService.photos.count
+        if self.currentPhotosCount != newCount {
+            let previousCount = self.currentPhotosCount
+            self.currentPhotosCount = newCount
+            guard let imagesTable = view?.imagesTableGetter() else {return}
+            imagesTable.performBatchUpdates {
+                let indexPaths = (previousCount..<newCount).map { i in
+                    IndexPath(row: i, section: 0)
+                }
+                imagesTable.insertRows(at: indexPaths, with: .automatic)
+            } completion: { _ in
+            }
+        }
+    }
+    
 }

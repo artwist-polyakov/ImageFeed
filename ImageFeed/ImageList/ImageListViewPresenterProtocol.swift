@@ -7,5 +7,6 @@
 
 import Foundation
 protocol ImageListViewPresenterProtocol {
-    
+    func updateTableViewAnimated()
+    func viewDidLoad()
 }
