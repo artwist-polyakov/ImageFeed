@@ -9,12 +9,8 @@ import UIKit
 import Kingfisher
 import ProgressHUD
 
-class ImagesListViewController: UIViewController & ImagesListViewControllerProtocol {
+class ImagesListViewController: UIViewController {
     @IBOutlet weak var imagesTable: UITableView!
-    private var presenter = ImagesListViewPresenter()
-//    private let photosName: [String] = Array(0..<20).map{ "\($0)" }
-    
-    // MARK: TO DELETE
     let placeholderImage = UIImage(named: "stub")
     private let imagesListService = ImagesListService.shared
     private var currentPhotosCount: Int = 0
@@ -25,18 +21,6 @@ class ImagesListViewController: UIViewController & ImagesListViewControllerProto
         formatter.timeStyle = .none
         return formatter
     }()
-    
-
-    // MARK: TO DELETE
-    func convertStringtoDate(unsplashDate: String) -> Date {
-        let dateFormatter = ISO8601DateFormatter()
-        let date = dateFormatter.date(from: unsplashDate)
-        if let date = date {
-            return date
-        } else {
-            return Date()
-        }
-    }
     
     // MARK: TO SAVE
     override func viewDidLoad() {
@@ -61,6 +45,7 @@ class ImagesListViewController: UIViewController & ImagesListViewControllerProto
         }
     }
     
+    // MARK: TO DELETE
     func updateTableViewAnimated() {
         let newCount = self.imagesListService.photos.count
         if self.currentPhotosCount != newCount {
@@ -89,19 +74,6 @@ class ImagesListViewController: UIViewController & ImagesListViewControllerProto
             super.prepare(for: segue, sender: sender)
         }
     }
-    
-    func configure (presenter: ImagesListViewPresenter) {
-        self.presenter = presenter
-        self.presenter.view = self
-    }
-    
-    func imagesTableGetter() -> UITableView  {
-        return self.imagesTable
-    }
-    
-    func imagesTableSetter(push: UITableView) {
-        self.imagesTable = push
-    }
 }
 
 extension ImagesListViewController: UITableViewDataSource {
@@ -120,6 +92,8 @@ extension ImagesListViewController: UITableViewDataSource {
 }
 
 extension ImagesListViewController {
+    
+    //MARK: TO DELETE
     private func setLiked(
         to likeButton: UIButton,
         state: Bool
@@ -216,6 +190,18 @@ extension ImagesListViewController: ImagesListCellDelegate {
                 print("Что-то не получилось поставить лайк в \(indexPath)")
             }
      
+        }
+    }
+}
+
+extension ImagesListViewController {
+    func convertStringtoDate(unsplashDate: String) -> Date {
+        let dateFormatter = ISO8601DateFormatter()
+        let date = dateFormatter.date(from: unsplashDate)
+        if let date = date {
+            return date
+        } else {
+            return Date()
         }
     }
 }
