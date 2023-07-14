@@ -296,7 +296,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wck-rB-L9p"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <accessibility key="accessibilityConfiguration" identifier="UnsplashWebView">
+                        <accessibility key="accessibilityConfiguration">
                             <bool key="isElement" value="YES"/>
                         </accessibility>
                         <constraints>

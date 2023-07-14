@@ -6,6 +6,8 @@
 //
 
 import XCTest
+private let emailSecret = ""
+private let passwordSecret = ""
 
 final class ImageFeedUITests: XCTestCase {
     
@@ -28,10 +30,23 @@ final class ImageFeedUITests: XCTestCase {
         let webView = app.webViews["UnsplashWebView"]
         webView.waitForExistence(timeout: 5)
         let loginTextField = webView.descendants(matching: .textField).element
+        XCTAssertTrue(loginTextField.waitForExistence(timeout: 5))
+        
+        loginTextField.tap()
+        loginTextField.typeText(emailSecret)
+        dismissKeyboardIfPresent()
+        webView.swipeUp()
+        
         let passwordTextField = webView.descendants(matching: .secureTextField).element
-        loginTextField.typeText("master@artwist.ru")
+        XCTAssertTrue(passwordTextField.waitForExistence(timeout: 5))
+        passwordTextField.tap()
+        passwordTextField.typeText(passwordSecret)
         // Ввести данные в форму
         webView.swipeUp()
+        webView.buttons["Login"].tap()
+        let tablesQuery = app.tables
+        let cell = tablesQuery.children(matching: .cell).element(boundBy: 0)
+        XCTAssertTrue(cell.waitForExistence(timeout: 5))
         // Нажать кнопку логина
         print(app.debugDescription)
         // Подождать, пока открывается экран ленты
@@ -43,6 +58,16 @@ final class ImageFeedUITests: XCTestCase {
     
     func testProfile() throws {
         // тестируем сценарий профиля
+    }
+    
+    func dismissKeyboardIfPresent() {
+        if app.keyboards.element(boundBy: 0).exists {
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                app.keyboards.buttons["Hide keyboard"].tap()
+            } else {
+                app.toolbars.buttons["Done"].tap()
+            }
+        }
     }
 
 }
