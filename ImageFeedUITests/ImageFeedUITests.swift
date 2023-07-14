@@ -21,6 +21,7 @@ final class ImageFeedUITests: XCTestCase {
     
     func testAuth() throws {
         // тестируем сценарий авторизации
+        // ТЕСТИРОВАТЬ С ВЫКЛЮЧЕННЫМ В НАСТРОЙКАХ ЭМУЛЯТОРА ЗАПОЛНЕНИЕМ ПАРОЛЕЙ
         /*
           У приложения мы получаем список кнопок на экране и получаем нужную кнопку по тексту на ней
           Далее вызываем функцию tap() для нажатия на этот элемент
@@ -53,7 +54,33 @@ final class ImageFeedUITests: XCTestCase {
         }
         
     func testFeed() throws {
-        // тестируем сценарий ленты
+        let tablesQuery = app.tables
+        
+        let cell = tablesQuery.children(matching: .cell).element(boundBy: 0)
+        cell.swipeUp()
+        
+        sleep(2)
+        
+        let cellToLike = tablesQuery.children(matching: .cell).element(boundBy: 1)
+        
+        cellToLike.buttons["likebutton"].tap()
+        sleep(2)
+        cellToLike.buttons["likebutton"].tap()
+        
+        sleep(2)
+        
+        cellToLike.tap()
+        
+        sleep(2)
+        
+        let image = app.scrollViews.images.element(boundBy: 0)
+        // Zoom in
+        image.pinch(withScale: 3, velocity: 1) // zoom in
+        // Zoom out
+        image.pinch(withScale: 0.5, velocity: -1)
+        
+        let navBackButtonWhiteButton = app.buttons["navBackButton"]
+        navBackButtonWhiteButton.tap()
     }
     
     func testProfile() throws {
