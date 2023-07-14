@@ -222,6 +222,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gan-af-y4b" userLabel="AuthButton">
                                 <rect key="frame" x="16" y="690" width="382" height="48"/>
+                                <accessibility key="accessibilityConfiguration" identifier="Authenticate"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="e8W-ue-7u1"/>
                                 </constraints>
@@ -295,6 +296,9 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wck-rB-L9p"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <accessibility key="accessibilityConfiguration" identifier="UnsplashWebView">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
                         <constraints>
                             <constraint firstItem="zTp-B7-ZNq" firstAttribute="leading" secondItem="tGJ-iG-nxG" secondAttribute="leading" id="1qi-rH-QOZ"/>
                             <constraint firstItem="2mc-SX-Klx" firstAttribute="top" secondItem="wck-rB-L9p" secondAttribute="top" constant="10" id="AMy-3W-I9h"/>
