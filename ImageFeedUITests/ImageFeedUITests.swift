@@ -87,14 +87,21 @@ final class ImageFeedUITests: XCTestCase {
     
     func testProfile() throws {
         sleep(3)
-            app.tabBars.buttons.element(boundBy: 1).tap()
-           
-            XCTAssertTrue(app.staticTexts[nameLastName].exists)
-            XCTAssertTrue(app.staticTexts[userName].exists)
-            
-            app.buttons["LogoutButtonId"].tap()
-            
-            app.alerts["Пока, пока!"].scrollViews.otherElements.buttons["Да"].tap()
+        app.tabBars.buttons.element(boundBy: 1).tap()
+       
+        XCTAssertTrue(app.staticTexts[nameLastName].exists)
+        XCTAssertTrue(app.staticTexts[userName].exists)
+        
+        app.buttons["LogoutButtonId"].tap()
+        
+        app.alerts["Пока, пока!"].scrollViews.otherElements.buttons["Да"].tap()
+        sleep(5)
+        let button = app.buttons["Authenticate"]
+        XCTAssertTrue(button.exists)
+
+
+        
+        
     }
     
     func dismissKeyboardIfPresent() {
