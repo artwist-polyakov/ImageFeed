@@ -18,7 +18,6 @@ final class SingleImageViewController: UIViewController {
         }
     }
     var imageToLoad: Photo!
-    
     @IBOutlet private weak var bigSinglePicture: UIImageView!
     @IBOutlet private weak var scrollView: UIScrollView!
     let screenSize = UIScreen.main.bounds.size
@@ -34,7 +33,7 @@ final class SingleImageViewController: UIViewController {
         let activityViewController = UIActivityViewController(activityItems: [sharingImage], applicationActivities: nil)
         present(activityViewController, animated: true, completion: nil)
     }
-    
+    // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         feedbackGenerator.prepare()
@@ -46,6 +45,7 @@ final class SingleImageViewController: UIViewController {
         loadImage(from: url)
     }
     
+    // MARK: rescaleAndCenterImageInScrollView
     private func rescaleAndCenterImageInScrollView(image: UIImage) {
         let minZoomScale = scrollView.minimumZoomScale
         let maxZoomScale = scrollView.maximumZoomScale
@@ -71,6 +71,7 @@ final class SingleImageViewController: UIViewController {
         scrollView.setContentOffset(CGPoint(x: x, y: y), animated: false)
     }
     
+    // MARK: scrollViewDidZoom
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         let imageViewSize = bigSinglePicture.frame.size
         let scrollViewSize = scrollView.bounds.size
@@ -81,6 +82,7 @@ final class SingleImageViewController: UIViewController {
         scrollView.contentInset = UIEdgeInsets(top: verticalPadding, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
     }
     
+    // MARK: scrollViewDidZoom
     func loadImage(from url:URL) {
         bigSinglePicture.kf.setImage(with: url) { [weak self] result in
             guard let self = self else { return }

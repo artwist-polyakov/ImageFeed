@@ -22,19 +22,15 @@ class ImagesListViewController: UIViewController {
         return formatter
     }()
     
-    // MARK: TO SAVE
+    // MARK: View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // MARK: TO DELETE
         DispatchQueue.main.async {
             if self.currentPhotosCount == 0 {
                 self.imagesListService.fetchPhotosNextPage()
             }
         }
-        // MARK: TO SAVE
         imagesTable.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
-        // MARK: TO DELETE
         profileImageServiceObserver = NotificationCenter.default.addObserver(
             forName: ImagesListService.DidChangeNotification, // 3
             object: nil,                                        // 4
@@ -45,7 +41,7 @@ class ImagesListViewController: UIViewController {
         }
     }
     
-    // MARK: TO DELETE
+    // MARK: updateTableViewAnimated
     func updateTableViewAnimated() {
         let newCount = self.imagesListService.photos.count
         if self.currentPhotosCount != newCount {
@@ -61,7 +57,7 @@ class ImagesListViewController: UIViewController {
             }
         }
     }
-    
+    // MARK: prepere for seague
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowSingleImage" {
             if let viewController = segue.destination as? SingleImageViewController {
@@ -76,6 +72,7 @@ class ImagesListViewController: UIViewController {
     }
 }
 
+// MARK: UITableViewDataSource
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return imagesListService.photos.count
@@ -91,9 +88,8 @@ extension ImagesListViewController: UITableViewDataSource {
     }
 }
 
+// MARK: Set Like + Config
 extension ImagesListViewController {
-    
-    //MARK: TO DELETE
     private func setLiked(
         to likeButton: UIButton,
         state: Bool
@@ -141,6 +137,7 @@ extension ImagesListViewController {
     
 }
 
+// MARK: UITableViewDelegate
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(
         _ tableView: UITableView,
@@ -154,8 +151,8 @@ extension ImagesListViewController: UITableViewDelegate {
         heightForRowAt indexPath: IndexPath
     ) -> CGFloat {
         guard indexPath.row < imagesListService.photos.count else {
-                return 0
-            }
+            return 0
+        }
         let photo = imagesListService.photos[indexPath.row]
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
         let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
@@ -166,17 +163,17 @@ extension ImagesListViewController: UITableViewDelegate {
     }
     
     func tableView(
-      _ tableView: UITableView,
-      willDisplay cell: UITableViewCell,
-      forRowAt indexPath: IndexPath
+        _ tableView: UITableView,
+        willDisplay cell: UITableViewCell,
+        forRowAt indexPath: IndexPath
     ) {
         if indexPath.row + 1 >= currentPhotosCount {
             imagesListService.fetchPhotosNextPage()
         }
     }
-
 }
 
+// MARK: ImagesListCellDelegate
 extension ImagesListViewController: ImagesListCellDelegate {
     func imageListCellDidTapLike(_ cell: ImagesListCell) {
         guard let indexPath = imagesTable.indexPath(for: cell) else { return }
@@ -189,7 +186,6 @@ extension ImagesListViewController: ImagesListCellDelegate {
             case .failure:
                 print("Что-то не получилось поставить лайк в \(indexPath)")
             }
-     
         }
     }
 }
