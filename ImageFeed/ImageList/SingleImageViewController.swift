@@ -10,6 +10,9 @@
 import UIKit
 final class SingleImageViewController: UIViewController {
     let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+    private static var window: UIWindow? {
+        return UIApplication.shared.windows.first
+    }
     var image: UIImage! {
         didSet {
             guard isViewLoaded else { return }
@@ -82,8 +85,9 @@ final class SingleImageViewController: UIViewController {
         scrollView.contentInset = UIEdgeInsets(top: verticalPadding, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
     }
     
-    // MARK: scrollViewDidZoom
+    // MARK: loadImage
     func loadImage(from url:URL) {
+        SingleImageViewController.window?.isUserInteractionEnabled = false
         bigSinglePicture.kf.setImage(with: url) { [weak self] result in
             guard let self = self else { return }
             
@@ -91,12 +95,14 @@ final class SingleImageViewController: UIViewController {
             case .success(let value):
                 self.bigSinglePicture.image = value.image
                 self.rescaleAndCenterImageInScrollView(image: value.image)
+                SingleImageViewController.window?.isUserInteractionEnabled = true
             case .failure:
                 let alertPresenter = AlertPresenter()
                 let alert = AlertModel(title: "УПС!", message: "Что-то пошло не так", primaryButtonText: "Не надо", primaryButtonCompletion: {
                 }, secondaryButtonText: "Повторить") {
                     self.loadImage(from: url)
                 }
+                SingleImageViewController.window?.isUserInteractionEnabled = true
                 alertPresenter.show(in: self, model:alert)
             }
         }
