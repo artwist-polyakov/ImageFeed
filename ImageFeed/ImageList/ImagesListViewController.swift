@@ -113,7 +113,7 @@ extension ImagesListViewController {
             .processor(processor)
         ]
         cell.picture.contentMode = .center
-        cell.picture.addGradientAnimation()
+        cell.picture.addGradientAnimation(cornerRadius: 20.0)
         cell.picture.kf.setImage(
             with:url,
             placeholder: placeholderImage,

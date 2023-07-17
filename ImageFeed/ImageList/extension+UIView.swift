@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UIView {
-    func addGradientAnimation() {
+    func addGradientAnimation(cornerRadius: CGFloat) {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [
                     UIColor(red: 0.682, green: 0.686, blue: 0.706, alpha: 1).cgColor,
@@ -20,7 +20,7 @@ extension UIView {
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
         gradientLayer.frame = bounds
-        gradientLayer.cornerRadius = 20
+        gradientLayer.cornerRadius = cornerRadius
         layer.addSublayer(gradientLayer)
         
         let animation = CAKeyframeAnimation(keyPath: "locations")
