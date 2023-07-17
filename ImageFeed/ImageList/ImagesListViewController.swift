@@ -113,12 +113,14 @@ extension ImagesListViewController {
             .processor(processor)
         ]
         cell.picture.contentMode = .center
+        cell.picture.addGradientAnimation()
         cell.picture.kf.setImage(
             with:url,
             placeholder: placeholderImage,
             options: options,
             completionHandler:{ [weak self] result in
                 guard self != nil else { return }
+                cell.picture.removeGradientAnimation()
                 switch result {
                 case .success(let value):
                     // Загрузка изображения прошла успешно
