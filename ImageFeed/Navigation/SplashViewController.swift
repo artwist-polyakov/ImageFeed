@@ -75,11 +75,6 @@ extension SplashViewController: AuthViewControllerDelegate {
         didAuthenticateWithCode code: String
     ) {
         self.fetchOAuthToken(code)
-        //        dismiss(animated: true) { [weak self] in
-        //            guard let self = self else { return }
-        //            UIBlockingProgressHUD.show()
-        //            self.fetchOAuthToken(code)
-        //        }
     }
     
     private func fetchOAuthToken(_ code: String) {

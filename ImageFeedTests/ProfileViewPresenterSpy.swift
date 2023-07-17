@@ -26,11 +26,9 @@ final class ProfileViewPresenterSpy: ProfileViewPresenterProtocol {
     }
     
     func updateAvatar(tag: Int) {
-        
     }
     
     func clearSecretsAndData() {
-        
     }
     
     

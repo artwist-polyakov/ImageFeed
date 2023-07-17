@@ -13,7 +13,6 @@ class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
     var userDescription: UILabel!
     var userNickName: UILabel!
     var userName: UILabel!
-    
     private let alertPresenter = AlertPresenter()
     static let LogoutNotification = Notification.Name(rawValue: "Logoutcompleted")
     

@@ -15,7 +15,6 @@ final class ImageFeedUITests: XCTestCase {
     
     private let app = XCUIApplication() // переменная приложения
     
-
     override func setUpWithError() throws {
         continueAfterFailure = false // настройка выполнения тестов, которая прекратит выполнения тестов, если в тесте что-то пошло не так
         app.launch() // запускаем приложение перед каждым тестом
@@ -25,9 +24,9 @@ final class ImageFeedUITests: XCTestCase {
         // тестируем сценарий авторизации
         // ТЕСТИРОВАТЬ С ВЫКЛЮЧЕННЫМ В НАСТРОЙКАХ ЭМУЛЯТОРА ЗАПОЛНЕНИЕМ ПАРОЛЕЙ
         /*
-          У приложения мы получаем список кнопок на экране и получаем нужную кнопку по тексту на ней
-          Далее вызываем функцию tap() для нажатия на этот элемент
-        */
+         У приложения мы получаем список кнопок на экране и получаем нужную кнопку по тексту на ней
+         Далее вызываем функцию tap() для нажатия на этот элемент
+         */
         app.buttons["Authenticate"].tap()
         // Подождать, пока экран авторизации открывается и загружается
         let webView = app.webViews["UnsplashWebView"]
@@ -53,20 +52,20 @@ final class ImageFeedUITests: XCTestCase {
         // Нажать кнопку логина
         print(app.debugDescription)
         // Подождать, пока открывается экран ленты
-        }
-        
+    }
+    
     func testFeed() throws {
         let tablesQuery = app.tables
-        
         let cell = tablesQuery.children(matching: .cell).element(boundBy: 0)
         cell.swipeUp()
         
         sleep(2)
         
         let cellToLike = tablesQuery.children(matching: .cell).element(boundBy: 1)
-        
         cellToLike.buttons["likeButtonToTap"].tap()
+        
         sleep(2)
+        
         cellToLike.buttons["likeButtonToTap"].tap()
         
         sleep(2)
@@ -80,7 +79,6 @@ final class ImageFeedUITests: XCTestCase {
         image.pinch(withScale: 3, velocity: 1) // zoom in
         // Zoom out
         image.pinch(withScale: 0.5, velocity: -1)
-        
         let navBackButtonWhiteButton = app.buttons["navBackButton"]
         navBackButtonWhiteButton.tap()
     }
@@ -88,7 +86,7 @@ final class ImageFeedUITests: XCTestCase {
     func testProfile() throws {
         sleep(3)
         app.tabBars.buttons.element(boundBy: 1).tap()
-       
+        
         XCTAssertTrue(app.staticTexts[nameLastName].exists)
         XCTAssertTrue(app.staticTexts[userName].exists)
         
@@ -98,10 +96,6 @@ final class ImageFeedUITests: XCTestCase {
         sleep(5)
         let button = app.buttons["Authenticate"]
         XCTAssertTrue(button.exists)
-
-
-        
-        
     }
     
     func dismissKeyboardIfPresent() {
@@ -113,5 +107,5 @@ final class ImageFeedUITests: XCTestCase {
             }
         }
     }
-
+    
 }

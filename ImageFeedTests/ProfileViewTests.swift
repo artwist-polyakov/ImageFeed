@@ -14,7 +14,6 @@ final class ProfileViewTests: XCTestCase {
         let viewController = ProfileViewController()
         let presenter = ProfileViewPresenterSpy()
         viewController.configure(presenter)
-
         
         // when
         _ = viewController.view

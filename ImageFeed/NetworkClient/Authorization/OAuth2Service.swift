@@ -52,7 +52,6 @@ final class OAuth2Service {
     
 }
 
-
 private func authTokenRequest(code: String) -> URLRequest {
     return URLRequest.makeHTTPRequest(
         path: "/oauth/token"
@@ -65,8 +64,6 @@ private func authTokenRequest(code: String) -> URLRequest {
         baseURL: URL(string: "https://unsplash.com")!
     )
 }
-
-
 
 enum NetworkError: Error {
     case httpStatusCode(Int)
