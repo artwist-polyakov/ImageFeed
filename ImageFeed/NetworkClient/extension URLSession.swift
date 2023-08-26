@@ -71,7 +71,6 @@ extension URLRequest {
             request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
         }
         
-        
         return request
     }
 }

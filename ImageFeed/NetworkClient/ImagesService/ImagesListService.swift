@@ -19,12 +19,12 @@ final class ImagesListService {
     
     init() {
         profileImageServiceObserver = NotificationCenter.default.addObserver(
-            forName: ProfileViewController.LogoutNotification, // 3
-            object: nil,                                        // 4
-            queue: .main                                        // 5
+            forName: ProfileViewController.LogoutNotification,
+            object: nil,
+            queue: .main
         ) { [weak self] _ in
             guard let self = self else { return }
-            self.photos = []                                 // 6
+            self.photos = []
         }
     }
     

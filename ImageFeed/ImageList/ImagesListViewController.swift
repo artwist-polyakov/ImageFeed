@@ -10,8 +10,7 @@ import Kingfisher
 import ProgressHUD
 
 class ImagesListViewController: UIViewController {
-    @IBOutlet private weak var imagesTable: UITableView!
-    private let photosName: [String] = Array(0..<20).map{ "\($0)" }
+    @IBOutlet weak var imagesTable: UITableView!
     let placeholderImage = UIImage(named: "stub")
     private let imagesListService = ImagesListService.shared
     private var currentPhotosCount: Int = 0
@@ -23,16 +22,7 @@ class ImagesListViewController: UIViewController {
         return formatter
     }()
     
-    func convertStringtoDate(unsplashDate: String) -> Date {
-        let dateFormatter = ISO8601DateFormatter()
-        let date = dateFormatter.date(from: unsplashDate)
-        if let date = date {
-            return date
-        } else {
-            return Date()
-        }
-    }
-    
+    // MARK: View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.async {
@@ -51,6 +41,7 @@ class ImagesListViewController: UIViewController {
         }
     }
     
+    // MARK: updateTableViewAnimated
     func updateTableViewAnimated() {
         let newCount = self.imagesListService.photos.count
         if self.currentPhotosCount != newCount {
@@ -64,10 +55,9 @@ class ImagesListViewController: UIViewController {
             } completion: { _ in
                 
             }
-            
         }
     }
-    
+    // MARK: prepere for seague
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowSingleImage" {
             if let viewController = segue.destination as? SingleImageViewController {
@@ -82,6 +72,7 @@ class ImagesListViewController: UIViewController {
     }
 }
 
+// MARK: UITableViewDataSource
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return imagesListService.photos.count
@@ -97,6 +88,7 @@ extension ImagesListViewController: UITableViewDataSource {
     }
 }
 
+// MARK: Set Like + Config
 extension ImagesListViewController {
     private func setLiked(
         to likeButton: UIButton,
@@ -112,8 +104,6 @@ extension ImagesListViewController {
         let imageLink  = photo.thumbImageURL
         guard let url = URL(string: imageLink)
         else {return}
-//        let indicator = ProgressHUDIndicator()
-//        cell.picture.kf.indicatorType = .custom(indicator: indicator)
         
         let placeholderColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
         let processor = RoundCornerImageProcessor(cornerRadius: 16)
@@ -123,12 +113,14 @@ extension ImagesListViewController {
             .processor(processor)
         ]
         cell.picture.contentMode = .center
+        cell.picture.addGradientAnimation(cornerRadius: 20.0)
         cell.picture.kf.setImage(
             with:url,
             placeholder: placeholderImage,
             options: options,
             completionHandler:{ [weak self] result in
                 guard self != nil else { return }
+                cell.picture.removeGradientAnimation()
                 switch result {
                 case .success(let value):
                     // Загрузка изображения прошла успешно
@@ -147,6 +139,7 @@ extension ImagesListViewController {
     
 }
 
+// MARK: UITableViewDelegate
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(
         _ tableView: UITableView,
@@ -160,8 +153,8 @@ extension ImagesListViewController: UITableViewDelegate {
         heightForRowAt indexPath: IndexPath
     ) -> CGFloat {
         guard indexPath.row < imagesListService.photos.count else {
-                return 0
-            }
+            return 0
+        }
         let photo = imagesListService.photos[indexPath.row]
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
         let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
@@ -172,17 +165,17 @@ extension ImagesListViewController: UITableViewDelegate {
     }
     
     func tableView(
-      _ tableView: UITableView,
-      willDisplay cell: UITableViewCell,
-      forRowAt indexPath: IndexPath
+        _ tableView: UITableView,
+        willDisplay cell: UITableViewCell,
+        forRowAt indexPath: IndexPath
     ) {
         if indexPath.row + 1 >= currentPhotosCount {
             imagesListService.fetchPhotosNextPage()
         }
     }
-
 }
 
+// MARK: ImagesListCellDelegate
 extension ImagesListViewController: ImagesListCellDelegate {
     func imageListCellDidTapLike(_ cell: ImagesListCell) {
         guard let indexPath = imagesTable.indexPath(for: cell) else { return }
@@ -195,7 +188,18 @@ extension ImagesListViewController: ImagesListCellDelegate {
             case .failure:
                 print("Что-то не получилось поставить лайк в \(indexPath)")
             }
-     
+        }
+    }
+}
+
+extension ImagesListViewController {
+    func convertStringtoDate(unsplashDate: String) -> Date {
+        let dateFormatter = ISO8601DateFormatter()
+        let date = dateFormatter.date(from: unsplashDate)
+        if let date = date {
+            return date
+        } else {
+            return Date()
         }
     }
 }

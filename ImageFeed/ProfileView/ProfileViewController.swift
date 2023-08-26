@@ -5,19 +5,18 @@
 //  Created by Александр Поляков on 11.05.2023.
 //
 import UIKit
-import Kingfisher
-import WebKit
 
-class ProfileViewController: UIViewController {
-    private var userDescription: UILabel!
-    private var userNickName: UILabel!
-    private var userName: UILabel!
-    private let profileService = ProfileService.shared
-    private var profileImageServiceObserver: NSObjectProtocol?
+class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
+    
+    // MARK: -  VARIABLES
+    var presenter: ProfileViewPresenterProtocol = ProfileViewPresenter()
+    var userDescription: UILabel!
+    var userNickName: UILabel!
+    var userName: UILabel!
     private let alertPresenter = AlertPresenter()
     static let LogoutNotification = Notification.Name(rawValue: "Logoutcompleted")
     
-    
+    // MARK: -  INTERFACE INIT METHODS
     private func initProfileImage (view: UIView) {
         view.backgroundColor = UIColor(named: "YP Black")
         let profileImage = UIImage(named: "ProfilePhotoPlaceholder") ?? UIImage(named: "ProfilePhotoPlaceholder")
@@ -35,7 +34,6 @@ class ProfileViewController: UIViewController {
         profilePhotoView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40).isActive = true
         profilePhotoView.heightAnchor.constraint(equalToConstant: 70).isActive = true
         profilePhotoView.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        
     }
     
     private func initLogoutButton(view: UIView) {
@@ -44,7 +42,8 @@ class ProfileViewController: UIViewController {
             target: self,
             action: #selector(Self.didTapLogoutButton)
         )
-        
+        logOutButton.accessibilityIdentifier = "LogoutButtonId"
+
         logOutButton.tintColor = UIColor(named: "YP Red")
         view.addSubview(logOutButton)
         logOutButton.translatesAutoresizingMaskIntoConstraints = false
@@ -87,56 +86,17 @@ class ProfileViewController: UIViewController {
         userDescription.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
     }
     
-    private func updateProfileDetails (profile: Profile) {
-        userDescription.text = profile.bio ?? ""
-        userNickName.text = profile.loginName
-        userName.text = profile.name ?? ""
-    }
-    
+    // MARK: -  VIEW DID LOAD
     override func viewDidLoad() {
         super.viewDidLoad()
-        initProfileImage (view: view)
-        initLogoutButton(view: view)
-        initLabels(view: view)
-        updateProfileDetails(profile: profileService.profile!)
-        profileImageServiceObserver = NotificationCenter.default.addObserver(
-            forName: ProfileImageService.DidChangeNotification, // 3
-            object: nil,                                        // 4
-            queue: .main                                        // 5
-        ) { [weak self] _ in
-            guard let self = self else { return }
-            self.updateAvatar()                                 // 6
-        }
-        updateAvatar()                                              // 7
+        self.initProfileImage (view: view)
+        self.initLogoutButton(view: view)
+        self.initLabels(view: view)
+        presenter.viewDidLoad()                                  // 7
         
     }
     
-    private func updateAvatar() {                                   // 8
-        guard
-            let profileImageURL = ProfileImageService.shared.avatarURL,
-            let url = URL(string: profileImageURL),
-            let imageView = view.viewWithTag(1) as? UIImageView
-        else { return }
-        let processor = RoundCornerImageProcessor(cornerRadius: imageView.frame.width / 2)
-        let placeholderImage = UIImage(named: "ProfilePhotoPlaceholder")
-        imageView.kf.setImage(with: url,
-                              placeholder: placeholderImage,
-                              options: nil,
-                              completionHandler: { [weak self] result in
-            guard self != nil else { return }
-            
-            switch result {
-            case .success(let value):
-                // Загрузка изображения прошла успешно
-                print("Фотография загружена: \(value.source.url?.absoluteString ?? "")")
-            case .failure(let error):
-                // Возникла ошибка при загрузке изображения
-                print("Фотография не загружена: \(error)")
-            }
-        })
-        
-    }
-    
+    // MARK: -  LOGOUT BUTON
     @objc
     private func didTapLogoutButton() {
         let primaryButtonCompletion = {
@@ -144,7 +104,7 @@ class ProfileViewController: UIViewController {
                 name: ProfileViewController.LogoutNotification,
                 object: self,
                 userInfo: nil)
-            self.clearSecretsAndData()
+            self.presenter.clearSecretsAndData()
             for view in self.view.subviews {
                 if view is UILabel {
                     view.removeFromSuperview()
@@ -163,18 +123,11 @@ class ProfileViewController: UIViewController {
         alertPresenter.show(in: self, model:alert)
     }
     
-    private func clearSecretsAndData() {
-        let tokenStorage = OAuth2TokenStorage.shared
-        tokenStorage.removeToken()
-        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
-           // Запрашиваем все данные из локального хранилища.
-           WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
-              // Массив полученных записей удаляем из хранилища.
-              records.forEach { record in
-                 WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
-              }
-           }
+    func configure(_ presenter: ProfileViewPresenterProtocol) {
+        self.presenter = presenter
+        self.presenter.view = self
     }
+    
 }
 
 

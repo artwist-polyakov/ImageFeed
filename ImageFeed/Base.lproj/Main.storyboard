@@ -45,6 +45,7 @@
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ce-a7-Gs0" userLabel="Like Button">
                                                     <rect key="frame" x="354" y="4" width="44" height="44"/>
+                                                    <accessibility key="accessibilityConfiguration" identifier="likeButtonToTap"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="LikeButtonOn"/>
                                                     <connections>
@@ -140,6 +141,7 @@
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBa-ge-baL" userLabel="BackButton">
                                 <rect key="frame" x="8" y="8" width="48" height="48"/>
+                                <accessibility key="accessibilityConfiguration" identifier="navBackButton"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="Omx-jO-l0n"/>
                                     <constraint firstAttribute="height" constant="48" id="lSt-rL-htl"/>
@@ -222,6 +224,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gan-af-y4b" userLabel="AuthButton">
                                 <rect key="frame" x="16" y="690" width="382" height="48"/>
+                                <accessibility key="accessibilityConfiguration" identifier="Authenticate"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="e8W-ue-7u1"/>
                                 </constraints>
@@ -258,12 +261,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hB7-3N-Qgc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="857.97101449275374" y="1355.3571428571429"/>
+            <point key="canvasLocation" x="-871" y="1054"/>
         </scene>
         <!--Web View View Controller-->
         <scene sceneID="CHi-ef-mbL">
             <objects>
-                <viewController id="cMe-gY-jNI" customClass="WebViewViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebViewViewController" id="cMe-gY-jNI" customClass="WebViewViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tGJ-iG-nxG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -295,6 +298,9 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wck-rB-L9p"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
                         <constraints>
                             <constraint firstItem="zTp-B7-ZNq" firstAttribute="leading" secondItem="tGJ-iG-nxG" secondAttribute="leading" id="1qi-rH-QOZ"/>
                             <constraint firstItem="2mc-SX-Klx" firstAttribute="top" secondItem="wck-rB-L9p" secondAttribute="top" constant="10" id="AMy-3W-I9h"/>
@@ -315,7 +321,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Wt-aD-3aN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1676.8115942028987" y="1355.3571428571429"/>
+            <point key="canvasLocation" x="-52" y="1054"/>
         </scene>
     </scenes>
     <resources>

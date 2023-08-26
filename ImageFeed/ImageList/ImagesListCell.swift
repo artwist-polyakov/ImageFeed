@@ -13,7 +13,6 @@ final class ImagesListCell: UITableViewCell {
     @IBOutlet weak var picture: UIImageView!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
-    
     @IBAction func likeButtonClicked() {
         delegate?.imageListCellDidTapLike(self)
     }
